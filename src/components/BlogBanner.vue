@@ -56,8 +56,8 @@ export default {
 		position: relative;
 		width: 600px;
 		height: 300px;
-		left: 10%;
-		margin-top: 10px;
+		left: 20%;
+		margin-top: 20px;
 	}
 
 	.carousel {
@@ -68,6 +68,8 @@ export default {
 		position: relative;
 		width: 100%;
 		height: 100%;
+		/* 设置元素的边框圆角半径为 5 像素，使边角变得圆滑 */
+		border-radius: 5px;
 	}
 
 	.slideshow-button {

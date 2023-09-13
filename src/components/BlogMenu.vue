@@ -27,6 +27,8 @@
 		align-items: center; /* 垂直居中 */
 		display: flex;
 		background-color: white;
+		/* 设置元素的边框圆角半径为 5 像素，使边角变得圆滑 */
+		border-radius: 5px;
 	}
 	
 	nav ul {
