@@ -1,5 +1,5 @@
 <template>
-	<div class="BlogMenu">
+	<div id="BlogMenu">
 		<nav>
 		    <ul>
 				<li><a href="/">首页</a></li>
@@ -15,7 +15,7 @@
 </script>
 
 <style>
-	.BlogMenu {
+	#BlogMenu {
 		/* 设置元素的高度为 10 像素 */
 		height: 30px;
 		/* 设置元素的行高为 10 像素，影响文本的垂直居中和行间距 */
