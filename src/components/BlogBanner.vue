@@ -39,8 +39,8 @@ export default {
 	  .imgArr {
 		width: 100%;  
 		height: 100%;  
-		object-fit: contain; /* 图片自适应容器，保持纵横比 */
 		position: absolute; /* 图片自适应的关键 */
+		border-radius: 5px;
 	  }
 	  
 </style>

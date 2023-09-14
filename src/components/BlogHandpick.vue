@@ -1,12 +1,12 @@
 <template>
-	<div id="BlogNews" class="BlogNews">
+	<div id="BlogHandpick" class="BlogNews">
 		<el-table
 		    :data="tableData"
 		    stripe
 		    style="width: 100%">
 			  <el-table-column
 			    prop="subject"
-			    label="最新文章"
+			    label="精选文章"
 			    width="270">
 			  </el-table-column>
 		      <el-table-column
