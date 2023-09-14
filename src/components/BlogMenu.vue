@@ -1,56 +1,107 @@
 <template>
 	<div id="BlogMenu">
-		<nav>
-		    <ul>
-				<li><a href="/">首页</a></li>
-				<li><a href="/user">用户中心</a></li>
-				<li><a href="/about">关于我们</a></li>
-				<li><a href="/services">服务</a></li>
-			</ul>
-		</nav>
+		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+		    <el-menu-item index="1"><a href="http://localhost:8080/" target="_blank">首页</a></el-menu-item>
+			<el-menu-item index="2">用户中心</el-menu-item>
+			<el-menu-item index="3">关于我们</el-menu-item>
+			<el-menu-item index="4">服务</el-menu-item>
+			<el-menu-item index="5">
+				<el-select
+				    v-model="value"
+				    multiple
+				    filterable
+				    remote
+				    reserve-keyword
+				    placeholder="请输入关键词"
+				    :remote-method="remoteMethod"
+				    :loading="loading">
+				    <el-option
+				      v-for="item in options"
+				      :key="item.value"
+				      :label="item.label"
+				      :value="item.value">
+				    </el-option>
+				</el-select>
+			</el-menu-item>
+			<el-menu-item index="6">
+				<el-col :span="12">
+				      <div class="demo-basic--circle">
+				        <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
+				      </div>
+				</el-col>  
+			</el-menu-item>
+		</el-menu>
 	</div>
 </template>
 
 <script>
+	export default {
+	    data() {
+	      return {
+	        options: [],
+	        value: [],
+	        list: [],
+	        loading: false,
+	        states: ["Alabama", "Alaska", "Arizona",
+	        "Arkansas", "California", "Colorado",
+	        "Connecticut", "Delaware", "Florida",
+	        "Georgia", "Hawaii", "Idaho", "Illinois",
+	        "Indiana", "Iowa", "Kansas", "Kentucky",
+	        "Louisiana", "Maine", "Maryland",
+	        "Massachusetts", "Michigan", "Minnesota",
+	        "Mississippi", "Missouri", "Montana",
+	        "Nebraska", "Nevada", "New Hampshire",
+	        "New Jersey", "New Mexico", "New York",
+	        "North Carolina", "North Dakota", "Ohio",
+	        "Oklahoma", "Oregon", "Pennsylvania",
+	        "Rhode Island", "South Carolina",
+	        "South Dakota", "Tennessee", "Texas",
+	        "Utah", "Vermont", "Virginia",
+	        "Washington", "West Virginia", "Wisconsin",
+	        "Wyoming"],
+			circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
+			squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+			sizeList: ["large", "medium", "small"]
+	      }
+	    },
+	    mounted() {
+	      this.list = this.states.map(item => {
+	        return { value: `value:${item}`, label: `label:${item}` };
+	      });
+	    },
+	    methods: {
+	      remoteMethod(query) {
+	        if (query !== '') {
+	          this.loading = true;
+	          setTimeout(() => {
+	            this.loading = false;
+	            this.options = this.list.filter(item => {
+	              return item.label.toLowerCase()
+	                .indexOf(query.toLowerCase()) > -1;
+	            });
+	          }, 200);
+	        } else {
+	          this.options = [];
+	        }
+	      }
+	    }
+	  }
 </script>
 
 <style>
 	#BlogMenu {
-		/* 设置元素的高度为 10 像素 */
-		height: 30px;
-		/* 设置元素的行高为 10 像素，影响文本的垂直居中和行间距 */
-		line-height: 25px;
-		/* 设置元素的左右内边距为 20 像素，上下内边距为 0（不添加垂直内边距） */
-		padding: 10px 10px;
-		background-position: top center;
-		justify-content: center; /* 水平居中 */
-		align-items: center; /* 垂直居中 */
-		display: flex;
-		background-color: white;
-		/* 设置元素的边框圆角半径为 5 像素，使边角变得圆滑 */
-		border-radius: 5px;
+		
 	}
 	
-	nav ul {
-	  list-style: none; /* 去除列表样式 */
-		transform: translate(50%, 0px);
+	.el-menu-item {
+		transform: translate(500px, 0);
 	}
 	
-	nav ul li {
-	  display: inline; /* 设置列表项水平排列 */
-	  margin-right: 20px; /* 设置右外边距为20像素，增加列表项之间的间距 */
+	a {
+		text-decoration: none;
 	}
 	
-	nav ul li:last-child {
-	  margin-right: 0; /* 最后一个列表项去除右外边距，避免多余的间距 */
-	}
-	
-	nav ul li a {
-	  text-decoration: none; /* 去除链接的下划线 */
-	  font-weight: bold; /* 设置链接文字加粗 */
-	}
-	
-	nav ul li a:hover {
-	  text-decoration: underline; /* 鼠标悬停时显示下划线 */
+	el-col {
+		float: right;
 	}
 </style>

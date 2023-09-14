@@ -4,18 +4,16 @@
 		    :data="tableData"
 		    stripe
 		    style="width: 100%">
-			 <el-table-column label="最近发布的文章">
 			  <el-table-column
 			    prop="subject"
-			    label="文章"
-			    width="400">
+			    label="最新文章"
+			    width="270">
 			  </el-table-column>
 		      <el-table-column
 		        prop="date"
 		        label="日期"
 		        width="80">
 		      </el-table-column>
-		    </el-table-column>
 		</el-table>
 	</div>
 </template>
@@ -37,6 +35,9 @@ export default {
 		}, {
 			subject: '标题4',
 			date: "05-04"
+		}, {
+			subject: '标题5',
+			date: "05-05"
 		}]
 	  }
 	}
@@ -46,6 +47,7 @@ export default {
 
 <style>
 	.BlogNews {
+		width: 350px;
 		position: absolute;
 		margin-top: 20px;
 		/* 设置元素的边框圆角半径为 5 像素，使边角变得圆滑 */
