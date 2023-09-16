@@ -2,7 +2,7 @@
 	<div id="BlogEssayList">
 		<el-row class="vertical-list">
 			<el-col :span="8" v-for="index in essayList.length" :key="index">
-				<router-link :to="'/article/' + essayList[index - 1].id"> <!-- 设置跳转链接 -->
+				<router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
 					<el-card :body-style="{ padding: '0px'}">
 					  <div class="card" style="padding: 14px;">
 						<img :src="essayList[index - 1].img" class="image">

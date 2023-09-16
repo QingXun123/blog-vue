@@ -1,6 +1,5 @@
 <template>
   <div id="home">
-	  
 	  <el-row>
 	    <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogMenu></BlogMenu></div></el-col>
 	  </el-row>
@@ -28,8 +27,6 @@
 </template>
 
 <script>
-import BlogMenu from '../components/common/BlogMenu.vue'
-import BlogNavigation from '../components/common/BlogNavigation.vue'
 import BlogBanner from '../components/home/BlogBanner.vue'
 import BlogHandpick from '../components/home/BlogHandpick.vue'
 import BlogDate from '../components/home/BlogDate.vue'
@@ -40,14 +37,12 @@ import BlogIntroduction from '../components/home/BlogIntroduction.vue'
 export default {
   name: 'home',
   components: {
-	BlogMenu,
 	BlogBanner,
 	BlogHandpick,
 	BlogDate,
 	BlogDetails,
 	BlogEssayList,
 	BlogIntroduction,
-	BlogNavigation,
   }
 }
 </script>
