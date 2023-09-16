@@ -28,14 +28,14 @@
 </template>
 
 <script>
-import BlogMenu from '../components/BlogMenu.vue'
-import BlogBanner from '../components/BlogBanner.vue'
-import BlogHandpick from '../components/BlogHandpick.vue'
-import BlogDate from '../components/BlogDate.vue'
-import BlogDetails from '../components/BlogDetails.vue'
-import BlogEssayList from '../components/BlogEssayList.vue'
-import BlogIntroduction from '../components/BlogIntroduction.vue'
-import BlogNavigation from '../components/BlogNavigation.vue'
+import BlogMenu from '../components/common/BlogMenu.vue'
+import BlogNavigation from '../components/common/BlogNavigation.vue'
+import BlogBanner from '../components/home/BlogBanner.vue'
+import BlogHandpick from '../components/home/BlogHandpick.vue'
+import BlogDate from '../components/home/BlogDate.vue'
+import BlogDetails from '../components/home/BlogDetails.vue'
+import BlogEssayList from '../components/home/BlogEssayList.vue'
+import BlogIntroduction from '../components/home/BlogIntroduction.vue'
 
 export default {
   name: 'home',
@@ -47,7 +47,7 @@ export default {
 	BlogDetails,
 	BlogEssayList,
 	BlogIntroduction,
-	BlogNavigation
+	BlogNavigation,
   }
 }
 </script>
