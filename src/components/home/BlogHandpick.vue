@@ -6,7 +6,7 @@
 		    style="width: 100%; font-size: 2px; empty-text='暂无数据';">
 			  <el-table-column
 			    prop="subject"
-			    label="精选文章"
+			    label="最新文章"
 			    width="270">
 			  </el-table-column>
 		      <el-table-column
@@ -28,11 +28,11 @@ import axios from "axios";
 		  }
 		},
 		created() {
-			this.getFeaturedEssayList();
+			this.getNewEssayList();
 		},
 		methods: {
-			getFeaturedEssayList: function() {
-				axios.get("http://localhost:9000/essayInfo/getFeaturedEssayList").then(
+			getNewEssayList: function() {
+				axios.get("http://localhost:9000/essayInfo/getNewEssayList").then(
 				(response) => {
 					const data = response.data.data;
 					// 遍历数据，将 releaseTime 格式化为 MM-DD 格式
