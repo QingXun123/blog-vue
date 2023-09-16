@@ -1,30 +1,42 @@
 <template>
   <div id="BlogBanner" class="carousel-container">
 	<el-carousel>
-	  <el-carousel-item v-for="item in 4" :key="item">
+	  <el-carousel-item v-for="item in imgArr.length" :key="item">
 		<h3 class="small">
-			<img :src="imgArr[item]" alt="" class="imgArr" />
+			<img :src="imgArr[item - 1]" alt="" class="imgArr" />
 		</h3>
 	  </el-carousel-item>
 	</el-carousel>
   </div>
 </template>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+import axios from 'axios'; // 导入axios库
+	
 export default {
   data() {
     return {
-      imgArr: [
-        "https://img0.baidu.com/it/u=3021883569,1259262591&fm=253&fmt=auto&app=120&f=JPEG?w=1140&h=641",
-        "https://img0.baidu.com/it/u=1856123620,3576811447&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=333",
-        "https://img2.baidu.com/it/u=2537370952,3446004972&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
-        "https://img2.baidu.com/it/u=638285213,1746517464&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800",
-      ],
+      imgArr: []
     };
   },
-  methods: {
-    
+  created() {
+  	  this.getBanner();
   },
+  methods: {
+    getBanner: function() {
+		axios.get("http://localhost:9000/essayBanner/getBanner").then
+		((response) => {
+			// console.log(this.imgArr);
+			const records = response.data.data.records;
+			console.log(response);
+			this.imgArr = records.map((record) => record.img);
+			console.log(this.imgArr);
+		}).catch((err) => {
+			console.error(err);
+		})
+	}
+  }
 };
 </script>
 

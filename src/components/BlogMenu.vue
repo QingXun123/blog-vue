@@ -38,6 +38,7 @@
 	export default {
 	    data() {
 	      return {
+		    activeIndex: '1',
 	        options: [],
 	        value: [],
 	        list: [],
@@ -70,6 +71,9 @@
 	      });
 	    },
 	    methods: {
+			handleSelect(key, keyPath) {
+				console.log(key, keyPath);
+			},
 	      remoteMethod(query) {
 	        if (query !== '') {
 	          this.loading = true;
