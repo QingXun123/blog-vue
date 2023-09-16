@@ -25,8 +25,12 @@
 		    <span>【 置顶 】</span>
 		  </div>
 		  <div v-for="index in essayTopList.length" :key="index" class="text item">
-			<span style="font-size: 15px; max-width: 200px;">{{ essayTopList[index - 1].subject }}</span>
-			<span  style="font-size: 12px; max-width: 70%; margin-left: 20px; color: gray"> {{ essayTopList[index - 1].content }}</span>
+			<router-link :to="'/essay/' + essayTopList[index - 1].essayId"> <!-- 设置跳转链接 -->
+				<span style="font-size: 15px; max-width: 200px; color: black;">{{ essayTopList[index - 1].subject }}</span>
+			</router-link>
+			<span  style="font-size: 12px; max-width: 70%; margin-left: 20px; color: gray;">
+				<div v-html="truncateContent(essayTopList[index - 1].content, 60)" class="content"></div>
+			</span>
 		  </div>
 		</el-card>
 	</div>
@@ -52,7 +56,16 @@ import axios from 'axios';
 				}).catch((err) => {
 					console.error(err);
 				})
-			}
+			},
+			truncateContent(content, max) {
+			  // 如果内容长度大于 max，则截取前 max 个字符并加上省略号
+			  if (content.length > max) {
+				  const plainText = content.replace(/<[^>]*>/g, '');
+				  return plainText.substring(0, max) + '...';
+			  }
+			  // 否则返回原内容
+			  return content;
+			},
 		}
 	};
 </script>
@@ -67,7 +80,7 @@ import axios from 'axios';
 	.text {
 	    font-size: 14px;
 	  }
-	
+	  
 	  .item {
 	    margin-bottom: 18px;
 	  }

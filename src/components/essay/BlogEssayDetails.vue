@@ -29,6 +29,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 			}
 		},
 		created() {
+			this.readEssay(this.$route.params.essayId);
 			this.info();
 		},
 		methods: {
@@ -36,6 +37,14 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 				axios.get("http://localhost:9000/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
+				}).catch((err) => {
+					console.error(err);
+				})
+			},
+			readEssay: function(val) {
+				axios.get("http://localhost:9000/essayInfo/readEssay?essayId=" + val)
+				.then((response) => {
+					console.log(response);
 				}).catch((err) => {
 					console.error(err);
 				})
