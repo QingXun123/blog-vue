@@ -10,7 +10,6 @@
   </div>
 </template>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import axios from 'axios'; // 导入axios库
 	

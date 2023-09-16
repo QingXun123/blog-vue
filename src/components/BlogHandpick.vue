@@ -3,7 +3,7 @@
 		<el-table
 		    :data="tableData"
 		    stripe
-		    style="width: 100%">
+		    style="width: 100%; font-size: 2px; empty-text='暂无数据';">
 			  <el-table-column
 			    prop="subject"
 			    label="精选文章"
@@ -43,7 +43,6 @@ import axios from "axios";
 					  item.releaseTime = `${month}-${day}`;
 					});
 					this.tableData = data;
-					console.log(this.tableData);
 				}).catch((err) => {
 					console.error(err);
 				})
@@ -67,5 +66,9 @@ import axios from "axios";
 	
 	.el-table {
 		border-radius: 5px;
+	}
+	
+	.cell {
+		line-height: 14px !important;
 	}
 </style>

@@ -24,8 +24,9 @@
 		  <div slot="header" class="clearfix">
 		    <span>【 置顶 】</span>
 		  </div>
-		  <div v-for="o in 2" :key="o" class="text item">
-		    {{'列表内容 ' + o }}
+		  <div v-for="index in essayTopList.length" :key="index" class="text item">
+			<span style="font-size: 15px; max-width: 200px;">{{ essayTopList[index - 1].subject }}</span>
+			<span  style="font-size: 12px; max-width: 70%; margin-left: 20px; color: gray"> {{ essayTopList[index - 1].content }}</span>
 		  </div>
 		</el-card>
 	</div>
@@ -37,7 +38,7 @@ import axios from 'axios';
 	export default {
 		data() {
 			return {
-				
+				essayTopList: []
 			};
 		},
 		created() {
@@ -45,9 +46,9 @@ import axios from 'axios';
 		},
 		methods: {
 			getFeaturedEssayList: function() {
-				axios.get("http://localhost:9000/essayInfo/getFeaturedEssayList").then(
+				axios.get("http://localhost:9000/essayInfo/getTopEssayList").then(
 				(response) => {
-					
+					this.essayTopList = response.data.data;
 				}).catch((err) => {
 					console.error(err);
 				})
