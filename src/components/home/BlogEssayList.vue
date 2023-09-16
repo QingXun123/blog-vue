@@ -5,7 +5,7 @@
 				<router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
 					<el-card :body-style="{ padding: '0px'}">
 					  <div class="card" style="padding: 14px;">
-						<img :src="essayList[index - 1].img" class="image">
+						<img :src="essayList[index - 1].img" class="image" style="min-width: 200px; max-width: 200px; min-height: 150px; max-height: 150px;">
 							<div class="essay">
 								<h3>{{ essayList[index-1].subject }}</h3>
 								<div class="details">
@@ -14,7 +14,7 @@
 									<i class="el-icon-view"> 阅读({{ essayList[index-1].readingQuantity }})</i>
 									<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
 								</div>
-								<a class="content">{{ essayList[index-1].content }}</a>
+								<div v-html="truncateContent(essayList[index-1].content, 170)" class="content"></div>
 							</div>
 					  </div>
 					</el-card>
@@ -67,7 +67,16 @@ import axios from 'axios';
 				}).catch((err) => {
 					console.error(err);
 				})
-			}
+			},
+			truncateContent(content, max) {
+			  // 如果内容长度大于 max，则截取前 max 个字符并加上省略号
+			  if (content.length > max) {
+				  const plainText = content.replace(/<[^>]*>/g, '');
+				  return plainText.substring(0, max) + '...';
+			  }
+			  // 否则返回原内容
+			  return content;
+			},
 		}
 	}
 </script>
@@ -112,7 +121,7 @@ import axios from 'axios';
 	.el-icon-user-solid,
 	.el-icon-view,
 	.el-icon-chat-line-round {
-		margin-left: 8px;
+		margin-left: 15px;
 	}
 	
 	.card {

@@ -21,4 +21,11 @@ const router = new VueRouter({
   routes
 })
 
+// 添加全局前置守卫
+router.beforeEach((to, from, next) => {
+  // 滚动到页面顶部
+  window.scrollTo(0, 0);
+  next();
+});
+
 export default router
