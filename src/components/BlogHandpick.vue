@@ -10,7 +10,7 @@
 			    width="270">
 			  </el-table-column>
 		      <el-table-column
-		        prop="date"
+		        prop="releaseTime"
 		        label="日期"
 		        width="80">
 		      </el-table-column>
@@ -19,33 +19,44 @@
 </template>
 
 <script>
+import axios from "axios";
 
-export default {
-  data() {
-	  return {
-		tableData: [{
-			subject: '标题1',
-			date: '05-02'
-		}, {
-			subject: '标题2',
-			date: '05-03'
-		}, {
-			subject: '标题3',
-			date: "05-03"
-		}, {
-			subject: '标题4',
-			date: "05-04"
-		}, {
-			subject: '标题5',
-			date: "05-05"
-		}]
-	  }
-	}
-  // 组件的其他代码
-}
+	export default {
+		data() {
+		  return {
+			tableData: []
+		  }
+		},
+		created() {
+			this.getFeaturedEssayList();
+		},
+		methods: {
+			getFeaturedEssayList: function() {
+				axios.get("http://localhost:9000/essayInfo/getFeaturedEssayList").then(
+				(response) => {
+					const data = response.data.data;
+					// 遍历数据，将 releaseTime 格式化为 MM-DD 格式
+					data.forEach((item) => {
+					  const date = new Date(item.releaseTime);
+					  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 月份从0开始，需要加1
+					  const day = date.getDate().toString().padStart(2, '0');
+					  item.releaseTime = `${month}-${day}`;
+					});
+					this.tableData = data;
+					console.log(this.tableData);
+				}).catch((err) => {
+					console.error(err);
+				})
+			}
+		}
+	};
 </script>
 
 <style>
+	#BlogHandpick {
+		position: relative;
+	}
+	
 	.BlogNews {
 		width: 350px;
 		position: absolute;

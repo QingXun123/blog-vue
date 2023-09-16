@@ -4,33 +4,20 @@
 	    <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogMenu></BlogMenu></div></el-col>
 	  </el-row>
 	  <el-row :gutter="2">
-	    <el-col :span="16"><div class="grid-content bg-purple"><BlogBanner></BlogBanner></div></el-col>
-	    <el-col :span="8"><div class="grid-content bg-purple-light"><BlogHandpick></BlogHandpick></div></el-col>
-	  </el-row>
-	  <el-row :gutter="4">
 	    <el-col :span="16">
 			<div class="grid-content bg-purple">
+				<BlogBanner></BlogBanner>
 				<BlogDetails></BlogDetails>
 				<BlogEssayList></BlogEssayList>
 			</div>
-	  </el-col>
-		<el-col :span="8">
+		</el-col>
+	    <el-col :span="8">
 			<div class="grid-content bg-purple-light">
+				<BlogHandpick></BlogHandpick>
 				<BlogDate></BlogDate>
 				<BlogIntroduction></BlogIntroduction>
 			</div>
-	  </el-col>
-	  </el-row>
-	  <el-row :gutter="2">
-	    <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-	  </el-row>
-	  <el-row>
-	    <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-	    <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-	    <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-	    <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-	    <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-	    <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+		</el-col>
 	  </el-row>
 	  <el-row>
 	    <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogNavigation></BlogNavigation></div></el-col>

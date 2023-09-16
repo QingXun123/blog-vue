@@ -32,6 +32,28 @@
 </template>
 
 <script>
+import axios from 'axios';
+	
+	export default {
+		data() {
+			return {
+				
+			};
+		},
+		created() {
+			this.getFeaturedEssayList();
+		},
+		methods: {
+			getFeaturedEssayList: function() {
+				axios.get("http://localhost:9000/essayInfo/getFeaturedEssayList").then(
+				(response) => {
+					
+				}).catch((err) => {
+					console.error(err);
+				})
+			}
+		}
+	};
 </script>
 
 <style>

@@ -29,9 +29,7 @@ export default {
 		((response) => {
 			// console.log(this.imgArr);
 			const records = response.data.data.records;
-			console.log(response);
 			this.imgArr = records.map((record) => record.img);
-			console.log(this.imgArr);
 		}).catch((err) => {
 			console.error(err);
 		})
