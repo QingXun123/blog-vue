@@ -10,7 +10,7 @@
 								<h3>{{ essayList[index-1].subject }}</h3>
 								<div class="details">
 									<i class="el-icon-timer">{{ essayList[index-1].releaseTime }}</i>
-									<i class="el-icon-user-solid"> {{ author }}</i>
+									<i class="el-icon-user-solid"> {{ essayList[index-1].userName }}</i>
 									<i class="el-icon-view"> 阅读({{ essayList[index-1].readingQuantity }})</i>
 									<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
 								</div>
@@ -39,7 +39,6 @@ import axios from 'axios';
 				essayList: [],
 				currentDate: "2022-01-01",
 				total: 1,
-				author: "青旬",
 				view: 10,
 				chat: 2
 			}
@@ -54,16 +53,15 @@ import axios from 'axios';
 					"size": 5
 				}).then(
 				(response) => {
-					const records = response.data.data.records
-					records.forEach((item) => {
+					const data = response.data.data;
+					data.forEach((item) => {
 						const date = new Date(item.releaseTime);
 						const year = date.getFullYear();
 						const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 月份从0开始，需要加1
 						const day = date.getDate().toString().padStart(2, '0');
 						item.releaseTime = `${year}-${month}-${day}`;
 					});
-					this.essayList = records;
-					
+					this.essayList = data;
 				}).catch((err) => {
 					console.error(err);
 				})
@@ -126,6 +124,10 @@ import axios from 'axios';
 	
 	.card {
 		display: flex;
+	}
+	
+	.card img {
+		object-fit: contain;
 	}
 	
 	.essay {

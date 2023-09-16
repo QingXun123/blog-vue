@@ -10,7 +10,7 @@
 				<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
 			</div>
 		  </div>
-		  <div v-html="essay.content"></div>
+		  <div v-html="essay.content" class="htmlText"></div>
 		</el-card>
 	</div>
 </template>
@@ -53,5 +53,9 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 		min-height: 50px;
 		font-size: 30px;
 		display: flex;
+	}
+
+	.htmlText img {
+		object-fit: scale-down;
 	}
 </style>
