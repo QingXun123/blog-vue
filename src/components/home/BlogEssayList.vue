@@ -5,7 +5,7 @@
 				
 				<el-card :body-style="{ padding: '0px'}">
 				  <div class="card" style="padding: 14px;">
-					  <router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
+					  <router-link :to="'/essay/' + essayList[index - 1].essayId" target="_self"> <!-- 设置跳转链接 -->
 						<img :src="essayList[index - 1].img" class="image" style="min-width: 200px; max-width: 200px; min-height: 150px; max-height: 150px;">
 					  </router-link>
 						<div class="essay">

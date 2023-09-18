@@ -25,7 +25,7 @@
 		    <span>【 置顶 】</span>
 		  </div>
 		  <div v-for="index in essayTopList.length" :key="index" class="text item">
-			<router-link :to="'/essay/' + essayTopList[index - 1].essayId"> <!-- 设置跳转链接 -->
+			<router-link :to="'/essay/' + essayTopList[index - 1].essayId" target="_self"> <!-- 设置跳转链接 -->
 				<span style="font-size: 15px; max-width: 200px; color: black;">{{ essayTopList[index - 1].subject }}</span>
 			</router-link>
 			<span  style="font-size: 12px; max-width: 70%; margin-left: 20px; color: gray;">
