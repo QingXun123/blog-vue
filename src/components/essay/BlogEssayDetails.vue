@@ -131,6 +131,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	
 	.htmlText img {
 		max-width: 750px;
+		height: auto;
 	}
 
 </style>
