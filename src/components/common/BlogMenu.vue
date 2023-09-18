@@ -1,7 +1,7 @@
 <template>
 	<div id="BlogMenu">
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-		    <el-menu-item index="1"><a href="http://localhost:8080/" target="_blank">首页</a></el-menu-item>
+		    <el-menu-item index="1"><a href="/" target="_blank">首页</a></el-menu-item>
 			<el-menu-item index="2">用户中心</el-menu-item>
 			<el-menu-item index="3">关于我们</el-menu-item>
 			<el-menu-item index="4">服务</el-menu-item>

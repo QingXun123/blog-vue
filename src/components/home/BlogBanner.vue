@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getBanner: function() {
-		axios.get("http://localhost:9000/essayBanner/getBanner").then
+		axios.get("http://42.193.243.59:9000/essayBanner/getBanner").then
 		((response) => {
 			// console.log(this.imgArr);
 			const records = response.data.data.records;

@@ -34,7 +34,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 		},
 		methods: {
 			info: function() {
-				axios.get("http://localhost:9000/essayInfo/info?essayId=" + this.$route.params.essayId)
+				axios.get("http://42.193.243.59:9000/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
 				}).catch((err) => {
@@ -42,7 +42,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 				})
 			},
 			readEssay: function(val) {
-				axios.get("http://localhost:9000/essayInfo/readEssay?essayId=" + val)
+				axios.get("http://42.193.243.59:9000/essayInfo/readEssay?essayId=" + val)
 				.then((response) => {
 					console.log(response);
 				}).catch((err) => {
@@ -55,7 +55,6 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 
 <style>
 	#BlogEssayDetails {
-		margin-left: 8%;
 	}
 	
 	.subject {
@@ -67,4 +66,66 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	.htmlText img {
 		object-fit: scale-down;
 	}
+	
+	/* 基本的表格样式 */
+	.table-box table {
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+	
+	.table-box table, .table-box th, .table-box td {
+	  border: 1px solid #ccc;
+	}
+	
+	/* 表头样式 */
+	.table-box th {
+	  background-color: #f2f2f2;
+	  text-align: left;
+	  padding: 8px;
+	}
+	
+	/* 表格行样式（奇数行和偶数行） */
+	.table-box tr:nth-child(even) {
+	  background-color: #f2f2f2;
+	}
+	
+	.table-box tr:nth-child(odd) {
+	  background-color: #ffffff;
+	}
+	
+	/* 单元格样式 */
+	.table-box td {
+	  padding: 8px;
+	  text-align: left;
+	}
+	
+	/* 鼠标悬停时的行样式 */
+	.table-box tr:hover {
+	  background-color: #e0e0e0;
+	}
+	
+	.htmlText ul {
+	  list-style-type: none;
+	  padding-left: 0;
+	}
+	
+	.htmlText ul li {
+	  margin: 0 0 2px;
+	  padding-left: 24px;
+	}
+	
+	.htmlText ul ul {
+	  padding-left: 24px;
+	}
+	
+	.htmlText a {
+	  text-decoration: none;
+	  color: #0077cc;
+	}
+	
+	.htmlText a:hover {
+	  /* text-decoration: underline; */
+	  color: #0055aa;
+	}
+
 </style>

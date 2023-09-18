@@ -5,5 +5,7 @@
 </template>
 
 <style>
-	
+	#app {
+		
+	}
 </style>

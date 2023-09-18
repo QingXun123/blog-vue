@@ -29,7 +29,7 @@
 				<span style="font-size: 15px; max-width: 200px; color: black;">{{ essayTopList[index - 1].subject }}</span>
 			</router-link>
 			<span  style="font-size: 12px; max-width: 70%; margin-left: 20px; color: gray;">
-				<div v-html="truncateContent(essayTopList[index - 1].content, 60)" class="content"></div>
+				<div v-html="truncateContent(essayTopList[index - 1].content, 150)" class="content"></div>
 			</span>
 		  </div>
 		</el-card>
@@ -50,7 +50,7 @@ import axios from 'axios';
 		},
 		methods: {
 			getFeaturedEssayList: function() {
-				axios.get("http://localhost:9000/essayInfo/getTopEssayList").then(
+				axios.get("http://42.193.243.59:9000/essayInfo/getTopEssayList").then(
 				(response) => {
 					this.essayTopList = response.data.data;
 				}).catch((err) => {
