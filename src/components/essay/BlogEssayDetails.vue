@@ -128,5 +128,9 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	  /* text-decoration: underline; */
 	  color: #0055aa;
 	}
+	
+	.htmlText img {
+		max-width: 750px;
+	}
 
 </style>
