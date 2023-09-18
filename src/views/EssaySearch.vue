@@ -24,17 +24,11 @@
 </template>
 
 <script>
-	import BlogHandpick from '../components/home/BlogHandpick.vue'
-	import BlogDate from '../components/home/BlogDate.vue'
-	import BlogIntroduction from '../components/home/BlogIntroduction.vue'
 	import BlogSearchDetails from '../components/search/BlogSearchDetails.vue'
 	
 	export default {
 	  name: 'home',
 	  components: {
-		BlogHandpick,
-		BlogDate,
-		BlogIntroduction,
 		BlogSearchDetails,
 	  },
 	}

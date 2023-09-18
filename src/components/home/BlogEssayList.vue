@@ -10,7 +10,7 @@
 					  </router-link>
 						<div class="essay">
 							<router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
-								<h3 style="color: black;">{{ essayList[index-1].subject }}</h3>
+								<h3 class="custom-essay-link">{{ essayList[index-1].subject }}</h3>
 							</router-link>
 							<div class="details">
 								<i class="el-icon-timer">{{ essayList[index-1].releaseTime }}</i>
@@ -152,4 +152,16 @@ import axios from 'axios';
 	  flex-direction: column; /* 将子元素垂直排列 */
 	}
 	
+	/* 自定义 router-link 样式 */
+	.custom-essay-link {
+	  text-decoration: none; /* 移除默认的下划线 */
+	  color: black; /* 设置链接文本颜色 */
+	  cursor: pointer; /* 将鼠标光标设置为手型 */
+	}
+	
+	.custom-essay-link:hover {
+	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
+	  /* 可以添加其他悬停效果，比如下划线 */
+	  /* text-decoration: underline; */
+	}
 </style>

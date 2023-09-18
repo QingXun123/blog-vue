@@ -28,21 +28,15 @@
 
 <script>
 import BlogBanner from '../components/home/BlogBanner.vue'
-import BlogHandpick from '../components/home/BlogHandpick.vue'
-import BlogDate from '../components/home/BlogDate.vue'
 import BlogDetails from '../components/home/BlogDetails.vue'
 import BlogEssayList from '../components/home/BlogEssayList.vue'
-import BlogIntroduction from '../components/home/BlogIntroduction.vue'
 
 export default {
   name: 'home',
   components: {
 	BlogBanner,
-	BlogHandpick,
-	BlogDate,
 	BlogDetails,
 	BlogEssayList,
-	BlogIntroduction,
   }
 }
 </script>

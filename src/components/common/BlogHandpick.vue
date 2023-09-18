@@ -8,6 +8,11 @@
 			    prop="subject"
 			    label="最新文章"
 			    width="270">
+				<!-- 使用 scoped-slot 渲染链接 -->
+				<template slot-scope="scope">
+				  <!-- 使用 router-link 渲染链接 -->
+				  <router-link :to="'/essay/' + scope.row.essayId" class="custom-link">{{ scope.row.subject }}</router-link>
+				</template>
 			  </el-table-column>
 		      <el-table-column
 		        prop="releaseTime"
@@ -70,5 +75,19 @@ import axios from "axios";
 	
 	.cell {
 		line-height: 14px !important;
+	}
+	
+	/* 自定义 router-link 样式 */
+	.custom-link {
+	  text-decoration: none; /* 移除默认的下划线 */
+	  color: grey; /* 设置链接文本颜色 */
+	  font-weight: bold; /* 设置链接文本粗体 */
+	  cursor: pointer; /* 将鼠标光标设置为手型 */
+	}
+	
+	.custom-link:hover {
+	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
+	  /* 可以添加其他悬停效果，比如下划线 */
+	  /* text-decoration: underline; */
 	}
 </style>

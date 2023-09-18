@@ -26,7 +26,7 @@
 		  </div>
 		  <div v-for="index in essayTopList.length" :key="index" class="text item">
 			<router-link :to="'/essay/' + essayTopList[index - 1].essayId" target="_self"> <!-- 设置跳转链接 -->
-				<span style="font-size: 15px; max-width: 200px; color: black;">{{ essayTopList[index - 1].subject }}</span>
+				<span class="custom-BlogDetails-link">{{ essayTopList[index - 1].subject }}</span>
 			</router-link>
 			<span  style="font-size: 12px; max-width: 70%; margin-left: 20px; color: gray;">
 				<div v-html="truncateContent(essayTopList[index - 1].content, 150)" class="content"></div>
@@ -103,4 +103,19 @@ import axios from 'axios';
 		  gap: 25px;
 	  }
 	  
+	  /* 自定义 router-link 样式 */
+	  .custom-BlogDetails-link {
+	    text-decoration: none; /* 移除默认的下划线 */
+	    color: grey; /* 设置链接文本颜色 */
+	    cursor: pointer; /* 将鼠标光标设置为手型 */
+		font-size: 15px;
+		max-width: 200px;
+		color: black;
+	  }
+	  
+	  .custom-BlogDetails-link:hover {
+	    color: #0055aa; /* 鼠标悬停时的文本颜色 */
+	    /* 可以添加其他悬停效果，比如下划线 */
+	    /* text-decoration: underline; */
+	  }
 </style>
