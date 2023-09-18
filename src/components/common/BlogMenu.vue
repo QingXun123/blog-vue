@@ -2,9 +2,9 @@
 	<div id="BlogMenu">
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 		    <el-menu-item index="1"><a href="/" target="_self">首页</a></el-menu-item>
-			<el-menu-item index="2">用户中心</el-menu-item>
-			<el-menu-item index="3">关于我们</el-menu-item>
-			<el-menu-item index="4">服务</el-menu-item>
+			<el-menu-item index="2" disabled>用户中心</el-menu-item>
+			<el-menu-item index="3" disabled>关于我们</el-menu-item>
+			<el-menu-item index="4" disabled>服务</el-menu-item>
 			<el-menu-item index="5">
 				<el-input
 				    placeholder="请输入内容"
@@ -13,13 +13,13 @@
 					@keyup.enter.native="redirectToSearch()">
 				  </el-input>
 			</el-menu-item>
-			<el-menu-item index="6">
+<!-- 			<el-menu-item index="6">
 				<el-col :span="12">
 				      <div class="demo-basic--circle">
 				        <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
 				      </div>
 				</el-col>  
-			</el-menu-item>
+			</el-menu-item> -->
 		</el-menu>
 	</div>
 </template>
