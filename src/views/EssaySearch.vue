@@ -10,12 +10,12 @@
 					</div>
 				</el-col>
 		  <el-col :span="8">
-					<div class="grid-content bg-purple-light">
-						<BlogHandpick></BlogHandpick>
-						<BlogDate></BlogDate>
-						<BlogIntroduction></BlogIntroduction>
-					</div>
-				</el-col>
+				<div class="grid-content bg-purple-light">
+					<BlogHandpick></BlogHandpick>
+					<BlogDate></BlogDate>
+					<BlogIntroduction></BlogIntroduction>
+				</div>
+			</el-col>
 		</el-row>
 		<el-row>
 		  <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogNavigation></BlogNavigation></div></el-col>

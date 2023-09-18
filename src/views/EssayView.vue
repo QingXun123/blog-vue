@@ -10,7 +10,7 @@
     			</div>
     		</el-col>
       <el-col :span="8">
-    			<div class="grid-content bg-purple-light right-position">
+    			<div class="grid-content bg-purple-light">
     				<BlogHandpick></BlogHandpick>
     				<BlogDate></BlogDate>
     				<BlogIntroduction></BlogIntroduction>
@@ -45,11 +45,5 @@
 	  color: #2c3e50;
 	  min-width: 1350px; /* 最小宽度 */
 	}
-	
-	.right-position {
-		position: fixed;
-		top: 10px; /* 距离顶部的距离 */
-		right: 10px; /* 距离右侧的距离 */
-		/* 其他样式属性 */
-	}
+
 </style>
