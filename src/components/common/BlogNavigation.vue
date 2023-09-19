@@ -6,10 +6,9 @@
 			<el-button type="info" plain>了解更多</el-button>
 		</el-card>
 		<div class="record">
-			<div style="text-align: center; margin-top: 20px; position: relative;">备案信息</div>
-			<p>123</p>
-			<p>123</p>
-			<p>123</p>
+			<div style="text-align: center; margin-top: 20px; position: relative;"><a href="blog.qxbase.com" target="_self" class="reference-link">© qxBase博客 | 致力于互联网行业 | 软件分享 | 技术教程 | qxBase.com</a></div>
+			<p><a href="https://beian.miit.gov.cn/" target="_blank" class="reference-link">粤ICP备2023104763号</a></p>
+			<p>本站部分图片、文章来源于网络，版权归原作者所有，如有侵权，请联系我们删除。</p>
 		</div>
 	</div>
 </template>
@@ -23,8 +22,21 @@
 		height: 300px;
 		background-color: white;
 		text-align: center;
-		font-size: 15px;
+		font-size: 10px;
 		position: absolute;
 		line-height: 10px;
+	}
+	
+	/* 自定义 router-link 样式 */
+	.reference-link {
+	  text-decoration: none; /* 移除默认的下划线 */
+	  color: grey; /* 设置链接文本颜色 */
+	  cursor: pointer; /* 将鼠标光标设置为手型 */
+	}
+	
+	.reference-link:hover {
+	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
+	  /* 可以添加其他悬停效果，比如下划线 */
+	  /* text-decoration: underline; */
 	}
 </style>

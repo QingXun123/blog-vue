@@ -18,7 +18,12 @@ const routes = [
   {
     path: '/search/:subject',
     name: 'search',
-    component: () => import('../views/EssaySearch.vue')
+    component: () => import('../views/EssaySearchView.vue')
+  },
+  {
+    path: '/disclaimer',
+    name: 'disclaimer',
+    component: () => import('../views/DisclaimerView.vue')
   }
 ]
 
