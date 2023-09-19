@@ -39,8 +39,11 @@ export default {
 
 <style>
 	
+	#BlogBanner {
+		position: relative;
+	}
+	
 	.carousel-container {
-		margin-left: 8%;
 		width: 800px;
 		heigth: 300px;
 	}

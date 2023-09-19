@@ -1,16 +1,25 @@
 <template>
 	<div id="disclaimer">
-		<div class='page-form'>
-			<el-row>
-			  <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogMenu></BlogMenu></div></el-col>
-			</el-row>
-			<el-row :gutter="2">
-			  <el-col :span="24"><div class="grid-content bg-purple-dark"><DisclaimerInfo></DisclaimerInfo></div></el-col>
-			</el-row>
-			<el-row>
-			  <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogNavigation></BlogNavigation></div></el-col>
-			</el-row>
-		</div>
+		
+		<el-container>
+		  <el-header>
+			  <BlogMenu></BlogMenu>
+		  </el-header>
+		  <div style="margin: auto;">
+			  <el-container>
+			  		<el-container>
+			  		  <el-main>
+			  			  <div>
+			  				<DisclaimerInfo></DisclaimerInfo>
+			  			  </div>
+			  		  </el-main>
+			  		</el-container>
+			  </el-container>
+		  </div>
+		  <el-footer>
+			  <BlogNavigation></BlogNavigation>
+		  </el-footer>
+		</el-container>
 	</div>
 </template>
 
@@ -28,7 +37,7 @@
 <style>
 	#disclaimer {
 	  color: #2c3e50;
-	  min-width: 1350px; /* 最小宽度 */
+	  min-width: 1200px; /* 最小宽度 */
 	}
 	
 	.page-form {

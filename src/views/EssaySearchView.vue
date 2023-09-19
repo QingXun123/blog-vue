@@ -1,25 +1,31 @@
 <template>
 	<div id="search">
-		<el-row>
-		  <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogMenu></BlogMenu></div></el-col>
-		</el-row>
-		<el-row :gutter="2">
-		  <el-col :span="16">
-					<div class="grid-content bg-purple">
-						<BlogSearchDetails></BlogSearchDetails>
-					</div>
-				</el-col>
-		  <el-col :span="8">
-				<div class="grid-content bg-purple-light">
-					<BlogHandpick></BlogHandpick>
-					<BlogDate></BlogDate>
-					<BlogIntroduction></BlogIntroduction>
-				</div>
-			</el-col>
-		</el-row>
-		<el-row>
-		  <el-col :span="24"><div class="grid-content bg-purple-dark"><BlogNavigation></BlogNavigation></div></el-col>
-		</el-row>
+		<el-container>
+		  <el-header>
+			  <BlogMenu></BlogMenu>
+		  </el-header>
+		  <div style="width: 1200px; margin: auto;">
+			  <el-container>
+			  		<el-container>
+			  		  <el-main>
+			  			  <div style="float: right;">
+			  				<BlogSearchDetails></BlogSearchDetails>
+			  			  </div>
+			  		  </el-main>
+			  		</el-container>
+			  		<el-aside>
+						<div>
+							<BlogHandpick></BlogHandpick>
+							<BlogDate></BlogDate>
+							<BlogIntroduction></BlogIntroduction>
+						</div>
+			  		</el-aside>
+			  </el-container>
+		  </div>
+		  <el-footer>
+			  <BlogNavigation></BlogNavigation>
+		  </el-footer>
+		</el-container>
 	</div>
 </template>
 
@@ -37,6 +43,6 @@
 <style>
 	#search {
 	  color: #2c3e50;
-	  min-width: 1350px; /* 最小宽度 */
+	  min-width: 1200px; /* 最小宽度 */
 	}
 </style>

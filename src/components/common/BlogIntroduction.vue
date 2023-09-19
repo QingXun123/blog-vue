@@ -15,6 +15,10 @@
 </script>
 
 <style>
+	#BlogIntroduction {
+		position: relative;
+	}
+	
 	.Introduction-card {
 		width: 350px;
 	}

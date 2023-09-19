@@ -55,7 +55,6 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 
 <style>
 	#BlogEssayDetails {
-		margin-left: 8%;
 	}
 	
 	.subject {

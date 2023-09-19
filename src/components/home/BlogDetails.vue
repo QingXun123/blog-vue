@@ -72,9 +72,9 @@ import axios from 'axios';
 
 <style>
 	#BlogDetails {
-		margin-left: 8%;
 		margin-top: 20px;
 		border-radius: 5px;
+		position: relative;
 	}
 	
 	.text {

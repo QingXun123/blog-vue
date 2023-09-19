@@ -93,7 +93,6 @@ import axios from 'axios';
 
 <style>
 	#BlogEssayList {
-		margin-left: 8%;
 		position: relative;
 	}
 	

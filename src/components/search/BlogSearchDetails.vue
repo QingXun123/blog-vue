@@ -90,6 +90,7 @@
 
 <style>
 	#BlogSearchDetails {
-		margin-left: 8%;
 	}
+	
+	margin-left: 8%;
 </style>

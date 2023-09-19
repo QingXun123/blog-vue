@@ -17,6 +17,5 @@
 
 <style>
 	#DisclaimerInfo {
-		margin-left: 8%;
 	}
 </style>
