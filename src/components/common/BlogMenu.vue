@@ -1,7 +1,7 @@
 <template>
 	<div id="BlogMenu">
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-		    <el-menu-item index="1"><a href="/" target="_self">首页</a></el-menu-item>
+			<el-menu-item index="1"><a href="/" target="_self">首页</a></el-menu-item>
 			<el-menu-item index="2" disabled>用户中心</el-menu-item>
 			<el-menu-item index="3" disabled>关于我们</el-menu-item>
 			<el-menu-item index="4" disabled>服务</el-menu-item>
@@ -69,8 +69,9 @@ import axios from 'axios'
 		position: relative;
 	}
 	
-	.el-menu-item {
-		transform: translate(500px, 0);
+	.el-menu-demo {
+		display: flex;
+		justify-content: center;
 	}
 	
 	a {
