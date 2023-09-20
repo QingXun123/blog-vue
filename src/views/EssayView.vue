@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import BlogEssayDetails from '../components/essay/BlogEssayDetails.vue'
+	import BlogEssayDetails from '../components/pc/essay/BlogEssayDetails.vue'
 	
 	export default {
 	  name: 'home',

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-	import DisclaimerInfo from '../components/disclaimer/DisclaimerInfo.vue';
+	import DisclaimerInfo from '../components/pc/disclaimer/DisclaimerInfo.vue';
 	
 	export default {
 		name: "disclaimer",

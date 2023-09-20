@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import BlogSearchDetails from '../components/search/BlogSearchDetails.vue'
+	import BlogSearchDetails from '../components/pc/search/BlogSearchDetails.vue'
 	
 	export default {
 	  name: 'home',
