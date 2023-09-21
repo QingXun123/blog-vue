@@ -5,12 +5,12 @@
 				
 				<el-card :body-style="{ padding: '0px'}">
 				  <div class="card" style="padding: 14px;">
-					  <router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
-						<img :src="essayList[index - 1].img" class="image" style="min-width: 200px; max-width: 200px; min-height: 150px; max-height: 150px;">
+					  <router-link :to="'/essay/' + essayList[index - 1].essayId" target="_self"> <!-- 设置跳转链接 -->
+						<img :src="essayList[index - 1].img" class="mobile-essay-image">
 					  </router-link>
 						<div class="essay">
 							<router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
-								<h3 style="color: black;">{{ essayList[index-1].subject }}</h3>
+								<h3 class="mobile-custom-essay-link">{{ essayList[index-1].subject }}</h3>
 							</router-link>
 							<div class="details">
 								<i class="el-icon-timer">{{ essayList[index-1].releaseTime }}</i>
@@ -18,7 +18,6 @@
 								<i class="el-icon-view"> 阅读({{ essayList[index-1].readingQuantity }})</i>
 								<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
 							</div>
-							<div v-html="truncateContent(essayList[index-1].content, 170)" class="content"></div>
 						</div>
 				  </div>
 				</el-card>

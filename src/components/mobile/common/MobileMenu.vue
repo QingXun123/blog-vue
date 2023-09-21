@@ -13,7 +13,7 @@
 		  :size="200">
 		  <!-- 菜单内容 -->
 		  <el-menu default-active="1">
-			<el-menu-item index="1">首页</el-menu-item>
+			<el-menu-item index="1"><a href="/" target="_self">首页</a></el-menu-item>
 			<el-menu-item index="2" disabled>用户中心</el-menu-item>
 			<el-menu-item index="3" disabled>关于我们</el-menu-item>
 			<el-menu-item index="4" disabled>服务中心</el-menu-item>
@@ -79,5 +79,14 @@
 		background-color: white;
 		height: 60px;
 		display: flex;
+	}
+	
+	.el-menu-item a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	.el-menu-item a:hover {
+	  color: #0055aa;
 	}
 </style>
