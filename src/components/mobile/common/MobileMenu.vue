@@ -35,7 +35,7 @@
 			  			  style=" width: 80%; flex-direction: row; align-items: center;"
 			  	@keyup.enter.native="redirectToSearch()">
 			    </el-input>
-				<el-button @click="openSearch" icon="el-icon-search" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em; border: none;"></el-button>
+				<el-button @click="redirectToSearch()" icon="el-icon-search" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em; border: none;"></el-button>
 		  </div>
 		  
 		</el-drawer>
@@ -59,6 +59,16 @@
 			openSearch() {
 			    // 打开搜索抽屉
 			    this.searchDrawerVisible = true;
+			  },
+			  redirectToSearch: function() {
+			  // 获取用户输入的内容
+			  const subject = this.input2;
+			  
+			  // 构建跳转链接
+			  const searchLink = `/search/${subject}`;
+			  console.log(subject);
+			  // 使用路由导航到搜索页面
+			  this.$router.push(searchLink);
 			  },
 	      },
 	  }

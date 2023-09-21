@@ -61,7 +61,6 @@ import BlogEssayList from '../components/pc/home/BlogEssayList.vue'
 import MobileBanner from '../components/mobile/home/MobileBanner.vue'
 import MobileDetails from '../components/mobile/home/MobileDetails.vue'
 import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
-import MobileNavigation from '../components/mobile/common/MobileNavigation.vue'
 
 export default {
   name: 'home',
@@ -72,7 +71,6 @@ export default {
 	MobileBanner,
 	MobileDetails,
 	MobileEssayList,
-	MobileNavigation,
   },
   data() {
   	return {

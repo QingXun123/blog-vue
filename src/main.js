@@ -12,6 +12,7 @@ import BlogIntroduction from './components/pc/common/BlogIntroduction.vue';
 import BlogHandpick from './components/pc/common/BlogHandpick.vue'
 
 import MobileMenu from './components/mobile/common/MobileMenu.vue'
+import MobileNavigation from './components/mobile/common/MobileNavigation.vue'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
@@ -21,6 +22,7 @@ Vue.component("BlogDate", BlogDate);
 Vue.component("BlogIntroduction", BlogIntroduction);
 Vue.component("BlogHandpick", BlogHandpick);
 Vue.component("MobileMenu", MobileMenu);
+Vue.component("MobileNavigation", MobileNavigation);
 
 new Vue({
   router,

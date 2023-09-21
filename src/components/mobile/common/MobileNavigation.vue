@@ -1,11 +1,11 @@
 <template>
 	<div id="MobileNavigation">
-		<el-card class="box-card" style="width: 100%; background-color: dimgray; color: white; text-align: center; height: 200px; margin-top: 50px; font-size: 30px;">
+		<el-card class="box-card" style="width: 100%; background-color: dimgray; color: white; text-align: center; height: 200px; margin-top: 50px; font-size: 25px;">
 			<p>关注我们，获取更多精彩内容！</p>
 			<el-button type="info" plain>关注我们</el-button>
 			<el-button type="info" plain>了解更多</el-button>
 		</el-card>
-		<div class="record">
+		<div class="mobile-record">
 			<div style="text-align: center; margin-top: 20px; position: relative;"><a href="http://blog.qxbase.com/" target="_self" class="reference-link">© qxBase博客 | 软件分享 | 技术教程 | 致力于互联网行业 | qxBase.com</a></div>
 			<p><a href="https://beian.miit.gov.cn/" target="_blank" class="reference-link">粤ICP备2023104763号</a></p>
 			<p>本站部分图片、文章来源于网络，版权归原作者所有，如有侵权，请联系我们删除。</p>
@@ -22,14 +22,14 @@
 		position: relative;
 	}
 	
-	.record {
+	.mobile-record {
 		width: 100%;
-		height: 300px;
+		height: 200px;
 		background-color: white;
 		text-align: center;
-		font-size: 10px;
+		font-size: 15px;
 		position: absolute;
-		line-height: 10px;
+		line-height: 20px;
 	}
 	
 	/* 自定义 router-link 样式 */
