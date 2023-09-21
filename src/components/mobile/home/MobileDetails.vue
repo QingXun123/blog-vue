@@ -3,19 +3,19 @@
 		<div class="mobileContent">
 			<el-card :body-style="{ padding: '0px' }" style="width: 30vw; height: 25vw;">
 			  <img src="https://th.bing.com/th/id/OIP.bVb769JBdzVZYuksxZ2Y-AHaEo?pid=ImgDet&rs=1" class="mobile-image">
-			  <div style="padding: 0px 10px; font-size: 1px;">
+			  <div style="padding: 0px 10px; font-size: 10px;">
 				<span>文章一</span>
 			  </div>
 			</el-card>
 			<el-card :body-style="{ padding: '0px' }" style="width: 30vw; height: 25vw;">
 			  <img src="https://th.bing.com/th/id/R.b0ea268fa1be279d112489ce83ad4696?rik=qItsh%2fBiy33hlg&riu=http%3a%2f%2fwww.quazero.com%2fuploads%2fallimg%2f140303%2f1-140303215009.jpg&ehk=S6PLWamt%2bMzQV8uO9ugcU5d5M19BpXtCpNz2cRJ7q9M%3d&risl=&pid=ImgRaw&r=0" class="mobile-image">
-			  <div style="padding: 0px 10px; font-size: 1px;">
+			  <div style="padding: 0px 10px; font-size: 10px;">
 				<span>文章二</span>
 			  </div>
 			</el-card>
 			<el-card :body-style="{ padding: '0px' }" style="width: 30vw; height: 25vw;">
 			  <img src="https://th.bing.com/th/id/R.b61e85948514dde6c8f2997871c60766?rik=WSmrFRL1fzIM2A&riu=http%3a%2f%2fpic1.bbzhi.com%2ffengjingbizhi%2fdiqiuguibaodachicunziranfengjingbizhijingxuandiyiji%2fnature_2008_landscape_1680_desktop_01_20183_11.jpg&ehk=UHw5ouJjdlJ4utvTAdWd8UZTuIpkI%2fMSeyoP%2fjtTbpQ%3d&risl=&pid=ImgRaw&r=0" class="mobile-image">
-			  <div style="padding: 0px 10px; font-size: 1px;">
+			  <div style="padding: 0px 10px; font-size: 10px;">
 				<span>文章三</span>
 			  </div>
 			</el-card>

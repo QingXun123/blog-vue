@@ -1,10 +1,10 @@
 <template>
 	<div id="BlogNavigation">
-		<el-card class="box-card" style="width: 100%; background-color: dimgray; color: white; text-align: center; height: 200px; margin-top: 50px; font-size: 30px;">
+		<el-card style="min-width: 100%; background-color: dimgray; color: white; text-align: center; height: 200px; margin-top: 50px; font-size: 30px;">
 			<p>关注我们，获取更多精彩内容！</p>
 			<el-button type="info" plain>关注我们</el-button>
 			<el-button type="info" plain>了解更多</el-button>
-		</el-card>
+		</el-card>	
 		<div class="record">
 			<div style="text-align: center; margin-top: 20px; position: relative;"><a href="http://blog.qxbase.com/" target="_self" class="reference-link">© qxBase博客 | 软件分享 | 技术教程 | 致力于互联网行业 | qxBase.com</a></div>
 			<p><a href="https://beian.miit.gov.cn/" target="_blank" class="reference-link">粤ICP备2023104763号</a></p>
