@@ -8,14 +8,16 @@
 		    <div style="margin: auto;">
 		  	  <el-container>
 		  	  		<el-container>
-		  	  		  <el-main>
-		  	  			  <div>
-		  	  			  </div>
+		  	  		  <el-main style="padding: 0px 0px !important;">
+						  <MobileBanner></MobileBanner>
+						  <MobileDetails></MobileDetails>
+						  <MobileEssayList></MobileEssayList>
 		  	  		  </el-main>
 		  	  		</el-container>
 		  	  </el-container>
 		    </div>
 		    <el-footer>
+				<MobileNavigation></MobileNavigation>
 		    </el-footer>
 		  </el-container>
 	  </div>
@@ -56,6 +58,10 @@
 import BlogBanner from '../components/pc/home/BlogBanner.vue'
 import BlogDetails from '../components/pc/home/BlogDetails.vue'
 import BlogEssayList from '../components/pc/home/BlogEssayList.vue'
+import MobileBanner from '../components/mobile/home/MobileBanner.vue'
+import MobileDetails from '../components/mobile/home/MobileDetails.vue'
+import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
+import MobileNavigation from '../components/mobile/common/MobileNavigation.vue'
 
 export default {
   name: 'home',
@@ -63,6 +69,10 @@ export default {
 	BlogBanner,
 	BlogDetails,
 	BlogEssayList,
+	MobileBanner,
+	MobileDetails,
+	MobileEssayList,
+	MobileNavigation,
   },
   data() {
   	return {

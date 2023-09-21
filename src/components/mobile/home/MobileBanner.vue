@@ -1,9 +1,9 @@
 <template>
-  <div id="BlogBanner" class="carousel-container">
-	<el-carousel>
+  <div id="MobileBanner">
+	<el-carousel style="width: 100vw;" height="250px">
 	  <el-carousel-item v-for="item in imgArr.length" :key="item">
 		<h3 class="small">
-			<img :src="imgArr[item - 1]" alt="" class="imgArr" />
+			<img :src="imgArr[item - 1]" alt="" class="MImgArr" />
 		</h3>
 	  </el-carousel-item>
 	</el-carousel>
@@ -39,16 +39,12 @@ export default {
 
 <style>
 	
-	#BlogBanner {
+	#MobileBanner {
 		position: relative;
+		margin: auto;
 	}
 	
-	.carousel-container {
-		width: 800px;
-		heigth: 300px;
-	}
-	
-	  .imgArr {
+	  .MImgArr {
 		width: 100%;  
 		height: 100%;  
 		position: absolute; /* 图片自适应的关键 */

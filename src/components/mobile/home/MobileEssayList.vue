@@ -1,16 +1,16 @@
 <template>
-	<div id="BlogEssayList">
+	<div id="MobileEssayList">
 		<el-row class="vertical-list">
 			<el-col :span="8" v-for="index in essayList.length" :key="index">
 				
 				<el-card :body-style="{ padding: '0px'}">
 				  <div class="card" style="padding: 14px;">
 					  <router-link :to="'/essay/' + essayList[index - 1].essayId" target="_self"> <!-- 设置跳转链接 -->
-						<img :src="essayList[index - 1].img" class="essay-image">
+						<img :src="essayList[index - 1].img" class="mobile-essay-image">
 					  </router-link>
 						<div class="essay">
 							<router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
-								<h3 class="custom-essay-link">{{ essayList[index-1].subject }}</h3>
+								<h3 class="mobile-custom-essay-link">{{ essayList[index-1].subject }}</h3>
 							</router-link>
 							<div class="details">
 								<i class="el-icon-timer">{{ essayList[index-1].releaseTime }}</i>
@@ -18,7 +18,6 @@
 								<i class="el-icon-view"> 阅读({{ essayList[index-1].readingQuantity }})</i>
 								<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
 							</div>
-							<div v-html="truncateContent(essayList[index-1].content, 170)" class="content"></div>
 						</div>
 				  </div>
 				</el-card>
@@ -92,7 +91,7 @@ import axios from 'axios';
 </script>
 
 <style>
-	#BlogEssayList {
+	#MobileEssayList {
 		position: relative;
 	}
 	
@@ -108,9 +107,9 @@ import axios from 'axios';
 		margin-top: 10px;
 	}
 	
-	.essay-image {
-		width: 200px;
-		height: 150px;
+	.mobile-essay-image {
+		width: 30vw;
+		height: 30vw;
 		display: block;
 		position: relative;
 		border-radius: 5px;
@@ -153,13 +152,14 @@ import axios from 'axios';
 	}
 	
 	/* 自定义 router-link 样式 */
-	.custom-essay-link {
+	.mobile-custom-essay-link {
 	  text-decoration: none; /* 移除默认的下划线 */
 	  color: black; /* 设置链接文本颜色 */
 	  cursor: pointer; /* 将鼠标光标设置为手型 */
+	  font-size: 15px;
 	}
 	
-	.custom-essay-link:hover {
+	.mobile-custom-essay-link:hover {
 	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
 	  /* 可以添加其他悬停效果，比如下划线 */
 	  /* text-decoration: underline; */

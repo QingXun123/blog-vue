@@ -46,6 +46,7 @@
 	export default {
 	    data() {
 	        return {
+				input2: "",
 			  drawerVisible: false, // 控制菜单栏的显示与隐藏
 	          searchDrawerVisible: false, // 控制搜索抽屉的显示与隐藏
 	        };
