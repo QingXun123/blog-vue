@@ -26,7 +26,7 @@
 		    <el-header>
 		  	  <BlogMenu></BlogMenu>
 		    </el-header>
-		    <div style="width: 1200px; margin: auto;">
+		    <div style="margin: auto;">
 		  	  <el-container>
 		  	  		<el-container>
 		  	  		  <el-main>

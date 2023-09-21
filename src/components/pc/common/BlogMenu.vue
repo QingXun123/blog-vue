@@ -67,6 +67,7 @@ import axios from 'axios'
 <style>
 	#BlogMenu {
 		position: relative;
+		max-width: none;
 	}
 	
 	.el-menu-demo {
