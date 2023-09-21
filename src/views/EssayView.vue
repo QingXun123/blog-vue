@@ -51,6 +51,7 @@
 </template>
 
 <script>
+	import BlogEssayDetails from '../components/pc/essay/BlogEssayDetails.vue'
 	import MobileEssayDetails from '../components/mobile/essay/MobileEssayDetails.vue'
 	import MobileDetails from '../components/mobile/home/MobileDetails.vue'
 	import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
@@ -59,6 +60,7 @@
 	export default {
 	  name: 'home',
 	  components: {
+		BlogEssayDetails,
 		MobileDetails,
 		MobileEssayList,
 		MobileEssayDetails,
