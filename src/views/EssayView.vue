@@ -30,6 +30,7 @@
 		  	  		  <el-main>
 		  	  			  <div style="float: right;">
 		  	  				<BlogEssayDetails></BlogEssayDetails>
+							<BlogComment></BlogComment>
 		  	  			  </div>
 		  	  		  </el-main>
 		  	  		</el-container>
@@ -52,10 +53,10 @@
 
 <script>
 	import BlogEssayDetails from '../components/pc/essay/BlogEssayDetails.vue'
+	import BlogComment from '../components/pc/essay/BlogComment.vue'
 	import MobileEssayDetails from '../components/mobile/essay/MobileEssayDetails.vue'
 	import MobileDetails from '../components/mobile/home/MobileDetails.vue'
 	import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
-	
 	
 	export default {
 	  name: 'home',
@@ -64,6 +65,7 @@
 		MobileDetails,
 		MobileEssayList,
 		MobileEssayDetails,
+		BlogComment
 	  },
 	  data() {
 	  	return {

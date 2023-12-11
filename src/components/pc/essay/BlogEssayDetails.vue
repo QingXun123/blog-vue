@@ -2,15 +2,19 @@
 	<div id="BlogEssayDetails">
 		<el-card class="box-card" style="min-height: 700px;">
 		  <div slot="header">
-		    <span class="subject">{{ essay.subject }}</span>
-			<div class="details">
-				<i class="el-icon-timer">{{ essay.releaseTime }}</i>
-				<i class="el-icon-user-solid"> {{ author }}</i>
-				<i class="el-icon-view"> 阅读({{ essay.readingQuantity }})</i>
-				<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
-			</div>
+			  <el-skeleton :rows="3" animated :loading="loading" >
+				<span class="subject">{{ essay.subject }}</span>
+				<div class="details">
+					<i class="el-icon-timer">{{ essay.releaseTime }}</i>
+					<i class="el-icon-user-solid"> {{ author }}</i>
+					<i class="el-icon-view"> 阅读({{ essay.readingQuantity }})</i>
+					<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
+				</div>
+			</el-skeleton>
 		  </div>
-		  <div v-html="essay.content" class="htmlText"></div>
+		  <el-skeleton :rows="10" animated :loading="loading" >
+				<div v-html="essay.content" class="htmlText"></div>
+			</el-skeleton>
 		</el-card>
 	</div>
 </template>
@@ -23,6 +27,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	export default {
 		data() {
 			return {
+				loading: true,
 				essayId: 1,
 				essay: {},
 				author: "青旬",
@@ -37,6 +42,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 				axios.get("http://42.193.243.59:9000/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
+					this.loading = false;
 				}).catch((err) => {
 					console.error(err);
 				})
