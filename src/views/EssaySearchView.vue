@@ -68,7 +68,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	#search {
 	  color: #2c3e50;
 	}

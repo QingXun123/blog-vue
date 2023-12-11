@@ -14,16 +14,23 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 	#BlogIntroduction {
+		padding-top: 10px;
 		position: relative;
 	}
 	
-	.Introduction-card {
+	/deep/ .Introduction-card {
 		width: 350px;
 	}
 	
 	.text {
 		line-height: 25px;
 	}
+	
+	.item {
+	    margin-bottom: 18px;
+		font-size: 15px;
+		font-weight: lighter;
+	  }
 </style>

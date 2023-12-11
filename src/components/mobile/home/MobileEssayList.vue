@@ -90,7 +90,7 @@ import axios from 'axios';
 	}
 </script>
 
-<style>
+<style scoped>
 	#MobileEssayList {
 		position: relative;
 	}
@@ -163,5 +163,13 @@ import axios from 'axios';
 	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
 	  /* 可以添加其他悬停效果，比如下划线 */
 	  /* text-decoration: underline; */
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	el-col {
+		float: right;
 	}
 </style>

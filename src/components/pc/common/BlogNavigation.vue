@@ -16,7 +16,7 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 	
 	#BlogNavigation {
 		position: relative;

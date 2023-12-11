@@ -34,7 +34,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	#disclaimer {
 	  color: #2c3e50;
 	  min-width: 1200px; /* 最小宽度 */

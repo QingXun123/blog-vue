@@ -84,7 +84,7 @@
     }
 </script>
 
-<style>
+<style scoped>
 	#essay {
 	  color: #2c3e50;
 	}

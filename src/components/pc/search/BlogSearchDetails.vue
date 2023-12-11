@@ -88,8 +88,71 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	#BlogSearchDetails {
 	}
 	
+	/deep/ .el-pagination {
+		margin-top: 20px;
+		display: flex;
+		justify-content: center; /* 水平居中 */
+	}
+	
+	/deep/ .el-card {
+		max-width: 800px;
+		width: 100vw;
+		margin-top: 10px;
+	}
+	
+	/deep/ .essay-image {
+		width: 200px;
+		height: 150px;
+		display: block;
+		position: relative;
+		border-radius: 5px;
+		object-fit: cover;
+	  }
+	  
+	/deep/ .details {
+	  font-size: 13px;
+	  color: #999;
+	  white-space:nowrap;
+	}
+	
+	/deep/ .content {
+		font-size: 13px;
+		color: #999;
+		margin-top: 5px;
+	}
+	
+	/deep/ .el-icon-user-solid,
+	.el-icon-view,
+	.el-icon-chat-line-round {
+		margin-left: 15px;
+	}
+	
+	/deep/ .card {
+		display: flex;
+	}
+	
+	/deep/ .card img {
+		object-fit: contain;
+	}
+	
+	/deep/ .essay {
+		margin-left: 10px;
+	}
+	
+	/deep/ .vertical-list {
+	  display: flex;
+	  flex-direction: column; /* 将子元素垂直排列 */
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	el-col {
+		float: right;
+	}
 </style>

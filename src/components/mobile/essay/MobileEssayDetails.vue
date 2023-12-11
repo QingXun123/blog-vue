@@ -1,6 +1,6 @@
 <template>
 	<div id="MobileEssayDetails">
-		<el-card class="box-card" style="min-height: 700px;">
+		<el-card class="box-card" style="min-height: 700px;;">
 		  <div slot="header">
 		    <span class="mobile-subject">{{ essay.subject }}</span>
 			<div class="details">
@@ -53,86 +53,92 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	}
 </script>
 
-<style>
+<style scoped>
 	#MobileEssayDetails {
 	}
 	
-	.mobile-subject {
+	/deep/ .el-card {
+		width: 100vw;
+		margin-top: 10px;
+	}
+	
+	/deep/ .mobile-subject {
 		min-height: 50px;
 		font-size: 25px;
 		display: flex;
 	}
 	
-	.mobile-htmlText {
+	/deep/ .mobile-htmlText {
 		font-size: 3vw;
+		max-width: 100%;
 	}
 
-	.mobile-htmlText img {
+	/deep/ .mobile-htmlText img {
 		object-fit: scale-down;
 	}
 	
 	/* 基本的表格样式 */
-	.table-box table {
+	/deep/ .table-box table {
 	  border-collapse: collapse;
 	  width: 100%;
 	}
 	
-	.table-box table, .table-box th, .table-box td {
+	/deep/ .table-box table, .table-box th, .table-box td {
 	  border: 1px solid #ccc;
 	}
 	
 	/* 表头样式 */
-	.table-box th {
+	/deep/ .table-box th {
 	  background-color: #f2f2f2;
 	  text-align: left;
 	  padding: 8px;
 	}
 	
 	/* 表格行样式（奇数行和偶数行） */
-	.table-box tr:nth-child(even) {
+	/deep/ .table-box tr:nth-child(even) {
 	  background-color: #f2f2f2;
 	}
 	
-	.table-box tr:nth-child(odd) {
+	/deep/ .table-box tr:nth-child(odd) {
 	  background-color: #ffffff;
 	}
 	
 	/* 单元格样式 */
-	.table-box td {
+	/deep/ .table-box td {
 	  padding: 8px;
 	  text-align: left;
 	}
 	
 	/* 鼠标悬停时的行样式 */
-	.table-box tr:hover {
+	/deep/ .table-box tr:hover {
 	  background-color: #e0e0e0;
 	}
 	
-	.mobile-htmlText ul {
+	/deep/ .mobile-htmlText ul {
 	  list-style-type: none;
 	  padding-left: 0;
 	}
 	
-	.mobile-htmlText ul li {
+	/deep/ .mobile-htmlText ul li {
 	  margin: 0 0 2px;
 	  padding-left: 24px;
 	}
 	
-	.mobile-htmlText ul ul {
+	/deep/ .mobile-htmlText ul ul {
 	  padding-left: 24px;
 	}
 	
-	.mobile-htmlText a {
+	/deep/ .mobile-htmlText a {
 	  text-decoration: none;
 	  color: #0077cc;
 	}
 	
-	.mobile-htmlText a:hover {
+	/deep/ .mobile-htmlText a:hover {
 	  /* text-decoration: underline; */
 	  color: #0055aa;
 	}
 	
-	.mobile-htmlText img {
+	/deep/ .mobile-htmlText img {
 		max-width: 90vw;
 		height: auto;
 	}

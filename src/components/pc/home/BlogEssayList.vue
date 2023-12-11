@@ -91,24 +91,24 @@ import axios from 'axios';
 	}
 </script>
 
-<style>
+<style scoped>
 	#BlogEssayList {
 		position: relative;
 	}
 	
-	.el-pagination {
+	/deep/ .el-pagination {
 		margin-top: 20px;
 		display: flex;
 		justify-content: center; /* 水平居中 */
 	}
 	
-	.el-card {
+	/deep/ .el-card {
 		max-width: 800px;
 		width: 100vw;
 		margin-top: 10px;
 	}
 	
-	.essay-image {
+	/deep/ .essay-image {
 		width: 200px;
 		height: 150px;
 		display: block;
@@ -117,51 +117,59 @@ import axios from 'axios';
 		object-fit: cover;
 	  }
 	  
-	.details {
+	/deep/ .details {
 	  font-size: 13px;
 	  color: #999;
 	  white-space:nowrap;
 	}
 	
-	.content {
+	/deep/ .content {
 		font-size: 13px;
 		color: #999;
 		margin-top: 5px;
 	}
 	
-	.el-icon-user-solid,
+	/deep/ .el-icon-user-solid,
 	.el-icon-view,
 	.el-icon-chat-line-round {
 		margin-left: 15px;
 	}
 	
-	.card {
+	/deep/ .card {
 		display: flex;
 	}
 	
-	.card img {
+	/deep/ .card img {
 		object-fit: contain;
 	}
 	
-	.essay {
+	/deep/ .essay {
 		margin-left: 10px;
 	}
 	
-	.vertical-list {
+	/deep/ .vertical-list {
 	  display: flex;
 	  flex-direction: column; /* 将子元素垂直排列 */
 	}
 	
 	/* 自定义 router-link 样式 */
-	.custom-essay-link {
+	/deep/ .custom-essay-link {
 	  text-decoration: none; /* 移除默认的下划线 */
 	  color: black; /* 设置链接文本颜色 */
 	  cursor: pointer; /* 将鼠标光标设置为手型 */
 	}
 	
-	.custom-essay-link:hover {
+	/deep/ .custom-essay-link:hover {
 	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
 	  /* 可以添加其他悬停效果，比如下划线 */
 	  /* text-decoration: underline; */
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	el-col {
+		float: right;
 	}
 </style>

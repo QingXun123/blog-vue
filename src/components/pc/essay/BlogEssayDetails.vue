@@ -53,82 +53,88 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	}
 </script>
 
-<style>
+<style scoped>
 	#BlogEssayDetails {
 	}
 	
-	.subject {
+	/deep/ .el-card {
+		max-width: 800px;
+		width: 100vw;
+		margin-top: 10px;
+	}
+	
+	/deep/ .subject {
 		min-height: 50px;
 		font-size: 30px;
 		display: flex;
 	}
 
-	.htmlText img {
+	/deep/ .htmlText img {
 		object-fit: scale-down;
 	}
 	
 	/* 基本的表格样式 */
-	.table-box table {
+	/deep/ .table-box table {
 	  border-collapse: collapse;
 	  width: 100%;
 	}
 	
-	.table-box table, .table-box th, .table-box td {
+	/deep/ .table-box table, .table-box th, .table-box td {
 	  border: 1px solid #ccc;
 	}
 	
 	/* 表头样式 */
-	.table-box th {
+	/deep/ .table-box th {
 	  background-color: #f2f2f2;
 	  text-align: left;
 	  padding: 8px;
 	}
 	
 	/* 表格行样式（奇数行和偶数行） */
-	.table-box tr:nth-child(even) {
+	/deep/ .table-box tr:nth-child(even) {
 	  background-color: #f2f2f2;
 	}
 	
-	.table-box tr:nth-child(odd) {
+	/deep/ .table-box tr:nth-child(odd) {
 	  background-color: #ffffff;
 	}
 	
 	/* 单元格样式 */
-	.table-box td {
+	/deep/ .table-box td {
 	  padding: 8px;
 	  text-align: left;
 	}
 	
 	/* 鼠标悬停时的行样式 */
-	.table-box tr:hover {
+	/deep/ .table-box tr:hover {
 	  background-color: #e0e0e0;
 	}
 	
-	.htmlText ul {
+	/deep/ .htmlText ul {
 	  list-style-type: none;
 	  padding-left: 0;
 	}
 	
-	.htmlText ul li {
+	/deep/ .htmlText ul li {
 	  margin: 0 0 2px;
 	  padding-left: 24px;
 	}
 	
-	.htmlText ul ul {
+	/deep/ .htmlText ul ul {
 	  padding-left: 24px;
 	}
 	
-	.htmlText a {
+	/deep/ .htmlText a {
 	  text-decoration: none;
 	  color: #0077cc;
 	}
 	
-	.htmlText a:hover {
+	/deep/ .htmlText a:hover {
 	  /* text-decoration: underline; */
 	  color: #0055aa;
 	}
 	
-	.htmlText img {
+	/deep/ .htmlText img {
 		max-width: 750px;
 		height: auto;
 	}

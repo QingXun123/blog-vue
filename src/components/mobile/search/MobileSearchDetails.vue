@@ -87,8 +87,85 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	#MobileSearchDetails {
 	}
 	
+	.el-pagination {
+		margin-top: 20px;
+		display: flex;
+		justify-content: center; /* 水平居中 */
+	}
+	
+	.el-card {
+		max-width: 800px;
+		width: 100vw;
+		margin-top: 10px;
+	}
+	
+	.mobile-essay-image {
+		width: 30vw;
+		height: 30vw;
+		display: block;
+		position: relative;
+		border-radius: 5px;
+		object-fit: cover;
+	  }
+	  
+	.details {
+	  font-size: 13px;
+	  color: #999;
+	  white-space:nowrap;
+	}
+	
+	.content {
+		font-size: 13px;
+		color: #999;
+		margin-top: 5px;
+	}
+	
+	.el-icon-user-solid,
+	.el-icon-view,
+	.el-icon-chat-line-round {
+		margin-left: 15px;
+	}
+	
+	.card {
+		display: flex;
+	}
+	
+	.card img {
+		object-fit: contain;
+	}
+	
+	.essay {
+		margin-left: 10px;
+	}
+	
+	.vertical-list {
+	  display: flex;
+	  flex-direction: column; /* 将子元素垂直排列 */
+	}
+	
+	/* 自定义 router-link 样式 */
+	.mobile-custom-essay-link {
+	  text-decoration: none; /* 移除默认的下划线 */
+	  color: black; /* 设置链接文本颜色 */
+	  cursor: pointer; /* 将鼠标光标设置为手型 */
+	  font-size: 15px;
+	}
+	
+	.mobile-custom-essay-link:hover {
+	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
+	  /* 可以添加其他悬停效果，比如下划线 */
+	  /* text-decoration: underline; */
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	el-col {
+		float: right;
+	}
 </style>

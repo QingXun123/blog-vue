@@ -56,7 +56,7 @@ import axios from 'axios'
 
 			// 构建跳转链接
 			const searchLink = `/search/${subject}`;
-			console.log(subject);
+			console.log(searchLink);
 			// 使用路由导航到搜索页面
 			this.$router.push(searchLink);
 			},
@@ -64,13 +64,13 @@ import axios from 'axios'
 	  }
 </script>
 
-<style>
+<style scoped>
 	#BlogMenu {
 		position: relative;
 		max-width: none;
 	}
 	
-	.el-menu-demo {
+	/deep/ .el-menu-demo {
 		display: flex;
 		justify-content: center;
 	}

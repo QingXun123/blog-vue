@@ -66,7 +66,7 @@
 			  
 			  // 构建跳转链接
 			  const searchLink = `/search/${subject}`;
-			  console.log(subject);
+			  console.log(searchLink);
 			  // 使用路由导航到搜索页面
 			  this.$router.push(searchLink);
 			  },
@@ -74,7 +74,7 @@
 	  }
 </script>
 
-<style>
+<style scoped>
 	#MobileMenu {
 		background-color: white;
 		height: 60px;

@@ -15,16 +15,16 @@
 	  }
 </script>
 
-<style>
+<style scoped>
 	#BlogDate {
 		margin-top: 20px;
 		width: 350px;
 		position: relative;
 	}
 	
-	.el-calendar-table .el-calendar-day {
-		box-sizing: border-box !important;
-		padding: 4px !important;
-		height: 30px !important;
+	/deep/ .el-calendar-table .el-calendar-day {
+		box-sizing: border-box;
+		padding: 4px;
+		height: 30px;
 	}
 </style>

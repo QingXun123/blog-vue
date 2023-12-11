@@ -15,7 +15,7 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 	#DisclaimerInfo {
 	}
 </style>

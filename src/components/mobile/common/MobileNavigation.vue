@@ -17,7 +17,7 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 	
 	#MobileNavigation {
 		position: relative;

@@ -3,7 +3,7 @@
 		<el-table
 		    :data="tableData"
 		    stripe
-		    style="width: 100%; font-size: 2px; empty-text='暂无数据';">
+		    style="width: 100%; empty-text='暂无数据';">
 			  <el-table-column
 			    prop="subject"
 			    label="最新文章"
@@ -56,7 +56,7 @@ import axios from "axios";
 	};
 </script>
 
-<style>
+<style scoped>
 	#BlogHandpick {
 		position: relative;
 	}
