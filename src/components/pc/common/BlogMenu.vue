@@ -52,8 +52,7 @@ import axios from 'axios'
 	      return {
 			input2: "",
 		    activeIndex: '',
-			circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-			squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
+			circleUrl: require('@/assets/headImg.png'),
 			sizeList: ["large", "medium", "small"],
 			username: '未登录',
 			// loginHtml: '<form id="login-form"><label for="email">邮箱：</label><input type="email" id="email" placeholder="Enter your email" required><br><label for="password">密码：</label><input type="password" id="password" placeholder="Enter your password" required></form>',

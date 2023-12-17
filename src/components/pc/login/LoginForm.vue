@@ -60,11 +60,11 @@
 				}, 500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
 			},
 			login: function() {
-				axios.post("http://42.193.243.59:9000/user/doLogin", {
+				axios.post("http://api.blog.qxbase.com/user/doLogin", {
 					"email": this.email,
 					"password": this.password,
 				}, {
-				  withCredentials: true // 开启跨域携带 Cookie
+				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
 					if (response.data.code !== 200) {
@@ -75,7 +75,7 @@
 					} else {
 						console.log(response);
 						// 获取响应中的 Set-Cookie 头部信息
-						const setCookieHeader = response.headers['set-cookie'];
+						const setCookieHeader = response.headers['satoken'];
 						
 						// 这里你可以对 setCookieHeader 进行处理，提取你需要的信息
 						console.log(setCookieHeader);
@@ -92,7 +92,7 @@
 				})
 			},
 			register: function() {
-				axios.post("http://42.193.243.59:9000/user/register", {
+				axios.post("http://api.blog.qxbase.com/user/register", {
 					"userName": this.username,
 					"email": this.email,
 					"password": this.password,

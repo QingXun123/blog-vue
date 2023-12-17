@@ -34,7 +34,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 		},
 		methods: {
 			info: function() {
-				axios.get("http://42.193.243.59:9000/essayInfo/info?essayId=" + this.$route.params.essayId)
+				axios.get("http://api.blog.qxbase.com/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
 				}).catch((err) => {
@@ -42,7 +42,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 				})
 			},
 			readEssay: function(val) {
-				axios.get("http://42.193.243.59:9000/essayInfo/readEssay?essayId=" + val)
+				axios.get("http://api.blog.qxbase.com/essayInfo/readEssay?essayId=" + val)
 				.then((response) => {
 					console.log(response);
 				}).catch((err) => {
