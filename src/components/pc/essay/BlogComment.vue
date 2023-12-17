@@ -9,7 +9,7 @@
 				<el-input
 				  type="textarea"
 				  placeholder="请输入内容"
-				  v-model="textarea"
+				  v-model="comment"
 				  maxlength="150"
 				  show-word-limit
 				  resize="none"
@@ -30,10 +30,12 @@
 </template>
 
 <script>
+	import axios from 'axios'; // 导入axios库
+	
 	export default {
 		data() {
 			return {
-				textarea: '',
+				comment: '',
 				checked: false,
 				loading: false
 			}
@@ -44,6 +46,34 @@
 					return;
 				}
 				this.loading = true;
+				axios.post("http://42.193.243.59:9000/essayComment/addComment", {
+					"essayId": this.$route.params,
+					"comment": this.comment,
+					"userId": this.getUserId(),
+				}).then(
+				(response) => {
+					if (response.data.message !== "ok") {
+						console.log(response.data);
+						this.$message({
+						  message: response.data.message,
+						  type: 'error'
+						});
+					} else {
+						this.user = response.data.data;
+						localStorage.setItem('userData', JSON.stringify(this.user));
+						this.$message({
+						  message: '发布成功',
+						  type: 'success'
+						});
+					}
+				}).catch((err) => {
+					console.error(err);
+				})
+			},
+			// 从 localStorage 中获取用户数据
+			getUserId: function() {
+			  const storedUserData = localStorage.getItem('userData');
+			  return storedUserData.userId;
 			},
 		}
 	}

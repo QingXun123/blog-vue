@@ -24,6 +24,11 @@ const routes = [
     path: '/disclaimer',
     name: 'disclaimer',
     component: () => import('../views/DisclaimerView.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue')
   }
 ]
 
