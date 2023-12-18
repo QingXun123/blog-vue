@@ -26,39 +26,40 @@
 			</el-card>
 			<div class="commentList">
 				<!-- 评论 -->
-				<div class="oneComment" v-for="index in commentList.length" :key="index">
-					<el-avatar :size="40" :src="commentList[index-1].img === null ? circleUrl : commentList[index-1].img"></el-avatar>
-					<a class="username">{{ commentList[index-1].userName }}</a>
+				<div class="oneComment" v-for="(comment, index) in commentList" :key="index - 1">
+					<el-avatar :size="40" :src="comment.img === null ? circleUrl : comment.img"></el-avatar>
+					<a class="username">{{ comment.userName }}</a>
 					<div class="content">
-						<a>{{ commentList[index-1].content }}</a>
+						<a>{{ comment.content }}</a>
 					</div>
-					<a class="createTime">{{ commentList[index-1].createTime }}</a>
+					<a class="createTime">{{ comment.createTime }}</a>
 					<i class="el-icon-thumb common-icon clickable-link" @click="like"></i>
-					<a class="common-num">{{ commentList[index-1].like }}</a>
+					<a class="common-num">{{ comment.like }}</a>
 					<i class="el-icon-chat-dot-round common-icon clickable-link" @click="like"></i>
-					<a class="common-num">12</a>
+					<a class="common-num">{{ nextCommentPage[comment.commentId].total }}</a>
 					<!-- 回复评论消息 -->
 					<div class="nextCommentList">
-						<div class="nextComment" v-for="index2 in 2" :key="index2">
+						<div class="nextComment" v-for="(nextComment, index2) in nextCommentList[comment.commentId]" :key="index2 - 1">
 							<el-avatar :size="40" :src="circleUrl"></el-avatar>
-							<a class="username">青旬</a>
+							<a class="username">{{ nextComment.userName }}</a>
 							<div class="content">
-								<a>hhh</a>
+								<a>{{ nextComment.content }}</a>
 							</div>
-							<a class="createTime">2020-01-01 00:00:00</a>
+							<a class="createTime">{{ nextComment.createTime }}</a>
 							<i class="el-icon-thumb common-icon clickable-link" @click="like"></i>
-							<a class="common-num">12</a>
+							<a class="common-num">{{ nextComment.like }}</a>
 							<i class="el-icon-chat-dot-round common-icon clickable-link" @click="like"></i>
-							<a class="common-num">12</a>
+							<a class="common-num">{{ nextComment.total }}</a>
 						</div>
 						<!-- 翻页选项 -->
 						<el-pagination
-						  @current-change="handleCurrentChange"
+						  @current-change="nextHandleCurrentChange($event, comment.commentId)"
 									:page-size="5"
 						  layout="prev, pager, next"
-						  :total="10"
+						  :total="nextCommentPage[comment.commentId].total"
 						  small
-						  class="nextPagination">
+						  class="nextPagination"
+						  v-if="nextCommentPage[comment.commentId].total > 5">
 						</el-pagination>
 					</div>
 				</div>
@@ -67,7 +68,7 @@
 				  @current-change="handleCurrentChange"
 							:page-size="5"
 				  layout="prev, pager, next"
-				  :total="10"
+				  :total="commentPage.total"
 				  background
 				  class="pagination">
 				</el-pagination>
@@ -88,10 +89,13 @@
 				loading: false,
 				circleUrl: require('@/assets/headImg.png'),
 				commentList: [],
+				commentPage: {},
+				nextCommentList: [],
+				nextCommentPage: [],
 			}
 		},
 		created() {
-			this.getCommentList();
+			this.page(1);
 		},
 		methods: {
 			commentClick: function() {
@@ -134,17 +138,127 @@
 			  const storedUserData = JSON.parse(localStorage.getItem('userData'));
 			  return storedUserData.userId;
 			},
-			getCommentList: function() {
-				axios.get("http://api.blog.qxbase.com/essayComment/getCommentByEssayId?essayId=" + this.$route.params.essayId).then(
+			page: function(val) {
+				axios.post("http://localhost:9000/essayComment/getcommentPage", {
+					"orders": [
+					    {
+					      "asc": false,
+					      "column": "createTime"
+					    }
+					  ],
+					"current": val,
+					"size": 5,
+					"records": [
+					  this.$route.params.essayId
+					]
+				}).then(
 				(response) => {
-					this.commentList = response.data.data;
-					console.log(this.commentList);
+					this.commentPage = response.data.data;
+					console.log(this.commentPage);
+					const records = this.commentPage.records;
+					records.forEach((item) => {
+						const date = new Date(item.createTIme);
+						const year = date.getFullYear();
+						const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 月份从0开始，需要加1
+						const day = date.getDate().toString().padStart(2, '0');
+						item.createTIme = `${year}-${month}-${day}`;
+					});
+					this.commentList = records;
+					for (let i = 0; i < this.commentList.length; i++) {
+					  let commentId = this.commentList[i].commentId;
+					  axios.post("http://localhost:9000/essayComment/getNextCommentPage", {
+					  	"orders": [
+					  	    {
+					  	      "asc": false,
+					  	      "column": "createTime"
+					  	    }
+					  	  ],
+					  	"current": val,
+					  	"size": 5,
+					  	"records": [
+					  	  commentId
+					  	]
+					  }).then(
+					  (response) => {
+					  	// this.nextCommentPage[commentId] = response.data.data;
+						this.$set(this.nextCommentPage, commentId, response.data.data);
+					  	const records = this.nextCommentPage[commentId].records;
+					  	records.forEach((item) => {
+							// 获取回复的回复总数
+							axios.get("http://localhost:9000/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+							(response) => {
+								if (response.data.code !== 200) {
+									this.$message({
+										message: response.data.data,
+										type: 'error'
+									});
+								}
+								// item.total = response.data.data;
+								this.$set(item, 'total', 0);
+							}).catch((err) => {
+								console.error(err);
+							})
+					  	});
+					  	// this.nextCommentList[commentId] = records;
+						this.$set(this.nextCommentList, commentId, records);
+					  }).catch((err) => {
+					  	console.error(err);
+					  })
+					}
+				}).catch((err) => {
+					console.error(err);
+				})
+			},
+			nextPage: function(val, commentId) {
+				axios.post("http://localhost:9000/essayComment/getNextCommentPage", {
+					"orders": [
+					    {
+					      "asc": false,
+					      "column": "createTime"
+					    }
+					  ],
+					"current": val,
+					"size": 5,
+					"records": [
+					  commentId
+					]
+				}).then(
+				(response) => {
+					const temp = response.data.data;
+					// this.nextCommentPage[temp.replyCommentId] = temp;
+					this.$set(this.nextCommentPage, temp.replyCommentId, temp);
+					console.log("test"+ temp[0]);
+					const records = this.nextCommentPage[temp.replyCommentId].records;
+					records.forEach((item) => {
+						// 获取回复的回复总数
+						axios.get("http://localhost:9000/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+						(response) => {
+							if (response.data.code !== 200) {
+								this.$message({
+									message: response.data.data,
+									type: 'error'
+								});
+							}
+							// item.total = response.data.data;
+							this.$set(item, 'total', 0);
+						}).catch((err) => {
+							console.error(err);
+						})
+					});
+					// this.nextCommentList[commentId] = records;
+					this.$set(this.nextCommentList, commentId, records);
 				}).catch((err) => {
 					console.error(err);
 				})
 			},
 			like: function() {
 				
+			},
+			handleCurrentChange(val) {
+				this.page(val);
+			},
+			nextHandleCurrentChange(val, commentId) {
+				this.nextPage(val, commentId);
 			},
 		}
 	}

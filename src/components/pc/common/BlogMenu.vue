@@ -117,7 +117,7 @@ import axios from 'axios'
 				if (user) {
 					this.username = user.userName;
 				}
-				console.log(user);
+				// console.log(user);
 				console.log(user.userName);
 			},
 			exit: function() {
