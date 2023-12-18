@@ -55,7 +55,6 @@
 				</div>
 			</div>
 		</transition>
-	  
   </div>
 </template>
 

@@ -80,7 +80,18 @@ import axios from 'axios'
 
 				// 构建跳转链接
 				const searchLink = `/search/${subject}`;
-				console.log(searchLink);
+				// 获取 URL 中的哈希部分
+				const hashFragment = window.location.hash;
+				// console.log(hashFragment);
+				// 如果你想获取路径中的特定部分，比如 /#/essay/10 中的 "essay"
+				const pathSegments = hashFragment.split('/');
+				console.log(pathSegments);
+				const specificSegment = pathSegments[1];
+				if (specificSegment === 'search') {
+					window.location.href = searchLink;
+					location.reload();
+					return;
+				}
 				// 使用路由导航到搜索页面
 				this.$router.push(searchLink);
 			},

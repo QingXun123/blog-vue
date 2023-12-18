@@ -3,36 +3,36 @@
 		<transition name="el-fade-in-linear">
 			<div v-show="show">
 				<div v-if="isMobile">
+					  <el-container>
+						<el-header>
+						  <MobileMenu></MobileMenu>
+						</el-header>
+						<div style="margin: auto;">
 						  <el-container>
-							<el-header>
-							  <MobileMenu></MobileMenu>
-							</el-header>
-							<div style="margin: auto;">
-							  <el-container>
-									<el-container>
-									  <el-main style="padding: 0px 0px !important;">
-										  
-									  </el-main>
-									</el-container>
-							  </el-container>
-							</div>
-							<el-footer>
-								<MobileNavigation></MobileNavigation>
-							</el-footer>
+								<el-container>
+								  <el-main style="padding: 0px 0px !important;">
+									  
+								  </el-main>
+								</el-container>
 						  </el-container>
+						</div>
+						<el-footer>
+							<MobileNavigation></MobileNavigation>
+						</el-footer>
+					  </el-container>
 				</div>
 				<div v-else>
-						  <el-container>
-							<el-header>
-							  <BlogMenu></BlogMenu>
-							</el-header>
-							<div style="margin: auto;">
-							  <LoginForm></LoginForm>
-							</div>
-							<el-footer id="footer">
-							  <BlogNavigation></BlogNavigation>
-							</el-footer>
-						  </el-container>
+					  <el-container>
+						<el-header>
+						  <BlogMenu></BlogMenu>
+						</el-header>
+						<div style="margin: auto;">
+						  <LoginForm></LoginForm>
+						</div>
+						<el-footer id="footer">
+						  <BlogNavigation></BlogNavigation>
+						</el-footer>
+					  </el-container>
 				</div>
 			</div>
 		</transition>
