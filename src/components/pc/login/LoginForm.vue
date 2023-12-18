@@ -21,7 +21,9 @@
 					<el-input placeholder="请输入密码" v-model="password" show-password style="top: 20px;" class="inputForm"></el-input>
 					<div style="display: flex; align-items: center; justify-content: space-evenly; position: absolute; top: 240px;">
 						<el-input placeholder="验证码" v-model="authCode" style="width: 100px; left: -25px;"></el-input>
-						<img src="../../../assets/logo.png" style="width: 100px; height: 50px;"/>
+						<el-card class="box-card indentifyCodeFormCard" v-loading="codeLoading">
+							<img class="indentifyCodeForm" ref="identifyImg" :src="identifyCodeImgUrl" @click="identifyCodeClick"/>
+						</el-card>
 					</div>
 					<el-button type="primary" style="top: 300px; position: absolute; width: 200px;" @click="register">注册</el-button>
 				</div>
@@ -46,7 +48,9 @@
 				currentContent: 'login',
 				loading: false,
 				user: '',
-				authCode: ''
+				authCode: '',
+				identifyCodeImgUrl: 'http://api.blog.qxbase.com/user/identifyImage',
+				codeLoading: false,
 			}
 		},
 		methods: {
@@ -96,6 +100,9 @@
 					"userName": this.username,
 					"email": this.email,
 					"password": this.password,
+					"identifyCode": this.authCode,
+				}, {
+				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
 					if (response.data.data) {
@@ -109,12 +116,21 @@
 						  message: response.data.message,
 						  type: 'error'
 						});
+						this.identifyCodeClick();
+						this.authCode = '';
 					}
 					this.user = response.data;
 					console.log(this.user);
 				}).catch((err) => {
 					console.error(err);
 				})
+			},
+			identifyCodeClick: function() {
+				this.codeLoading = true;
+				setTimeout(() => {
+					this.codeLoading = false;
+					this.$refs.identifyImg.src = this.identifyCodeImgUrl + '?' + Math.random();
+				}, 1000); // 2000 毫秒即 2 秒，你可以根据需要调整时间
 			}
 		}
 	};
@@ -178,5 +194,17 @@
 	/* 鼠标悬浮时的效果 */
 	.clickable-link:hover {
 	  color: red; /* 可以根据需要修改悬浮时的颜色 */
+	}
+	
+	.indentifyCodeForm,
+	.indentifyCodeFormCard {
+		width: 95px;
+		height: 35px;
+	}
+	
+	.indentifyCodeFormCard {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
 	}
 </style>

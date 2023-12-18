@@ -124,6 +124,17 @@
 					} else {
 						this.user = response.data.data;
 						localStorage.setItem('userData', JSON.stringify(this.user));
+						this.content = '';
+						this.commentList.unshift({
+							'content': this.user.content,
+							'createTime': this.user.createTime,
+							'essayId': this.user.essayId,
+							'like': this.user.like,
+							'userId': this.user.userId,
+							'type': this.user.type,
+							'replyCommentId': this.user.replyCommentId,
+							'replySuperCommentId':this.user.replySuperCommentId,
+						})
 						this.$message({
 						  message: '发布成功',
 						  type: 'success'
@@ -139,7 +150,7 @@
 			  return storedUserData.userId;
 			},
 			page: function(val) {
-				axios.post("http://localhost:9000/essayComment/getcommentPage", {
+				axios.post("http://api.blog.qxbase.com/essayComment/getcommentPage", {
 					"orders": [
 					    {
 					      "asc": false,
@@ -166,7 +177,7 @@
 					this.commentList = records;
 					for (let i = 0; i < this.commentList.length; i++) {
 					  let commentId = this.commentList[i].commentId;
-					  axios.post("http://localhost:9000/essayComment/getNextCommentPage", {
+					  axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
 					  	"orders": [
 					  	    {
 					  	      "asc": false,
@@ -185,7 +196,7 @@
 					  	const records = this.nextCommentPage[commentId].records;
 					  	records.forEach((item) => {
 							// 获取回复的回复总数
-							axios.get("http://localhost:9000/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+							axios.get("http://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
 							(response) => {
 								if (response.data.code !== 200) {
 									this.$message({
@@ -210,7 +221,7 @@
 				})
 			},
 			nextPage: function(val, commentId) {
-				axios.post("http://localhost:9000/essayComment/getNextCommentPage", {
+				axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
 					"orders": [
 					    {
 					      "asc": false,
@@ -225,13 +236,13 @@
 				}).then(
 				(response) => {
 					const temp = response.data.data;
-					// this.nextCommentPage[temp.replyCommentId] = temp;
-					this.$set(this.nextCommentPage, temp.replyCommentId, temp);
+					// this.nextCommentPage[temp.replySuperCommentId] = temp;
+					this.$set(this.nextCommentPage, temp.replySuperCommentId, temp);
 					console.log("test"+ temp[0]);
-					const records = this.nextCommentPage[temp.replyCommentId].records;
+					const records = this.nextCommentPage[temp.replySuperCommentId].records;
 					records.forEach((item) => {
 						// 获取回复的回复总数
-						axios.get("http://localhost:9000/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+						axios.get("http://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
 						(response) => {
 							if (response.data.code !== 200) {
 								this.$message({

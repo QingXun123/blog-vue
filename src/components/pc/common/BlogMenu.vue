@@ -13,8 +13,8 @@
 					@keyup.enter.native="redirectToSearch()">
 				  </el-input>
 			</el-menu-item>
-			<div v-if="!getUserData()">
-				<el-menu-item index="6" style="position: absolute; right: 10%; width: 150px;">
+			<div v-if="this.userName === '未登录'">
+				<el-menu-item index="6" style="position: relative; left: 100%; width: 150px;">
 					<el-button type="text" @click="login">
 						<el-col :span="12">
 							  <div class="demo-basic--circle">
@@ -26,7 +26,7 @@
 				</el-menu-item>
 			</div>
 			<div v-else>
-				<el-submenu index="6" style="position: absolute; right: 10%; width: 200px;">
+				<el-submenu index="6" style="position: relative; left: 100%; width: 200px;">
 					<template slot="title">
 						<el-button type="text">
 							<el-col :span="2">
@@ -34,10 +34,11 @@
 									<div class="block"><el-avatar :size="40" :src="circleUrl"></el-avatar></div>
 								  </div>
 							</el-col>
-							<a style="padding-left: 20px; position: relative; top: 0.8vw; color: darkgray;">{{ truncateContent(username, 7) }}</a>
+							<a style="padding-left: 20px; position: relative; top: 0.8vw; color: darkgray;">{{ truncateContent(userName, 7) }}</a>
 						</el-button>
 					</template>
-					<el-menu-item index="6-1" @click="exit">退出登录</el-menu-item>
+					<el-menu-item index="6-1" @click="">个人中心</el-menu-item>
+					<el-menu-item index="6-2" @click="exit">退出登录</el-menu-item>
 				</el-submenu>
 			</div>
 		</el-menu>
@@ -54,7 +55,8 @@ import axios from 'axios'
 		    activeIndex: '',
 			circleUrl: require('@/assets/headImg.png'),
 			sizeList: ["large", "medium", "small"],
-			username: '未登录',
+			user: '',
+			userName: '未登录',
 			// loginHtml: '<form id="login-form"><label for="email">邮箱：</label><input type="email" id="email" placeholder="Enter your email" required><br><label for="password">密码：</label><input type="password" id="password" placeholder="Enter your password" required></form>',
 	      }
 	    },
@@ -112,26 +114,44 @@ import axios from 'axios'
 			  // 否则返回原内容
 			  return content;
 			},
-			getUser: function() {
-				var user = this.getUserData();
-				if (user) {
-					this.username = user.userName;
-				}
-				// console.log(user);
-				console.log(user.userName);
+			getUser() {
+				axios.get("http://api.blog.qxbase.com/user/info", {
+				  withCredentials: true ,// 开启跨域携带 Cookie
+				}).then(
+				(response) => {
+					// if (response.data.code !== 200) {
+					// 	this.$message({
+					// 		message: response.data.err,
+					// 		type: 'error'
+					// 	});
+					// }
+					this.user = response.data.data;
+					if (this.user) {
+						this.userName = this.user.userName;
+					}
+				}).catch((err) => {
+					console.error(err);
+				})
 			},
 			exit: function() {
-				this.clearUserData();
-				location.reload();
-			},
-			// 从 localStorage 中获取用户数据
-			getUserData: function() {
-			  const storedUserData = localStorage.getItem('userData');
-			  return storedUserData ? JSON.parse(storedUserData) : null;
-			},
-			// 在用户退出登录或其他需要清除用户数据的地方，清除 localStorage 中的数据
-			clearUserData: function() {
-			  localStorage.removeItem('userData');
+				axios.get("http://api.blog.qxbase.com/user/logout", {
+					withCredentials: true
+				}).then((response) => {
+					if (response.data.code === 200) {
+						this.$message({
+							type: 'success',
+							message: '注销登录'
+						})
+						location.reload();
+					} else {
+						this.$message({
+							type: 'error',
+							message: '注销失败'
+						})
+					}
+				}).catch((err) => {
+					console.error(err);
+				})
 			},
 	    }
 	  }
