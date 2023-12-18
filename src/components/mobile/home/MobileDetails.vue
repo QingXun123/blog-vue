@@ -89,10 +89,6 @@ import axios from 'axios';
 		font-size: 12px;
 	}
 	
-	.mobile-box-card {
-		width: 100vw;
-	}
-	
 	.mobile-image {
 		width: 100%;
 		height: 100%;

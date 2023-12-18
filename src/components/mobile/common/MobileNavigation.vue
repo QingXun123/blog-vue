@@ -1,6 +1,6 @@
 <template>
 	<div id="MobileNavigation">
-		<el-card class="box-card" style="width: 100%; background-color: dimgray; color: white; text-align: center; height: 200px; margin-top: 50px; font-size: 25px;">
+		<el-card class="box-card" style="background-color: dimgray; color: white; text-align: center; height: 200px; margin-top: 50px; font-size: 25px;">
 			<p>关注我们，获取更多精彩内容！</p>
 			<el-button type="info" plain>关注我们</el-button>
 			<el-button type="info" plain>了解更多</el-button>
@@ -24,7 +24,6 @@
 	}
 	
 	.mobile-record {
-		width: 100%;
 		height: 200px;
 		background-color: white;
 		text-align: center;

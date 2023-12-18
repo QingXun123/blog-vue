@@ -125,12 +125,20 @@ export default {
 @media (max-width: 768px) {
   .element {
     /* 手机样式 */
+	width: 100vw;
   }
   
   .el-header {
   	padding: 0 0px !important;
   }
 
+	.el-container {
+		width: 100vw;
+	}
+	
+	.el-card, .box-card, .is-always-shadow {
+		/* max-width: 99.5vw !important; */
+	}
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {

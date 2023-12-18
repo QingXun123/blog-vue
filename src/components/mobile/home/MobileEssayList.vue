@@ -103,7 +103,7 @@ import axios from 'axios';
 	
 	.el-card {
 		max-width: 800px;
-		width: 100vw;
+		width: 99vw;
 		margin-top: 10px;
 	}
 	
