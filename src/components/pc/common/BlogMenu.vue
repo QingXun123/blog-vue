@@ -88,7 +88,11 @@ import axios from 'axios'
 				console.log(pathSegments);
 				const specificSegment = pathSegments[1];
 				if (specificSegment === 'search') {
-					window.location.href = searchLink;
+					// 获取完整的 URL
+					  const currentURL = window.location.href;
+					  
+					var modifiedURL = currentURL.replace(/\/#\/.*$/, "/#");
+					window.location.replace(modifiedURL + searchLink);
 					location.reload();
 					return;
 				}

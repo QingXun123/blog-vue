@@ -33,9 +33,9 @@
 			      prefix-icon="el-icon-search"
 			      v-model="input2"
 			  			  style=" width: 80%; flex-direction: row; align-items: center;"
-			  	@keyup.enter.native="redirectToSearch()">
+			  	@keyup.enter.native="redirectToSearchPhone()">
 			    </el-input>
-				<el-button @click="redirectToSearch()" icon="el-icon-search" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em; border: none;"></el-button>
+				<el-button @click="redirectToSearchPhone()" icon="el-icon-search" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1em; border: none;"></el-button>
 		  </div>
 		  
 		</el-drawer>
@@ -60,7 +60,7 @@
 			    // 打开搜索抽屉
 			    this.searchDrawerVisible = true;
 			  },
-			  redirectToSearch: function() {
+			  redirectToSearchPhone: function() {
 			  // 获取用户输入的内容
 			  const subject = this.input2;
 			  
