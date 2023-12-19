@@ -55,7 +55,7 @@ import axios from 'axios'
 		    activeIndex: '',
 			circleUrl: require('@/assets/headImg.png'),
 			sizeList: ["large", "medium", "small"],
-			user: '',
+			user: {},
 			userName: '未登录',
 			// loginHtml: '<form id="login-form"><label for="email">邮箱：</label><input type="email" id="email" placeholder="Enter your email" required><br><label for="password">密码：</label><input type="password" id="password" placeholder="Enter your password" required></form>',
 	      }
@@ -63,6 +63,12 @@ import axios from 'axios'
 		created() {
 			this.here();
 			this.getUser();
+		},
+		watch: {
+		    // 监听子组件数据变化
+		    user(newVal, oldVal) {
+		      this.$emit('update:user', newVal); // 通过事件向父组件同步数据
+		    }
 		},
 	    methods: {
 			here: function() {
@@ -129,7 +135,7 @@ import axios from 'axios'
 			  // 否则返回原内容
 			  return content;
 			},
-			getUser() {
+			async getUser() {
 				axios.get("http://api.blog.qxbase.com/user/info", {
 				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
@@ -143,6 +149,7 @@ import axios from 'axios'
 					this.user = response.data.data;
 					if (this.user) {
 						this.userName = this.user.userName;
+						this.$emit("userEvent", this.user);
 					}
 				}).catch((err) => {
 					console.error(err);

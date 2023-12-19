@@ -24,7 +24,7 @@
 			  <div v-else>
 				  <el-container>
 					<el-header>
-					  <BlogMenu></BlogMenu>
+					  <BlogMenu @userEvent="userEvent"></BlogMenu>
 					</el-header>
 					<div style="width: 1200px; margin: auto;">
 					  <el-container>
@@ -32,7 +32,7 @@
 							  <el-main>
 								  <div style="float: right;">
 									<BlogEssayDetails></BlogEssayDetails>
-									<BlogComment></BlogComment>
+									<BlogComment :user="user"></BlogComment>
 								  </div>
 							  </el-main>
 							</el-container>
@@ -75,6 +75,7 @@
 	  	return {
 	  	  isMobile: window.innerWidth < 768, // 假设小于768px的屏幕为手机设备
 		  show: false,
+		  user: { "userId": 1, "phone": "13682348336", "email": "947338658@qq.com", "userName": "青旬", "sex": 0 },
 	  	};
 	  },
 	  created() {
@@ -90,6 +91,9 @@
 	    checkDeviceType() {
 	      this.isMobile = window.innerWidth < 768;
 	    },
+		userEvent(user) {
+			this.user = user;
+		}
 	  },
     }
 </script>
