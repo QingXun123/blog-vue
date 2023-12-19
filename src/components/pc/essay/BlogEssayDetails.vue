@@ -6,8 +6,8 @@
 				<span class="subject">{{ essay.subject }}</span>
 				<div class="details">
 					<i class="el-icon-timer">{{ essay.releaseTime }}</i>
-					<i class="el-icon-user-solid"> {{ author }}</i>
-					<i class="el-icon-view"> 阅读({{ essay.readingQuantity }})</i>
+					<i class="el-icon-user-solid" style="margin-left: 10px;"> {{ author }}</i>
+					<i class="el-icon-view" style="margin-left: 10px;"> 阅读({{ essay.readingQuantity }})</i>
 					<!-- <i class="el-icon-chat-line-round">{{ chat }}</i> -->
 				</div>
 			</el-skeleton>
