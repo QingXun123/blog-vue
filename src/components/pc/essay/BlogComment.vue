@@ -169,7 +169,7 @@
 				axios.post("http://api.blog.qxbase.com/essayComment/addComment", {
 					"essayId": this.$route.params.essayId,
 					"content": this.content,
-					"userId": this.getUserId(),
+					"userId": this.user.userId,
 					"type": this.checked ? 1 : 0,
 				}, {
 				  withCredentials: true, // 设置为 true，携带凭证
@@ -183,18 +183,19 @@
 						});
 					} else {
 						const comment = response.data.data;
-						localStorage.setItem('userData', JSON.stringify(this.comment));
+						// localStorage.setItem('userData', JSON.stringify(comment));
 						this.content = '';
 						this.commentList.unshift({
-							'content': this.comment.content,
-							'createTime': this.comment.createTime,
-							'essayId': this.comment.essayId,
-							'like': this.comment.like,
-							'userId': this.comment.userId,
-							'type': this.comment.type,
-							'replyCommentId': this.comment.replyCommentId,
-							'replySuperCommentId':this.comment.replySuperCommentId,
+							'content': comment.content,
+							'createTime': comment.createTime,
+							'essayId': comment.essayId,
+							'like': comment.like,
+							'userId': comment.userId,
+							'type': comment.type,
+							'replyCommentId': comment.replyCommentId,
+							'replySuperCommentId':comment.replySuperCommentId,
 						})
+						this.pageByUserId(1);
 						this.$message({
 						  message: '发布成功',
 						  type: 'success'
