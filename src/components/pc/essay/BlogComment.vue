@@ -4,7 +4,6 @@
 			<el-card class="box-card comment">
 				评论
 			</el-card>
-			<div>User: {{user}}</div>
 				<el-avatar :size="40" :src="circleUrl" style="margin-top: 10px;"></el-avatar>
 			<el-card class="box-card comment-window">
 				<el-input
@@ -65,6 +64,9 @@
 							</el-pagination>
 						</div>
 					</div>
+					<div v-if="!commentPage.total" class="voidComment">
+						<a style="color: darkgray; font-weight: 300;">暂无评论</a>
+					</div>
 					<!-- 翻页选项 -->
 					<el-pagination
 					  @current-change="page"
@@ -72,6 +74,7 @@
 					  layout="prev, pager, next"
 					  :total="commentPage.total"
 					  background
+					  hide-on-single-page
 					  class="pagination">
 					</el-pagination>
 				</div>
@@ -556,5 +559,11 @@
 		position: relative;
 		box-shadow: none;
 		border: 2px solid #eaeaea;
+	}
+	
+	.voidComment {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
