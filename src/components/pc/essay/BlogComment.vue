@@ -347,6 +347,9 @@
 				})
 			},
 			like: function(comment) {
+				if (this.hint()) {
+					return;
+				}
 				if (!comment.likeId) {
 					axios.post("http://api.blog.qxbase.com/essayLike/like", {
 						'userId': this.user.userId,
