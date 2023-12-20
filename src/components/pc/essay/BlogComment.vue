@@ -4,6 +4,7 @@
 			<el-card class="box-card comment">
 				评论
 			</el-card>
+			<div>User: {{user}}</div>
 				<el-avatar :size="40" :src="circleUrl" style="margin-top: 10px;"></el-avatar>
 			<el-card class="box-card comment-window">
 				<el-input
@@ -25,7 +26,7 @@
 				</el-card>
 			</el-card>
 			<div class="commentList">
-				<div v-if="Object.keys(user).length !== 0">
+				<div>
 					<!-- 评论 -->
 					<div class="oneComment" v-for="(comment, index) in commentList" :key="index - 1">
 						<el-avatar :size="40" :src="comment.img === null ? circleUrl : comment.img"></el-avatar>
@@ -36,86 +37,37 @@
 						<a class="createTime">{{ comment.createTime }}</a>
 						<i class="el-icon-thumb common-icon clickable-link" @click="like(comment)" :style="{ color: comment.likeId ? 'red' : 'initial' }"></i>
 						<a class="common-num">{{ comment.like }}</a>
-						<i class="el-icon-chat-dot-round common-icon clickable-link" @click="like"></i>
+						<i class="el-icon-chat-dot-round common-icon clickable-link" @click="replyCommentClick(comment.commentId, null)"></i>
 						<a class="common-num">{{ nextCommentPage[comment.commentId].total }}</a>
 						<!-- 回复评论消息 -->
 						<div class="nextCommentList">
 							<div class="nextComment" v-for="(nextComment, index2) in nextCommentList[comment.commentId]" :key="index2 - 1">
 								<el-avatar :size="40" :src="circleUrl"></el-avatar>
-								<a class="username">{{ nextComment.userName }}</a>
+								<a class="username">{{ nextComment.userName }}<a> {{ nextComment.replyCommentId ? '' : '' }}</a></a>
 								<div class="content">
 									<a>{{ nextComment.content }}</a>
 								</div>
 								<a class="createTime">{{ nextComment.createTime }}</a>
 								<i class="el-icon-thumb common-icon clickable-link" @click="like(nextComment)" :style="{ color: nextComment.likeId ? 'red' : 'initial' }"></i>
 								<a class="common-num">{{ nextComment.like }}</a>
-								<i class="el-icon-chat-dot-round common-icon clickable-link" @click="like"></i>
+								<i class="el-icon-chat-dot-round common-icon clickable-link" @click="replyCommentClick(comment.commentId, nextComment.commentId)"></i>
 								<a class="common-num">{{ nextComment.total }}</a>
 							</div>
 							<!-- 翻页选项 -->
 							<el-pagination
-							  @current-change="nextHandleCurrentChangeByUserId($event, comment.commentId)"
+							  @current-change="nextPage($event, comment.commentId)"
 										:page-size="5"
 							  layout="prev, pager, next"
 							  :total="nextCommentPage[comment.commentId].total"
 							  small
 							  class="nextPagination"
-							  v-if="nextCommentPage[comment.commentId].total > 5">
+							  hide-on-single-page>
 							</el-pagination>
 						</div>
 					</div>
 					<!-- 翻页选项 -->
 					<el-pagination
-					  @current-change="handleCurrentChangeByUserId"
-								:page-size="5"
-					  layout="prev, pager, next"
-					  :total="commentPage.total"
-					  background
-					  class="pagination">
-					</el-pagination>
-				</div>
-				<div v-else>
-					<!-- 评论 -->
-					<div class="oneComment" v-for="(comment, index) in commentList" :key="index - 1">
-						<el-avatar :size="40" :src="comment.img === null ? circleUrl : comment.img"></el-avatar>
-						<a class="username">{{ comment.userName }}</a>
-						<div class="content">
-							<a>{{ comment.content }}</a>
-						</div>
-						<a class="createTime">{{ comment.createTime }}</a>
-						<i class="el-icon-thumb common-icon clickable-link" @click="like(comment)" :style="{ color: comment.likeId ? 'red' : 'initial' }"></i>
-						<a class="common-num">{{ comment.like }}</a>
-						<i class="el-icon-chat-dot-round common-icon clickable-link" @click="like"></i>
-						<a class="common-num">{{ nextCommentPage[comment.commentId].total }}</a>
-						<!-- 回复评论消息 -->
-						<div class="nextCommentList">
-							<div class="nextComment" v-for="(nextComment, index2) in nextCommentList[comment.commentId]" :key="index2 - 1">
-								<el-avatar :size="40" :src="circleUrl"></el-avatar>
-								<a class="username">{{ nextComment.userName }}</a>
-								<div class="content">
-									<a>{{ nextComment.content }}</a>
-								</div>
-								<a class="createTime">{{ nextComment.createTime }}</a>
-								<i class="el-icon-thumb common-icon clickable-link" @click="like(nextComment)" :style="{ color: nextComment.likeId ? 'red' : 'initial' }"></i>
-								<a class="common-num">{{ nextComment.like }}</a>
-								<i class="el-icon-chat-dot-round common-icon clickable-link" @click="like"></i>
-								<a class="common-num">{{ nextComment.total }}</a>
-							</div>
-							<!-- 翻页选项 -->
-							<el-pagination
-							  @current-change="nextHandleCurrentChange($event, comment.commentId)"
-										:page-size="5"
-							  layout="prev, pager, next"
-							  :total="nextCommentPage[comment.commentId].total"
-							  small
-							  class="nextPagination"
-							  v-if="nextCommentPage[comment.commentId].total > 5">
-							</el-pagination>
-						</div>
-					</div>
-					<!-- 翻页选项 -->
-					<el-pagination
-					  @current-change="handleCurrentChange"
+					  @current-change="page"
 								:page-size="5"
 					  layout="prev, pager, next"
 					  :total="commentPage.total"
@@ -125,6 +77,34 @@
 				</div>
 			</div>
 		</el-card>
+		<el-drawer
+		  title="回复评论"
+		  :visible.sync="drawer"
+		  direction="btt"
+		  size="30%"
+		  :before-close="handleClose">
+		  <div class="center-div">
+			  <el-card class="box-card reply-comment-window">
+			  	<el-input
+			  	  type="textarea"
+			  	  placeholder="请输入内容"
+			  	  v-model="nextContent"
+			  	  maxlength="150"
+			  	  show-word-limit
+			  	  resize="none"
+			  	  class="comment-input">
+			  	</el-input>
+			  	<el-card class="box-card comment-window-checked">
+			  		<el-checkbox v-model="nextChecked" class="checked">匿名发布</el-checkbox>
+			  		<el-button 
+			  		size="mini"
+			  		:loading="loading"
+			  		@click="nextCommentClick"
+			  		class="comment-button">发布</el-button>
+			  	</el-card>
+			  </el-card>
+		  </div>
+		</el-drawer>
 		
 	</div>
 </template>
@@ -137,13 +117,18 @@
 		data() {
 			return {
 				content: '',
+				nextContent: '',
 				checked: false,
+				nextChecked: false,
 				loading: false,
 				circleUrl: require('@/assets/headImg.png'),
 				commentList: [],
 				commentPage: {},
 				nextCommentList: [],
 				nextCommentPage: [],
+				drawer: false,
+				tempCommentId: '',
+				tempNextCommentId: '',
 			}
 		},
 		created() {
@@ -153,12 +138,13 @@
 			user: {
 				immediate: true, // 立即执行一次
 				handler(newVal, oldVal) {
-					this.pageByUserId(1);
+					this.page(1);
 				}
 			}
 		},
 		methods: {
 			commentClick: function() {
+				this.hint();
 				if (this.loading != false) {
 					return;
 				}
@@ -182,20 +168,20 @@
 						  type: 'error'
 						});
 					} else {
-						const comment = response.data.data;
+						// const comment = response.data.data;
 						// localStorage.setItem('userData', JSON.stringify(comment));
 						this.content = '';
-						this.commentList.unshift({
-							'content': comment.content,
-							'createTime': comment.createTime,
-							'essayId': comment.essayId,
-							'like': comment.like,
-							'userId': comment.userId,
-							'type': comment.type,
-							'replyCommentId': comment.replyCommentId,
-							'replySuperCommentId':comment.replySuperCommentId,
-						})
-						this.pageByUserId(1);
+						// this.commentList.unshift({
+						// 	'content': comment.content,
+						// 	'createTime': comment.createTime,
+						// 	'essayId': comment.essayId,
+						// 	'like': comment.like,
+						// 	'userId': comment.userId,
+						// 	'type': comment.type,
+						// 	'replyCommentId': comment.replyCommentId,
+						// 	'replySuperCommentId':comment.replySuperCommentId,
+						// })
+						this.page(1);
 						this.$message({
 						  message: '发布成功',
 						  type: 'success'
@@ -205,79 +191,51 @@
 					console.error(err);
 				})
 			},
-			// 从 localStorage 中获取用户数据
-			getUserId: function() {
-			  const storedUserData = JSON.parse(localStorage.getItem('userData'));
-			  return storedUserData.userId;
-			},
-			page: function(val) {
-				console.log("yyy");
-				axios.post("http://api.blog.qxbase.com/essayComment/getCommentPage", {
-					"orders": [
-						{
-						  "asc": false,
-						  "column": "createTime"
-						}
-					  ],
-					"current": val,
-					"size": 5,
-					"records": [
-					  this.$route.params.essayId
-					]
+			nextCommentClick: function() {
+				if (this.loading != false) {
+					return;
+				}
+				this.loading = true;
+				setTimeout(() => {
+					this.loading = false;
+				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
+				axios.post("http://api.blog.qxbase.com/essayComment/addComment", {
+					"essayId": this.$route.params.essayId,
+					"content": this.nextContent,
+					"userId": this.user.userId,
+					"type": this.nextChecked ? 1 : 0,
+					'replySuperCommentId': this.tempCommentId,
+					'replyCommentId': this.tempNextCommentId,
+				}, {
+				  withCredentials: true, // 设置为 true，携带凭证
 				}).then(
 				(response) => {
-					this.commentPage = response.data.data;
-					console.log(this.commentPage);
-					const records = this.commentPage.records;
-					this.commentList = records;
-					for (let i = 0; i < this.commentList.length; i++) {
-					  let commentId = this.commentList[i].commentId;
-					  axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
-						"orders": [
-							{
-							  "asc": false,
-							  "column": "createTime"
-							}
-						  ],
-						"current": val,
-						"size": 5,
-						"records": [
-						  commentId
-						]
-					  }).then(
-					  (response) => {
-						// this.nextCommentPage[commentId] = response.data.data;
-						this.$set(this.nextCommentPage, commentId, response.data.data);
-						const records = this.nextCommentPage[commentId].records;
-						records.forEach((item) => {
-							// 获取回复的回复总数
-							axios.get("http://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
-							(response) => {
-								if (response.data.code !== 200) {
-									this.$message({
-										message: response.data.data,
-										type: 'error'
-									});
-								}
-								// item.total = response.data.data;
-								this.$set(item, 'total', 0);
-							}).catch((err) => {
-								console.error(err);
-							})
+					if (response.data.code !== 200) {
+						console.log(response.data);
+						this.$message({
+						  message: response.data.message,
+						  type: 'error'
 						});
-						// this.nextCommentList[commentId] = records;
-						this.$set(this.nextCommentList, commentId, records);
-					  }).catch((err) => {
-						console.error(err);
-					  })
+					} else {
+						// const comment = response.data.data;
+						// localStorage.setItem('userData', JSON.stringify(comment));
+						this.nextContent = '';
+						this.page(1);
+						this.$message({
+						  message: '发布成功',
+						  type: 'success'
+						});
+						this.drawer = false;
+						this.replySuperCommentId = '';
+						this.replyCommentId = '';
 					}
 				}).catch((err) => {
 					console.error(err);
 				})
 			},
-			pageByUserId: function(val) {
+			page: function(val) {
 				console.log("nnn");
-				axios.post("http://api.blog.qxbase.com/essayComment/getCommentPageByUserId", {
+				axios.post("http://api.blog.qxbase.com/essayComment/getCommentPage", {
 					"orders": [
 						{
 						  "asc": false,
@@ -298,14 +256,14 @@
 					this.commentList = records;
 					for (let i = 0; i < this.commentList.length; i++) {
 					  let commentId = this.commentList[i].commentId;
-					  axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPageByUserId", {
+					  axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
 						"orders": [
 							{
-							  "asc": false,
+							  "asc": true,
 							  "column": "createTime"
 							}
 						  ],
-						"current": val,
+						"current": 1,
 						"size": 5,
 						"records": [
 						  commentId,
@@ -318,7 +276,7 @@
 						const records = this.nextCommentPage[commentId].records;
 						records.forEach((item) => {
 							// 获取回复的回复总数
-							axios.get("http://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+							axios.get("http://api.blog.qxbase.com/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
 							(response) => {
 								if (response.data.code !== 200) {
 									this.$message({
@@ -327,7 +285,7 @@
 									});
 								}
 								// item.total = response.data.data;
-								this.$set(item, 'total', 0);
+								this.$set(item, 'total', response.data.data);
 							}).catch((err) => {
 								console.error(err);
 							})
@@ -346,49 +304,7 @@
 				axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
 					"orders": [
 					    {
-					      "asc": false,
-					      "column": "createTime"
-					    }
-					  ],
-					"current": val,
-					"size": 5,
-					"records": [
-					  commentId
-					]
-				}).then(
-				(response) => {
-					const temp = response.data.data;
-					// this.nextCommentPage[temp.replySuperCommentId] = temp;
-					this.$set(this.nextCommentPage, temp.replySuperCommentId, temp);
-					console.log("test"+ temp[0]);
-					const records = this.nextCommentPage[temp.replySuperCommentId].records;
-					records.forEach((item) => {
-						// 获取回复的回复总数
-						axios.get("http://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
-						(response) => {
-							if (response.data.code !== 200) {
-								this.$message({
-									message: response.data.data,
-									type: 'error'
-								});
-							}
-							// item.total = response.data.data;
-							this.$set(item, 'total', 0);
-						}).catch((err) => {
-							console.error(err);
-						})
-					});
-					// this.nextCommentList[commentId] = records;
-					this.$set(this.nextCommentList, commentId, records);
-				}).catch((err) => {
-					console.error(err);
-				})
-			},
-			nextPageByUserId: function(val, commentId) {
-				axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPageByUserId", {
-					"orders": [
-					    {
-					      "asc": false,
+					      "asc": true,
 					      "column": "createTime"
 					    }
 					  ],
@@ -460,18 +376,28 @@
 					'messsage': '取消点赞'
 				})
 			},
-			handleCurrentChange(val) {
-				this.page(val);
+			hint: function() {
+				console.log(this.user.userName);
+				if (this.user.userName != null || this.user.userName != undefined) {
+					return false;
+				}
+				this.$message({
+					'type': 'warning',
+					'message': '您还未登录'
+				});
+				setTimeout(() => {
+					window.location.href = '#/login';
+				}, 1500);
+				return true;
 			},
-			nextHandleCurrentChange(val, commentId) {
-				this.nextPage(val, commentId);
-			},
-			handleCurrentChangeByUserId(val) {
-				this.pageByUserId(val);
-			},
-			nextHandleCurrentChangeByUserId(val, commentId) {
-				this.nextPageByUserId(val, commentId);
-			},
+			replyCommentClick: function(tempCommentId, tempNextCommentId) {
+				if (this.hint()) {
+					return;
+				}
+				this.drawer = true;
+				this.tempCommentId = tempCommentId;
+				this.tempNextCommentId = tempNextCommentId;
+			}
 		}
 	}
 </script>
@@ -616,5 +542,19 @@
 	
 	.nextPagination {
 		margin-left: 50px;
+	}
+	
+	.center-div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.reply-comment-window {
+		width: 700px;
+		height: 130px;
+		position: relative;
+		box-shadow: none;
+		border: 2px solid #eaeaea;
 	}
 </style>
