@@ -83,6 +83,14 @@ import axios from 'axios'
 			redirectToSearch: function() {
 				// 获取用户输入的内容
 				const subject = this.input2;
+				
+				if (subject === '') {
+					  this.$message({
+						  'type': 'warning',
+						  'message': '搜索内容不能为空'
+					  })
+					  return;
+				}
 
 				// 构建跳转链接
 				const searchLink = `/search/${subject}`;
@@ -106,6 +114,7 @@ import axios from 'axios'
 				this.$router.push(searchLink);
 			},
 			login: function() {
+				localStorage.setItem('lastVisitedPage', window.location.href);
 				window.location.href = '#/login';
 				
 				// this.$confirm(this.loginHtml, '登录', {
@@ -183,6 +192,7 @@ import axios from 'axios'
 	#BlogMenu {
 		position: relative;
 		max-width: none;
+		min-width: 1200px; /* 最小宽度 */
 	}
 	
 	/deep/ .el-menu-demo {

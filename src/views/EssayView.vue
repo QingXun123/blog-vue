@@ -5,13 +5,14 @@
 			  <div v-if="isMobile">
 				  <el-container style="width: 100vw;">
 					<el-header>
-					  <MobileMenu></MobileMenu>
+					  <MobileMenu @userEvent="userEvent"></MobileMenu>
 					</el-header>
 					<div style="margin: auto;">
 					  <el-container>
 							<el-container>
 							  <el-main style="padding: 0px 0px !important;">
 									<MobileEssayDetails></MobileEssayDetails>
+									<MobileEssayComment :user="user"></MobileEssayComment>
 							  </el-main>
 							</el-container>
 					  </el-container>
@@ -32,11 +33,11 @@
 							  <el-main>
 								  <div style="float: right;">
 									<BlogEssayDetails></BlogEssayDetails>
-									<BlogComment :user="user"></BlogComment>
+									<BlogEssayComment :user="user"></BlogEssayComment>
 								  </div>
 							  </el-main>
 							</el-container>
-							<el-aside>
+							<el-aside style="min-width: 370px;">
 								<div>
 									<BlogHandpick></BlogHandpick>
 									<BlogDate></BlogDate>
@@ -57,8 +58,9 @@
 
 <script>
 	import BlogEssayDetails from '../components/pc/essay/BlogEssayDetails.vue'
-	import BlogComment from '../components/pc/essay/BlogComment.vue'
+	import BlogEssayComment from '../components/pc/essay/BlogEssayComment.vue'
 	import MobileEssayDetails from '../components/mobile/essay/MobileEssayDetails.vue'
+	import MobileEssayComment from '../components/mobile/essay/MobileEssayComment.vue'
 	import MobileDetails from '../components/mobile/home/MobileDetails.vue'
 	import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
 	
@@ -69,7 +71,8 @@
 		MobileDetails,
 		MobileEssayList,
 		MobileEssayDetails,
-		BlogComment
+		BlogEssayComment,
+		MobileEssayComment,
 	  },
 	  data() {
 	  	return {
@@ -128,7 +131,7 @@
 	  }
 	  
 	  .el-aside {
-	    width: 370px !important;
+	    min-width: 370px !important;
 	  }
 	}
 	

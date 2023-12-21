@@ -39,7 +39,7 @@
 						  	  			  </div>
 						  	  		  </el-main>
 						  	  		</el-container>
-						  	  		<el-aside>
+						  	  		<el-aside style="min-width: 370px;">
 						  				<div>
 						  					<BlogHandpick></BlogHandpick>
 						  					<BlogDate></BlogDate>

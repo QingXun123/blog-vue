@@ -1,5 +1,5 @@
 <template>
-	<div id="BlogComment">
+	<div id="BlogEssayComment">
 		<el-card class="box-card custom-card" style="margin-top: 20px;">
 			<el-card class="box-card comment">
 				评论
@@ -16,7 +16,7 @@
 				  class="comment-input">
 				</el-input>
 				<el-card class="box-card comment-window-checked">
-					<el-checkbox v-model="checked" class="checked">匿名发布</el-checkbox>
+					<el-checkbox v-model="checked" class="checked" disabled>匿名发布</el-checkbox>
 					<el-button 
 					size="mini"
 					:loading="loading"
@@ -38,6 +38,12 @@
 						<a class="common-num">{{ comment.like }}</a>
 						<i class="el-icon-chat-dot-round common-icon clickable-link" @click="replyCommentClick(comment.commentId, null)"></i>
 						<a class="common-num">{{ nextCommentPage[comment.commentId].total }}</a>
+						<el-dropdown v-if="isLogin() && user.userId === comment.userId" @command="deleteComment" trigger="click" size="mini" class="moreForm">
+							<i class="el-icon-more-outline"></i>
+						  <el-dropdown-menu slot="dropdown">
+							<el-dropdown-item :command="comment.commentId" icon="el-icon-delete">删除</el-dropdown-item>
+						  </el-dropdown-menu>
+						</el-dropdown>
 						<!-- 回复评论消息 -->
 						<div class="nextCommentList">
 							<div class="nextComment" v-for="(nextComment, index2) in nextCommentList[comment.commentId]" :key="index2 - 1">
@@ -51,6 +57,12 @@
 								<a class="common-num">{{ nextComment.like }}</a>
 								<i class="el-icon-chat-dot-round common-icon clickable-link" @click="replyCommentClick(comment.commentId, nextComment.commentId)"></i>
 								<a class="common-num">{{ nextComment.total }}</a>
+								<el-dropdown v-if="isLogin() && user.userId === nextComment.userId" @command="deleteComment" trigger="click" size="mini" class="moreForm">
+									<i class="el-icon-more-outline"></i>
+								  <el-dropdown-menu slot="dropdown">
+									<el-dropdown-item :command="nextComment.commentId" icon="el-icon-delete">删除</el-dropdown-item>
+								  </el-dropdown-menu>
+								</el-dropdown>
 							</div>
 							<!-- 翻页选项 -->
 							<el-pagination
@@ -98,7 +110,7 @@
 			  	  class="comment-input">
 			  	</el-input>
 			  	<el-card class="box-card comment-window-checked">
-			  		<el-checkbox v-model="nextChecked" class="checked">匿名发布</el-checkbox>
+			  		<el-checkbox v-model="nextChecked" class="checked" disabled>匿名发布</el-checkbox>
 			  		<el-button 
 			  		size="mini"
 			  		:loading="loading"
@@ -132,6 +144,7 @@
 				drawer: false,
 				tempCommentId: '',
 				tempNextCommentId: '',
+				user: {},
 			}
 		},
 		created() {
@@ -141,6 +154,7 @@
 			user: {
 				immediate: true, // 立即执行一次
 				handler(newVal, oldVal) {
+					
 					this.page(1);
 				}
 			}
@@ -354,33 +368,83 @@
 					axios.post("http://api.blog.qxbase.com/essayLike/like", {
 						'userId': this.user.userId,
 						'commentId': comment.commentId
+					}, {
+						withCredentials: true, // 设置为 true，携带凭证
 					}).then((response) => {
-						console.log(response.data);
+						// console.log(response.data);
+						this.$message({
+							'type': 'success',
+							'message': "点赞成功",
+						})
+						comment.like++;
+						comment.likeId = !comment.likeId;
 					}).catch((error) => {
 						console.log(error);
-					})
-					comment.like++;
-					this.$message({
-						'type': 'success',
-						'messsage': '点赞成功'
+						this.$message({
+							'type': 'error',
+							'message': response.data.data
+						})
 					})
 				} else {
-					comment.like--;
 					axios.post("http://api.blog.qxbase.com/essayLike/dislike", {
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}).then((response) => {
-						console.log(response.data);
+						// console.log(response.data);
+						this.$message({
+							'type': 'success',
+							'message': "取消点赞",
+						})
+						comment.like--;
+						comment.likeId = !comment.likeId;
 					}).catch((error) => {
 						console.log(error);
+						this.$message({
+							'type': 'error',
+							'message': response.data.data
+						})
 					})
 				}
-				comment.likeId = !comment.likeId;
-				console.log(comment.likeId);
-				this.$message({
-					'type': 'success',
-					'messsage': '取消点赞'
-				})
+			},
+			deleteComment: function(commentId) {
+				this.$confirm('此操作将永久删除该评论, 是否继续?', '提示', {
+				  confirmButtonText: '确定',
+				  cancelButtonText: '取消',
+				  type: 'warning'
+				}).then(() => {
+					axios.post("http://api.blog.qxbase.com/essayComment/deleteComment", {
+						"commentId": commentId,
+						"userId": this.user.userId,
+					}, {
+						withCredentials: true, // 设置为 true，携带凭证
+					}).then((response) => {
+						if (response.data.code !== 200) {
+							this.$message({
+								message: response.data.data,
+								type: 'error'
+							});
+						}
+						if (response.data.data) {
+							this.$message({
+								'type': 'success',
+								'message': '删除成功'
+							})
+							this.page(1);
+						} else {
+							this.$message({
+								'type': 'error',
+								'message': '删除失败'
+							})
+						}
+					}).catch((error) => {
+						console.log(error);
+					});
+				}).catch(() => {
+				  this.$message({
+					type: 'info',
+					message: '已取消删除'
+				  });          
+				});
 			},
 			hint: function() {
 				console.log(this.user.userName);
@@ -392,6 +456,8 @@
 					'message': '您还未登录'
 				});
 				setTimeout(() => {
+					// 保存位置
+					localStorage.setItem('lastVisitedPage', window.location.href);
 					window.location.href = '#/login';
 				}, 1500);
 				return true;
@@ -403,13 +469,16 @@
 				this.drawer = true;
 				this.tempCommentId = tempCommentId;
 				this.tempNextCommentId = tempNextCommentId;
-			}
+			},
+			isLogin: function() {
+				return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
+			},
 		}
 	}
 </script>
 
 <style scoped>
-	#BlogComment {
+	#BlogEssayComment {
 		
 	}
 	
@@ -568,5 +637,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	
+	.moreForm {
+		float: right;
+		cursor: pointer; /* 设置鼠标样式为手型，表示可以点击 */
 	}
 </style>

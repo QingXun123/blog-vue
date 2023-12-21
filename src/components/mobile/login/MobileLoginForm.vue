@@ -1,5 +1,5 @@
 <template>
-	<div id="LoginForm">
+	<div id="MobileLoginForm">
 		<el-card class="box-card loginCard" v-loading="loading">
 			<div v-if="currentContent === 'login'">
 				<div class="inputList">
@@ -84,7 +84,6 @@
 						// 这里你可以对 setCookieHeader 进行处理，提取你需要的信息
 						console.log(setCookieHeader);
 						this.user = response.data.data;
-						localStorage.setItem('userData', JSON.stringify(this.user));
 						this.$message({
 						  message: '登录成功',
 						  type: 'success'
@@ -148,7 +147,7 @@
 </script>
 
 <style scoped>
-	#LoginForm {
+	#MobileLoginForm {
 		background-image: url('../../../assets/background.jpg');
 		  background-size: cover;
 		  background-repeat: no-repeat;
@@ -156,7 +155,7 @@
 		  width: 100vw;
 	}
 	
-	#LoginForm::before {
+	#MobileLoginForm::before {
 	  content: '';
 	  position: absolute;
 	  height: 100vh; /* 设置容器高度，保证背景图充满整个屏幕 */
@@ -170,7 +169,7 @@
 		height: 400px;
 		border-radius: 10px;
 		top: 50%;
-		right: 10%; /* 调整右边距 */
+		left: 5%;
 		transform: translateY(-50%); /* 上下居中 */
 	}
 	

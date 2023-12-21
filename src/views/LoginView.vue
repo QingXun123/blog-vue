@@ -11,7 +11,7 @@
 						  <el-container>
 								<el-container>
 								  <el-main style="padding: 0px 0px !important;">
-									  
+									  <MobileLoginForm></MobileLoginForm>
 								  </el-main>
 								</el-container>
 						  </el-container>
@@ -41,12 +41,13 @@
 
 <script>
 import LoginForm from '../components/pc/login/LoginForm.vue'
-// import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
+import MobileLoginForm from '../components/mobile/login/MobileLoginForm.vue'
 
 export default {
   name: 'home',
   components: {
-	LoginForm
+	LoginForm,
+	MobileLoginForm,
   },
   data() {
   	return {

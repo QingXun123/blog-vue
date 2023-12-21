@@ -21,6 +21,7 @@
 	#BlogNavigation {
 		position: relative;
 		max-width: none;
+		min-width: 1200px; /* 最小宽度 */
 	}
 	
 	#BlogNavigation .el-card {

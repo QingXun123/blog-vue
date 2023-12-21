@@ -1,6 +1,9 @@
 <template>
 	<div id="MobileSearchDetails">
 		<el-row class="vertical-list">
+			<div v-if="essayList.length <= 0" class="voidEssay">
+				<a style="color: darkgray; font-weight: 400;">暂无数据</a>
+			</div>
 			<el-col :span="8" v-for="index in essayList.length" :key="index">
 				
 				<el-card :body-style="{ padding: '0px'}">
@@ -89,6 +92,7 @@
 
 <style scoped>
 	#MobileSearchDetails {
+		
 	}
 	
 	.el-pagination {
@@ -159,6 +163,14 @@
 	  color: #0055aa; /* 鼠标悬停时的文本颜色 */
 	  /* 可以添加其他悬停效果，比如下划线 */
 	  /* text-decoration: underline; */
+	}
+	
+	.voidEssay {
+		margin-top: 40px;
+		min-height: 500px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	
 	a {

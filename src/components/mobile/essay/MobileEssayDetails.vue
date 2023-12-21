@@ -58,7 +58,6 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 	}
 	
 	/deep/ .el-card {
-		width: 100vw;
 		margin-top: 10px;
 	}
 	
