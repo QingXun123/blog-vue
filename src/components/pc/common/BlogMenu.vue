@@ -2,9 +2,13 @@
 	<div id="BlogMenu">
 		<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			<el-menu-item index="1"><a href="/" target="_self">首页</a></el-menu-item>
-			<el-menu-item index="2" disabled>用户中心</el-menu-item>
-			<el-menu-item index="3" disabled>关于我们</el-menu-item>
-			<el-menu-item index="4" disabled>服务</el-menu-item>
+			<el-submenu index="2">
+				<template slot="title">独立页面</template>
+				<el-menu-item index="2-1"><a href="https://github.com/QingXun123" target="_blank">GitHub仓库</a></el-menu-item>
+				<el-menu-item index="2-2" disabled>在线聊天室</el-menu-item>
+			</el-submenu>
+			<el-menu-item index="3" disabled>旗下站点</el-menu-item>
+			<el-menu-item index="4" disabled>关于我们</el-menu-item>
 			<el-menu-item index="5">
 				<el-input
 				    placeholder="请输入内容"
@@ -37,7 +41,7 @@
 							<a style="padding-left: 20px; position: relative; top: 0.8vw; color: darkgray;">{{ truncateContent(userName, 7) }}</a>
 						</el-button>
 					</template>
-					<el-menu-item index="6-1" @click="">个人中心</el-menu-item>
+					<el-menu-item index="6-1" @click="" disabled>个人中心</el-menu-item>
 					<el-menu-item index="6-2" @click="exit">退出登录</el-menu-item>
 				</el-submenu>
 			</div>
@@ -202,6 +206,12 @@ import axios from 'axios'
 	
 	a {
 		text-decoration: none;
+	}
+	
+	a:link,
+	a:visited {
+	  color: inherit; /* 使用继承的颜色，保持和默认状态相同 */
+	  /* text-decoration: none; */
 	}
 	
 	el-col {

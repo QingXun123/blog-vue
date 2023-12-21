@@ -38,9 +38,13 @@
 				</el-col>
 			</el-menu-item>
 			<el-menu-item index="2"><a href="/" target="_self">首页</a></el-menu-item>
-			<el-menu-item index="3" disabled>用户中心</el-menu-item>
-			<el-menu-item index="4" disabled>关于我们</el-menu-item>
-			<el-menu-item index="5" disabled>服务中心</el-menu-item>
+			<el-submenu index="3">
+				<template slot="title">独立页面</template>
+				<el-menu-item index="3-1"><a href="https://github.com/QingXun123" target="_blank">GitHub仓库</a></el-menu-item>
+				<el-menu-item index="3-2" disabled>在线聊天室</el-menu-item>
+			</el-submenu>
+			<el-menu-item index="4" disabled>旗下站点</el-menu-item>
+			<el-menu-item index="5" disabled>关于我们</el-menu-item>
 			<el-menu-item index="6" v-if="isLogin()" @click="exit">退出登录</el-menu-item>
 		  </el-menu>
 		</el-drawer>

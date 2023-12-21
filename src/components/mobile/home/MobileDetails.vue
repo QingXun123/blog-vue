@@ -2,7 +2,7 @@
 	<div id="MobileDetails">
 		<div class="mobileContent">
 			<el-card :body-style="{ padding: '0px' }" style="width: 30vw;">
-			  <img src="https://th.bing.com/th/id/OIP.bVb769JBdzVZYuksxZ2Y-AHaEo?pid=ImgDet&rs=1" class="mobile-image">
+			  <img src="https://img1.baidu.com/it/u=3893389324,4043822814&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800" class="mobile-image">
 			  <div style="padding: 0px 10px;">
 				<span>精选优质文章</span>
 			  </div>

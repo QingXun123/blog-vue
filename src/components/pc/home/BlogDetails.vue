@@ -2,7 +2,7 @@
 	<div id="BlogDetails">
 		<div class="specialContent">
 			<el-card :body-style="{ padding: '0px' }" style="width: 250px;">
-			  <img style="width: 250px;" src="https://th.bing.com/th/id/OIP.bVb769JBdzVZYuksxZ2Y-AHaEo?pid=ImgDet&rs=1" class="details-image">
+			  <img style="width: 250px;" src="https://img1.baidu.com/it/u=3893389324,4043822814&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800" class="details-image">
 			  <div style="padding: 14px;">
 				<span>精选优质文章</span>
 			  </div>
