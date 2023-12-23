@@ -5,7 +5,7 @@
 			<el-submenu index="2">
 				<template slot="title">独立页面</template>
 				<el-menu-item index="2-1"><a href="https://github.com/QingXun123" target="_blank">GitHub仓库</a></el-menu-item>
-				<el-menu-item index="2-2" disabled>在线聊天室</el-menu-item>
+				<el-menu-item index="2-2"><a @click="gotoChat">在线聊天室</a></el-menu-item>
 			</el-submenu>
 			<el-menu-item index="3" disabled>旗下站点</el-menu-item>
 			<el-menu-item index="4" disabled>关于我们</el-menu-item>
@@ -138,6 +138,9 @@ import axios from 'axios'
 				// 		message: '取消输入'
 				// 	  });       
 				// 	});
+			},
+			gotoChat() {
+				window.location.href = '#/chat';
 			},
 			truncateContent(content, max) {
 			  // 如果内容长度大于 max，则截取前 max 个字符并加上省略号

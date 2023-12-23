@@ -96,7 +96,7 @@
 	    },
 		userEvent(user) {
 			this.user = user;
-		}
+		},
 	  },
     }
 </script>
