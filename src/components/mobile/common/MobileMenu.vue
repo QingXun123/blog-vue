@@ -41,7 +41,7 @@
 			<el-submenu index="3">
 				<template slot="title">独立页面</template>
 				<el-menu-item index="3-1"><a href="https://github.com/QingXun123" target="_blank">GitHub仓库</a></el-menu-item>
-				<el-menu-item index="3-2" disabled>在线聊天室</el-menu-item>
+				<el-menu-item index="3-2"><a @click="gotoChat">在线聊天室</a></el-menu-item>
 			</el-submenu>
 			<el-menu-item index="4" disabled>旗下站点</el-menu-item>
 			<el-menu-item index="5" disabled>关于我们</el-menu-item>
@@ -96,6 +96,9 @@
 	      methods: {
 			  home: function() {
 				  window.location.href = '#/';
+			  },
+			  gotoChat() {
+			  	window.location.href = '#/chat';
 			  },
 			  isLogin() {
 				  return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);

@@ -11,7 +11,7 @@
 						  <el-container>
 								<el-container>
 								  <el-main style="padding: 0px 0px !important;">
-								  
+									<MobileBlogChat :user="user"></MobileBlogChat>
 								  </el-main>
 								</el-container>
 						  </el-container>
@@ -41,11 +41,13 @@
 
 <script>
 	import BlogChat from '../components/pc/chat/BlogChat.vue';
+	import MobileBlogChat from '../components/mobile/chat/MobileBlogChat.vue';
 	
 	export default {
 		name: "chat",
 		components: {
 			BlogChat,
+			MobileBlogChat
 		},
 		data() {
 			return {

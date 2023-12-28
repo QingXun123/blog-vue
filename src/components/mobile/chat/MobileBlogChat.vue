@@ -1,8 +1,19 @@
 <template>
-	<div id="BlogChat" class="flex-center">
+	<div id="MobileBlogChat" class="flex-center" style="flex-wrap: wrap;">
+		<div class="connectStatus-class">
+			<a>当前聊天室在线人数: {{ userCount }}</a>
+			</br>
+			<el-button type="primary" @click="drawer = true" size="mini" icon="el-icon-user-solid">在线用户</el-button>
+			<el-button @click="reConnectingClick" :type="connectStatus[connectIndex]" size="mini" :loading="connectIndex === 0 || connectIndex === 3">
+				<a v-if="connectIndex === 0">连接中</a>
+				<a v-else-if="connectIndex === 1">连接成功</a>
+				<a v-else-if="connectIndex === 2">连接已断开，点击重连</a>
+				<a v-else-if="connectIndex === 3">正在重连...{{ reConnectTime }}</a>
+			</el-button>
+		</div>
 		<el-card class="box-card background-card">
 			<div class="flex-container">
-				<el-card class="box-card user-list-card">
+<!-- 				<el-card class="box-card user-list-card">
 					<ul ref="userList" class="user-list" v-infinite-scroll="userLoad" style="overflow:auto">
 					    <li v-for="(oneUserData, index) in userData" :key="index - 1"  class="oneUser">
 							<div class="flex-center-left">
@@ -10,15 +21,15 @@
 								<a v-if="oneUserData.status === 0" class="userName">游客{{ oneUserData.userName }}</a>
 								<a v-else-if="oneUserData.status === 2" class="userName">【大坤吧】{{ oneUserData.userName }}</a>
 								<a v-else class="userName">{{ oneUserData.userName }}</a>
-								<a v-if="oneUserData.userName === randomUserId || String(oneUserData.userId) === String(user.userId)" class="userName">[我]</a>
+								<a v-if="oneUserData.userName === randomUserId || oneUserData.userId === String(user.userId)" class="userName">[我]</a>
 							</div>
 						</li>
 					</ul>
-				</el-card>
+				</el-card> -->
 				<el-card class="box-card chat-card">
 					<ul ref="chatList" class="chat-list" v-infinite-scroll="chatLoad" style="overflow:auto">
 					    <li v-for="(oneChatData, index) in chatData" :key="index - 1" class="oneChat" ref="chatItem">
-							<div class="myChatFlex" v-if="String(oneChatData.userId) === randomUserId || String(oneChatData.userId) === String(user.userId) || oneChatData.userName === randomUserId">
+							<div class="myChatFlex" v-if="oneChatData.userId === randomUserId || String(oneChatData.userId) === String(user.userId) || oneChatData.userName === randomUserId">
 								  <el-avatar :size="40" :src="circleUrl" class="userHeadByMyself"></el-avatar>
 								  <a v-if="oneChatData.status === '2'" class="userNameByMyself-class">游客{{ oneChatData.userName }}</a>
 								  <a v-else-if="oneChatData.type === 2" class="userNameByMyself-class">游客{{ oneChatData.userId }}</a>
@@ -43,7 +54,7 @@
 				</el-card>
 			</div>
 			<div class="flex-container">
-				<el-card class="box-card control-panel-class">
+<!-- 				<el-card class="box-card control-panel-class">
 					<a>当前聊天室在线人数: {{ userCount }}</a>
 					</br>
 					<el-button @click="reConnectingClick" :type="connectStatus[connectIndex]" size="mini" :loading="connectIndex === 0 || connectIndex === 3">
@@ -52,13 +63,13 @@
 						<a v-else-if="connectIndex === 2">连接已断开，点击重连</a>
 						<a v-else-if="connectIndex === 3">正在重连...{{ reConnectTime }}</a>
 					</el-button>
-				</el-card>
+				</el-card> -->
 				<el-card class="box-card content-card flex-center">
 					<el-card class="box-card content-window flex-center">
 						<el-checkbox v-model="chatChecked" class="checked" disabled>匿名发布</el-checkbox>
 						<el-popover
 						  placement="right"
-						  width="400"
+						  width="200"
 						  trigger="click">
 						  <div style="display: inline;" @click="expressionIconClick(char)" class="clickable-link" v-for="(char, index) in expressionIcon" :key="index">{{char}}</div>
 						  <i class="el-icon-cherry clickable-link expressionIcon-class" slot="reference"></i>
@@ -84,6 +95,25 @@
 			
 			</el-card>
 		</el-card>
+		<el-drawer
+		  title="在线用户"
+		  :visible.sync="drawer"
+		  :size="180"
+		  direction="ltr"
+		  class="flex-center"
+		  :with-header="true">
+		  <ul ref="userList" class="user-list" v-infinite-scroll="userLoad" style="overflow:auto">
+		      <li v-for="(oneUserData, index) in userData" :key="index - 1"  class="oneUser">
+		  		<div class="flex-center-left">
+		  			<el-avatar :size="40" :src="circleUrl"></el-avatar>
+		  			<a v-if="oneUserData.status === 0" class="userName">游客{{ oneUserData.userName }}</a>
+		  			<a v-else-if="oneUserData.status === 2" class="userName">【大坤吧】{{ oneUserData.userName }}</a>
+		  			<a v-else class="userName">{{ oneUserData.userName }}</a>
+		  			<a v-if="oneUserData.userName === randomUserId || String(oneUserData.userId) === String(user.userId)" class="userName">[我]</a>
+		  		</div>
+		  	</li>
+		  </ul>
+		</el-drawer>
 	</div>
 </template>
 
@@ -114,6 +144,7 @@
 				reConnectTime: 0,
 				userCount: 0,
 				expressionIcon: ['😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇', '🥰', '😍', '🤩', '😘', '😗', '☺️', '😚', '😙', '😋', '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😏', '😒', '🙄', '😬', '🤥', '😌', '😔', '😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '🤯', '🤠', '🥳', '😎', '🤓', '🧐', '😕', '😟', '🙁', '☹️', '😮', '😯', '😲', '😳', '🥺', '😦', '😧', '😨', '😰', '😥', '😢', '😭', '😱', '😖', '😣', '😞', '😓', '😩', '😫', '🥱', '😤', '😡', '😠', '🤬', '😈', '👿', '💀', '☠️', '💩', '🤡'],
+				drawer: false,
 			}
 		},
 		created() {
@@ -170,6 +201,7 @@
 				  	  type: 'success'
 				  	});
 				  	this.connectIndex = 1;
+					this.getChatList();
 					clearInterval(this.connectId);
 				  }
 			  }, 1500);
@@ -231,8 +263,32 @@
 			},
 			async setupWebSocketAsVisitor() {
 				await this.getChatList();
+				// 检查是否存在保存的位置信息和时间戳
+				  const lastRandomUserId = localStorage.getItem('lastRandomUserId');
+				  const lastRandomUserIdTimestamp = localStorage.getItem('lastRandomUserIdTimestamp');
+				  console.log("lastRandomUserId: " + lastRandomUserId);
+				  console.log("lastRandomUserIdTimestamp: " + lastRandomUserIdTimestamp);
+				  // 检查是否需要重新生成随机 ID
+				  if (lastRandomUserId && lastRandomUserIdTimestamp) {
+				    const currentTime = new Date().getTime();
+				    const lastGeneratedTime = parseInt(lastRandomUserIdTimestamp);
 				
-				  this.getRandomUserId();
+				    // 判断是否超过一周，86400000 毫秒为一天的时间戳
+				    if (currentTime - lastGeneratedTime > 7 * 86400000) {
+				      this.randomUserId = 0 + this.generateRandomNumber(5);
+				      // 更新保存的位置和时间戳
+				      localStorage.setItem('lastRandomUserId', this.randomUserId);
+				      localStorage.setItem('lastRandomUserIdTimestamp', currentTime.toString());
+				    } else {
+				      this.randomUserId = lastRandomUserId;
+				    }
+				  } else {
+				    // 第一次生成随机 ID
+				    this.randomUserId = 0 + this.generateRandomNumber(5);
+				    // 保存位置和时间戳
+				    localStorage.setItem('lastRandomUserId', this.randomUserId);
+				    localStorage.setItem('lastRandomUserIdTimestamp', new Date().getTime().toString());
+				  }
 				if (this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING)) {
 				  this.socket.close();
 				}
@@ -346,8 +402,8 @@
 				  message = {
 					  "msg":this.content,
 					  "to":"1",
-					  "userId":this.randomUserId,
 					  "type":"2002",
+					  "userId":this.randomUserId,
 					  'status': "2",
 				  }
 			  }
@@ -418,40 +474,12 @@
 				  console.log(error);
 			  })
 		  },
-		  getRandomUserId() {
-			  // 检查是否存在保存的位置信息和时间戳
-			    const lastRandomUserId = localStorage.getItem('lastRandomUserId');
-			    const lastRandomUserIdTimestamp = localStorage.getItem('lastRandomUserIdTimestamp');
-			    console.log("lastRandomUserId: " + lastRandomUserId);
-			    console.log("lastRandomUserIdTimestamp: " + lastRandomUserIdTimestamp);
-			  // 检查是否需要重新生成随机 ID
-			  if (lastRandomUserId && lastRandomUserIdTimestamp) {
-			    const currentTime = new Date().getTime();
-			    const lastGeneratedTime = parseInt(lastRandomUserIdTimestamp);
-			  				
-			    // 判断是否超过一周，86400000 毫秒为一天的时间戳
-			    if (currentTime - lastGeneratedTime > 7 * 86400000) {
-			      this.randomUserId = 0 + this.generateRandomNumber(5);
-			      // 更新保存的位置和时间戳
-			      localStorage.setItem('lastRandomUserId', this.randomUserId);
-			      localStorage.setItem('lastRandomUserIdTimestamp', currentTime.toString());
-			    } else {
-			      this.randomUserId = lastRandomUserId;
-			    }
-			  } else {
-			    // 第一次生成随机 ID
-			    this.randomUserId = 0 + this.generateRandomNumber(5);
-			    // 保存位置和时间戳
-			    localStorage.setItem('lastRandomUserId', this.randomUserId);
-			    localStorage.setItem('lastRandomUserIdTimestamp', new Date().getTime().toString());
-			  }
-		  },
 		}
 	}
 </script>
 
 <style scoped>
-	#BlogChat {
+	#MobileBlogChat {
 		min-height: 700px;
 	}
 	
@@ -503,8 +531,8 @@
 	.chat-card {
 		background-color: rgb(248, 248, 248);
 		border: 1px solid rgb(248, 248, 248);
-		margin-left: 2%;
-		width: 70%;
+		/* margin-left: 2%; */
+		width: 100vw;
 		border-radius: 5px 10px 5px 5px;
 	}
 	
@@ -518,7 +546,8 @@
 	}
 	
 	.user-list {
-		width: 174px;
+		margin-left: 10px;
+		width: 200px;
 	}
 	
 	.chat-list {
@@ -540,7 +569,7 @@
 	
 	.userHeadByMyself {
 		position: absolute;
-		left: 450px;
+		left: 68vw;
 	}
 	
 	.userName-class {
@@ -557,7 +586,7 @@
 		font-weight: 500;
 		color: grey;
 		top: 0;
-		right: -10px;
+		right: 35vw;
 	}
 	
 	.sharpCorner-left {
@@ -578,7 +607,7 @@
 		border-width: 10px;
 		border-color: transparent transparent transparent white; /* 调整颜色以匹配气泡背景 */
 		top: 37px;
-		left: 435px; /* 调整尖角位置 */
+		right: 33vw; /* 调整尖角位置 */
 		transform: translateY(-50%) scaleY(-1); /* 垂直翻转 */;
 	}
 	
@@ -589,7 +618,7 @@
 	  font-weight: 500;
 	  min-height: 20px;
 	  min-width: 10px;
-	  max-width: 275px;
+	  max-width: 180px;
 	  top: 17px;
 	  
 	  background-color: white;
@@ -608,7 +637,7 @@
 	  font-weight: 500;
 	  min-height: 20px;
 	  min-width: 10px;
-	  max-width: 275px;
+	  max-width: 180px;
 	  top: 17px;
 	  
 	  background-color: white;
@@ -617,7 +646,7 @@
 	  padding-top: 13px;
 	  border-radius: 10px;
 	  position: relative;
-	  right: -10px;
+	  right: 38vw;
 	  direction: ltr; /* 设置文本方向为右到左 */
 	  text-align: left; /* 将文本从右侧开始显示，使长度向左增长 */
 	}
@@ -631,15 +660,15 @@
 	
 	.oneChat {
 		position: relative;
-		min-width: 150px;
-		max-width: 425px;
+		min-width: 50vw;
+		max-width: 100vw;
 		left: -20px;
 		margin-top: 37px;
 		/* border: 2px solid black; */
 	}
 	
 	.chatContent {
-		margin-left: 5px;
+		/* margin-left: 5px; */
 	}
 	
 	.contentForm {
@@ -647,12 +676,12 @@
 	}
 	
 	.content-card {
-		width: 70%;
+		width: 100vw;
 		margin-top: 10px;
 		height: 160px;
 		box-shadow: 0;
 		position: relative;
-		border-radius: 5px 5px 10px 5px;
+		border-radius: 5px 5px 10px 10px;
 	}
 	
 	.content-window {
@@ -660,18 +689,18 @@
 		box-shadow: 0;
 		border-radius: 5px 5px 0 0;
 		position: relative;
-		width: 761px;
+		width: 100vw;
 		height: 30px;
 	}
 	
 	.checked {
 		position: relative;
-		right: 180px;
+		left: -22vw;
 	}
 	
 	.content-button {
 		position: relative;
-		left: 180px;
+		left: 23vw;
 		box-shadow: 0;
 	}
 	
@@ -679,8 +708,8 @@
 		border-radius: 0 0 10px 10px;
 		position: relative;
 		height: 129px;
-		left: 115px;
-		width: 70%;
+		left: 21px;
+		width: 90vw;
 	}
 	
 	/deep/ textarea {
@@ -690,11 +719,12 @@
 	
 	.clickable-link {
 	  cursor: pointer; /* 设置鼠标样式为手型，表示可以点击 */
+	  font-size: 22px;
 	}
 	
 	.expressionIcon-class {
 		position: relative;
-		left: 170px;
+		left: 20vw;
 		top: 3px;
 	}
 	
@@ -706,4 +736,8 @@
 		border-radius: 5px 5px 5px 10px;
 	}
 	
+	.connectStatus-class {
+		margin-top: 20px;
+		margin-bottom: -50px;
+	  }
 </style>
