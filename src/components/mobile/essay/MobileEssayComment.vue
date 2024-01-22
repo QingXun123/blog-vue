@@ -176,7 +176,7 @@
 				return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
 			},
 			deleteComment: function() {
-				axios.post("http://api.blog.qxbase.com/essayComment/deleteComment", {
+				axios.post("https://api.blog.qxbase.com/essayComment/deleteComment", {
 					"commentId": this.tempDeleteCommentId,
 					"userId": this.user.userId,
 				}, {
@@ -215,7 +215,7 @@
 				setTimeout(() => {
 					this.loading = false;
 				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
-				axios.post("http://api.blog.qxbase.com/essayComment/addComment", {
+				axios.post("https://api.blog.qxbase.com/essayComment/addComment", {
 					"essayId": this.$route.params.essayId,
 					"content": this.content,
 					"userId": this.user.userId,
@@ -262,7 +262,7 @@
 				setTimeout(() => {
 					this.loading = false;
 				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
-				axios.post("http://api.blog.qxbase.com/essayComment/addComment", {
+				axios.post("https://api.blog.qxbase.com/essayComment/addComment", {
 					"essayId": this.$route.params.essayId,
 					"content": this.nextContent,
 					"userId": this.user.userId,
@@ -298,7 +298,7 @@
 			},
 			page: function(val) {
 				console.log("nnn");
-				axios.post("http://api.blog.qxbase.com/essayComment/getCommentPage", {
+				axios.post("https://api.blog.qxbase.com/essayComment/getCommentPage", {
 					"orders": [
 						{
 						  "asc": false,
@@ -319,7 +319,7 @@
 					this.commentList = records;
 					for (let i = 0; i < this.commentList.length; i++) {
 					  let commentId = this.commentList[i].commentId;
-					  axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
+					  axios.post("https://api.blog.qxbase.com/essayComment/getNextCommentPage", {
 						"orders": [
 							{
 							  "asc": true,
@@ -339,7 +339,7 @@
 						const records = this.nextCommentPage[commentId].records;
 						records.forEach((item) => {
 							// 获取回复的回复总数
-							axios.get("http://api.blog.qxbase.com/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
+							axios.get("https://api.blog.qxbase.com/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
 							(response) => {
 								if (response.data.code !== 200) {
 									this.$message({
@@ -364,7 +364,7 @@
 				})
 			},
 			nextPage: function(val, commentId) {
-				axios.post("http://api.blog.qxbase.com/essayComment/getNextCommentPage", {
+				axios.post("https://api.blog.qxbase.com/essayComment/getNextCommentPage", {
 					"orders": [
 					    {
 					      "asc": true,
@@ -386,7 +386,7 @@
 					const records = this.nextCommentPage[temp.replySuperCommentId].records;
 					records.forEach((item) => {
 						// 获取回复的回复总数
-						axios.get("http://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+						axios.get("https://api.blog.qxbase.com/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
 						(response) => {
 							if (response.data.code !== 200) {
 								this.$message({
@@ -411,7 +411,7 @@
 					return;
 				}
 				if (!comment.likeId) {
-					axios.post("http://api.blog.qxbase.com/essayLike/like", {
+					axios.post("https://api.blog.qxbase.com/essayLike/like", {
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}, {
@@ -432,7 +432,7 @@
 						})
 					})
 				} else {
-					axios.post("http://api.blog.qxbase.com/essayLike/dislike", {
+					axios.post("https://api.blog.qxbase.com/essayLike/dislike", {
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}).then((response) => {

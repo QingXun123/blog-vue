@@ -39,7 +39,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 		},
 		methods: {
 			info: function() {
-				axios.get("http://api.blog.qxbase.com/essayInfo/info?essayId=" + this.$route.params.essayId)
+				axios.get("https://api.blog.qxbase.com/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
 					this.loading = false;
@@ -48,7 +48,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 				})
 			},
 			readEssay: function(val) {
-				axios.get("http://api.blog.qxbase.com/essayInfo/readEssay?essayId=" + val)
+				axios.get("https://api.blog.qxbase.com/essayInfo/readEssay?essayId=" + val)
 				.then((response) => {
 					console.log("阅读成功");
 				}).catch((err) => {

@@ -50,7 +50,7 @@
 		},
 		methods: {
 			getEssayListLikeSubject: function(val) {
-				axios.post("http://api.blog.qxbase.com/essayInfo/getEssayListLikeSubject", {
+				axios.post("https://api.blog.qxbase.com/essayInfo/getEssayListLikeSubject", {
 					  "current": 1,
 					  "records": [
 					    val

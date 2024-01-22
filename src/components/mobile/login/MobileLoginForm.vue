@@ -49,7 +49,7 @@
 				loading: false,
 				user: '',
 				authCode: '',
-				identifyCodeImgUrl: 'http://api.blog.qxbase.com/user/identifyImage',
+				identifyCodeImgUrl: 'https://api.blog.qxbase.com/user/identifyImage',
 				codeLoading: false,
 			}
 		},
@@ -64,7 +64,7 @@
 				}, 500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
 			},
 			login: function() {
-				axios.post("http://api.blog.qxbase.com/user/doLogin", {
+				axios.post("https://api.blog.qxbase.com/user/doLogin", {
 					"email": this.email,
 					"password": this.password,
 				}, {
@@ -106,7 +106,7 @@
 				})
 			},
 			register: function() {
-				axios.post("http://api.blog.qxbase.com/user/register", {
+				axios.post("https://api.blog.qxbase.com/user/register", {
 					"userName": this.username,
 					"email": this.email,
 					"password": this.password,

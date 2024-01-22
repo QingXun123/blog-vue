@@ -104,7 +104,7 @@
 				  return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
 			  },
 			  async getUser() {
-			  	axios.get("http://api.blog.qxbase.com/user/info", {
+			  	axios.get("https://api.blog.qxbase.com/user/info", {
 			  	  withCredentials: true ,// 开启跨域携带 Cookie
 			  	}).then(
 			  	(response) => {
@@ -127,7 +127,7 @@
 			  	window.location.href = '#/login';
 			  },
 			  exit: function() {
-			  	axios.get("http://api.blog.qxbase.com/user/logout", {
+			  	axios.get("https://api.blog.qxbase.com/user/logout", {
 			  		withCredentials: true
 			  	}).then((response) => {
 			  		if (response.data.code === 200) {

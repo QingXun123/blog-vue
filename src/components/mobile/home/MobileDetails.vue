@@ -50,7 +50,7 @@ import axios from 'axios';
 		},
 		methods: {
 			getFeaturedEssayList: function() {
-				axios.get("http://api.blog.qxbase.com/essayInfo/getTopEssayList").then(
+				axios.get("https://api.blog.qxbase.com/essayInfo/getTopEssayList").then(
 				(response) => {
 					this.essayTopList = response.data.data;
 				}).catch((err) => {

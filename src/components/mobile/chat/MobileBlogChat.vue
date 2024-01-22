@@ -355,7 +355,7 @@
 			});
 		  },
 		  getChatList() {
-			  axios.get("http://api.blog.qxbase.com/chat/getChatList")
+			  axios.get("https://api.blog.qxbase.com/chat/getChatList")
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code != 200) {
@@ -372,7 +372,7 @@
 			  })
 		  },
 		  getUserList() {
-			  axios.get("http://api.blog.qxbase.com/room/getOnlineUserByRoomId?roomId=" + 1)
+			  axios.get("https://api.blog.qxbase.com/room/getOnlineUserByRoomId?roomId=" + 1)
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code != 200) {
@@ -459,7 +459,7 @@
 			  }, 1000);
 		  },
 		  getOnlineUserCount() {
-			  axios.get("http://api.blog.qxbase.com/room/getOnlineCountByRoomId?roomId=1")
+			  axios.get("https://api.blog.qxbase.com/room/getOnlineCountByRoomId?roomId=1")
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code !== 200) {

@@ -152,7 +152,7 @@ import axios from 'axios'
 			  return content;
 			},
 			async getUser() {
-				axios.get("http://api.blog.qxbase.com/user/info", {
+				axios.get("https://api.blog.qxbase.com/user/info", {
 				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
@@ -172,7 +172,7 @@ import axios from 'axios'
 				})
 			},
 			exit: function() {
-				axios.get("http://api.blog.qxbase.com/user/logout", {
+				axios.get("https://api.blog.qxbase.com/user/logout", {
 					withCredentials: true
 				}).then((response) => {
 					if (response.data.code === 200) {

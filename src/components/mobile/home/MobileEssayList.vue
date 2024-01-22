@@ -49,7 +49,7 @@ import axios from 'axios';
 		},
 		methods: {
 			page: function(val) {
-				axios.post("http://api.blog.qxbase.com/essayInfo/page", {
+				axios.post("https://api.blog.qxbase.com/essayInfo/page", {
 					"orders": [
 					    {
 					      "asc": false,
