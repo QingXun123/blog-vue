@@ -6,7 +6,7 @@
 				<el-card :body-style="{ padding: '0px'}">
 				  <div class="card" style="padding: 14px;">
 					  <router-link :to="'/essay/' + essayList[index - 1].essayId" target="_self"> <!-- 设置跳转链接 -->
-						<img :src="essayList[index - 1].img" class="essay-image">
+						<img :src="essayList[index - 1].img ? essayList[index - 1].img : 'https://qxbase-1309929489.cos.ap-guangzhou.myqcloud.com/com/qxbase/blog/essay/thumbnail.png'" class="essay-image">
 					  </router-link>
 						<div class="essay">
 							<router-link :to="'/essay/' + essayList[index - 1].essayId"> <!-- 设置跳转链接 -->
