@@ -1,7 +1,15 @@
 // 定义后端访问地址
 // const backendUrl = 'http://localhost:9000';
-const backendUrl = 'https://api.blog.qxbase.com';
-// const backendUrl = 'http://api.blog.qxbase.com';
+// const backendUrls = {
+//   url: 'http://localhost:9000',
+//   wsUrl: 'ws://localhost:9000',
+//   baseUrl: 'localhost:9000'
+// };
+const backendUrls = {
+  url: 'https://api.blog.qxbase.com',
+  wsUrl: 'wss://api.blog.qxbase.com',
+  baseUrl: 'api.blog.qxbase.com'
+};
 
 // 导出后端访问地址
-export default backendUrl;
+export default backendUrls;

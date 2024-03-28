@@ -36,7 +36,7 @@
 
 <script>
 import axios from 'axios';
-import backendUrl from '@/config/globalConfig';
+import backendUrls from '@/config/globalConfig';
 
 	export default {
 		data() {
@@ -50,7 +50,7 @@ import backendUrl from '@/config/globalConfig';
 		},
 		methods: {
 			page: function(val) {
-				axios.post(backendUrl + "/essayInfo/page", {
+				axios.post(backendUrls.url + "/essayInfo/page", {
 					"orders": [
 					    {
 					      "asc": false,

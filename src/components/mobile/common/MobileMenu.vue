@@ -73,7 +73,7 @@
 
 <script>
 	import axios from 'axios'
-	import backendUrl from '@/config/globalConfig';
+	import backendUrls from '@/config/globalConfig';
 	
 	export default {
 	    data() {
@@ -105,7 +105,7 @@
 				  return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
 			  },
 			  async getUser() {
-			  	axios.get(backendUrl + "/user/info", {
+			  	axios.get(backendUrls.url + "/user/info", {
 			  	  withCredentials: true ,// 开启跨域携带 Cookie
 			  	}).then(
 			  	(response) => {
@@ -128,7 +128,7 @@
 			  	window.location.href = '#/login';
 			  },
 			  exit: function() {
-			  	axios.get(backendUrl + "/user/logout", {
+			  	axios.get(backendUrls.url + "/user/logout", {
 			  		withCredentials: true
 			  	}).then((response) => {
 			  		if (response.data.code === 0) {

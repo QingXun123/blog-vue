@@ -38,7 +38,7 @@
 
 <script>
 import axios from 'axios';
-import backendUrl from '@/config/globalConfig';
+import backendUrls from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -51,7 +51,7 @@ import backendUrl from '@/config/globalConfig';
 		},
 		methods: {
 			getFeaturedEssayList: function() {
-				axios.get(backendUrl + "/essayInfo/getTopEssayList").then(
+				axios.get(backendUrls.url + "/essayInfo/getTopEssayList").then(
 				(response) => {
 					this.essayTopList = response.data.data;
 				}).catch((err) => {

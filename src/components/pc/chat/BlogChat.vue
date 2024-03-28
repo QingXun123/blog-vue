@@ -91,7 +91,7 @@
 	// 引入 WebSocket 模块
 	import WebSocketClient from 'websocket'
 	import axios from 'axios'
-	import backendUrl from '@/config/globalConfig';
+	import backendUrls from '@/config/globalConfig';
 	
 	export default {
 		props: ['user'],
@@ -123,7 +123,7 @@
 				if (!(this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING))) {
 				  this.setupWebSocketAsVisitor();
 				}
-			}, 2000);
+			}, 1500);
 			setTimeout(() => {
 				this.scrollToChatBottom();
 			}, 1500);
@@ -131,7 +131,7 @@
 				if (!(this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING))) {
 				  this.connectIndex = 2;
 				}
-			}, 1000);
+			}, 1500);
 		  },
 		  watch: {
 		  	user: {
@@ -194,7 +194,7 @@
 				  this.socket.close();
 				}
 				// 创建 WebSocket 实例
-				const socket = new WebSocket(`wss://api.blog.qxbase.com/websocket/1/${this.user.userId}`);
+				const socket = new WebSocket(`${backendUrls.wsUrl}/websocket/1/${this.user.userId}`);
 			  // 创建 WebSocket 实例
 			  this.socket = socket;
 		
@@ -202,7 +202,7 @@
 			  this.socket.onopen = () => {
 				console.log('WebSocket 连接已建立');
 				this.getUserList();
-				this.getOnlineUserCount();
+				// this.getOnlineUserCount();
 				// this.sendMessage({'msg': "123", "to": "1", "userId": "1", "type": "2001"});
 			  };
 		  
@@ -242,7 +242,7 @@
 				  this.socket.close();
 				}
 				// 创建 WebSocket 实例
-				const socket = new WebSocket(`wss://api.blog.qxbase.com/websocket/1/${this.randomUserId}`);
+				const socket = new WebSocket(`${backendUrls.wsUrl}/websocket/1/${this.randomUserId}`);
 			  // 创建 WebSocket 实例
 			  this.socket = socket;
 					
@@ -250,7 +250,7 @@
 			  this.socket.onopen = () => {
 				console.log('WebSocket 连接已建立');
 				this.getUserList();
-				this.getOnlineUserCount();
+				// this.getOnlineUserCount();
 				// this.sendMessage({'msg': "123", "to": "1", "userId": "1", "type": "2001"});
 			  };
 					  
@@ -304,7 +304,7 @@
 			});
 		  },
 		  getChatList() {
-			  axios.get(backendUrl + "/chat/getChatList")
+			  axios.get(backendUrls.url + "/chat/getChatList")
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code != 0) {
@@ -321,7 +321,7 @@
 			  })
 		  },
 		  getUserList() {
-			  axios.get(backendUrl + "/room/getOnlineUserByRoomId?roomId=" + 1)
+			  axios.get(backendUrls.url + "/room/getOnlineUserByRoomId?roomId=" + 1)
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code != 0) {
@@ -408,7 +408,7 @@
 			  }, 1000);
 		  },
 		  getOnlineUserCount() {
-			  axios.get(backendUrl + "/room/getOnlineCountByRoomId?roomId=1")
+			  axios.get(backendUrls.url + "/room/getOnlineCountByRoomId?roomId=1")
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code !== 0) {

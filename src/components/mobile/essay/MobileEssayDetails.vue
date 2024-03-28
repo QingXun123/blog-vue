@@ -19,7 +19,7 @@
 import axios from "axios";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样式
-import backendUrl from '@/config/globalConfig';
+import backendUrls from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -35,7 +35,7 @@ import backendUrl from '@/config/globalConfig';
 		},
 		methods: {
 			info: function() {
-				axios.get(backendUrl + "/essayInfo/info?essayId=" + this.$route.params.essayId)
+				axios.get(backendUrls.url + "/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
 				}).catch((err) => {
@@ -43,7 +43,7 @@ import backendUrl from '@/config/globalConfig';
 				})
 			},
 			readEssay: function(val) {
-				axios.get(backendUrl + "/essayInfo/readEssay?essayId=" + val)
+				axios.get(backendUrls.url + "/essayInfo/readEssay?essayId=" + val)
 				.then((response) => {
 					console.log(response);
 				}).catch((err) => {

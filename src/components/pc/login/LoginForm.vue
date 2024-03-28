@@ -38,7 +38,7 @@
 
 <script>
 	import axios from 'axios'; // 导入axios库
-	import backendUrl from '@/config/globalConfig';
+	import backendUrls from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -50,7 +50,7 @@
 				loading: false,
 				user: '',
 				authCode: '',
-				identifyCodeImgUrl: backendUrl + '/user/identifyImage',
+				identifyCodeImgUrl: backendUrls.url + '/user/identifyImage',
 				codeLoading: false,
 			}
 		},
@@ -65,7 +65,7 @@
 				}, 500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
 			},
 			login: function() {
-				axios.post(backendUrl + "/user/doLogin", {
+				axios.post(backendUrls.url + "/user/doLogin", {
 					"email": this.email,
 					"password": this.password,
 				}, {
@@ -108,7 +108,7 @@
 				})
 			},
 			register: function() {
-				axios.post(backendUrl + "/user/register", {
+				axios.post(backendUrls.url + "/user/register", {
 					"userName": this.username,
 					"email": this.email,
 					"password": this.password,

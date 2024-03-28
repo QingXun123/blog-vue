@@ -37,7 +37,7 @@
 
 <script>
 	import axios from "axios";
-	import backendUrl from '@/config/globalConfig';
+	import backendUrls from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -51,7 +51,7 @@
 		},
 		methods: {
 			getEssayListLikeSubject: function(val) {
-				axios.post(backendUrl + "/essayInfo/getEssayListLikeSubject", {
+				axios.post(backendUrls.url + "/essayInfo/getEssayListLikeSubject", {
 					  "current": 1,
 					  "records": [
 					    val

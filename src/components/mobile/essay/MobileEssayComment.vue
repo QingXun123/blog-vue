@@ -138,7 +138,7 @@
 
 <script>
 	import axios from 'axios'; // 导入axios库
-	import backendUrl from '@/config/globalConfig';
+	import backendUrls from '@/config/globalConfig';
 	
 	export default {
 		props: ['user'],
@@ -177,7 +177,7 @@
 				return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
 			},
 			deleteComment: function() {
-				axios.post(backendUrl + "/essayComment/deleteComment", {
+				axios.post(backendUrls.url + "/essayComment/deleteComment", {
 					"commentId": this.tempDeleteCommentId,
 					"userId": this.user.userId,
 				}, {
@@ -216,7 +216,7 @@
 				setTimeout(() => {
 					this.loading = false;
 				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
-				axios.post(backendUrl + "/essayComment/addComment", {
+				axios.post(backendUrls.url + "/essayComment/addComment", {
 					"essayId": this.$route.params.essayId,
 					"content": this.content,
 					"userId": this.user.userId,
@@ -263,7 +263,7 @@
 				setTimeout(() => {
 					this.loading = false;
 				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
-				axios.post(backendUrl + "/essayComment/addComment", {
+				axios.post(backendUrls.url + "/essayComment/addComment", {
 					"essayId": this.$route.params.essayId,
 					"content": this.nextContent,
 					"userId": this.user.userId,
@@ -299,7 +299,7 @@
 			},
 			page: function(val) {
 				console.log("nnn");
-				axios.post(backendUrl + "/essayComment/getCommentPage", {
+				axios.post(backendUrls.url + "/essayComment/getCommentPage", {
 					"orders": [
 						{
 						  "asc": false,
@@ -320,7 +320,7 @@
 					this.commentList = records;
 					for (let i = 0; i < this.commentList.length; i++) {
 					  let commentId = this.commentList[i].commentId;
-					  axios.post(backendUrl + "/essayComment/getNextCommentPage", {
+					  axios.post(backendUrls.url + "/essayComment/getNextCommentPage", {
 						"orders": [
 							{
 							  "asc": true,
@@ -340,7 +340,7 @@
 						const records = this.nextCommentPage[commentId].records;
 						records.forEach((item) => {
 							// 获取回复的回复总数
-							axios.get(backendUrl + "/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
+							axios.get(backendUrls.url + "/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
 							(response) => {
 								if (response.data.code !== 0) {
 									this.$message({
@@ -365,7 +365,7 @@
 				})
 			},
 			nextPage: function(val, commentId) {
-				axios.post(backendUrl + "/essayComment/getNextCommentPage", {
+				axios.post(backendUrls.url + "/essayComment/getNextCommentPage", {
 					"orders": [
 					    {
 					      "asc": true,
@@ -387,7 +387,7 @@
 					const records = this.nextCommentPage[temp.replySuperCommentId].records;
 					records.forEach((item) => {
 						// 获取回复的回复总数
-						axios.get(backendUrl + "/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+						axios.get(backendUrls.url + "/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
 						(response) => {
 							if (response.data.code !== 0) {
 								this.$message({
@@ -412,7 +412,7 @@
 					return;
 				}
 				if (!comment.likeId) {
-					axios.post(backendUrl + "/essayLike/like", {
+					axios.post(backendUrls.url + "/essayLike/like", {
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}, {
@@ -433,7 +433,7 @@
 						})
 					})
 				} else {
-					axios.post(backendUrl + "/essayLike/dislike", {
+					axios.post(backendUrls.url + "/essayLike/dislike", {
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}).then((response) => {
