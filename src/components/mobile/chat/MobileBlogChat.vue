@@ -226,7 +226,7 @@
 				  this.socket.close();
 				}
 				// 创建 WebSocket 实例
-				const socket = new WebSocket(`wss://api.blog.qxbase.com/websocket/1/${this.user.userId}`);
+				const socket = new WebSocket(`${backendUrls.wsUrl}/websocket/1/${this.user.userId}`);
 			  // 创建 WebSocket 实例
 			  this.socket = socket;
 		
@@ -298,7 +298,7 @@
 				  this.socket.close();
 				}
 				// 创建 WebSocket 实例
-				const socket = new WebSocket(`wss://api.blog.qxbase.com/websocket/1/${this.randomUserId}`);
+				const socket = new WebSocket(`${backendUrls.wsUrl}/websocket/1/${this.randomUserId}`);
 			  // 创建 WebSocket 实例
 			  this.socket = socket;
 					
@@ -464,7 +464,7 @@
 			  }, 1000);
 		  },
 		  getOnlineUserCount() {
-			  axios.get(backendUrls + "/room/getOnlineCountByRoomId?roomId=1")
+			  axios.get(backendUrls.url + "/room/getOnlineCountByRoomId?roomId=1")
 			  .then((response) => {
 				  const data = response.data;
 				  if (data.code !== 0) {
