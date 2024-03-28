@@ -119,7 +119,11 @@
 		},
 		created() {
 			// this.getUserList();
-			this.setupWebSocketAsVisitor();
+			setTimeout(() => {
+				if (!(this.socket && (this.socket.readyState === WebSocket.OPEN || this.socket.readyState === WebSocket.CONNECTING))) {
+				  this.setupWebSocketAsVisitor();
+				}
+			}, 2000);
 			setTimeout(() => {
 				this.scrollToChatBottom();
 			}, 1500);

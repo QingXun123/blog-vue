@@ -50,7 +50,7 @@
 				loading: false,
 				user: '',
 				authCode: '',
-				identifyCodeImgUrl: 'https://api.blog.qxbase.com/user/identifyImage',
+				identifyCodeImgUrl: backendUrl + '/user/identifyImage',
 				codeLoading: false,
 			}
 		},

@@ -183,7 +183,7 @@
 				}, {
 					withCredentials: true, // 设置为 true，携带凭证
 				}).then((response) => {
-					if (response.data.code !== 200) {
+					if (response.data.code !== 0) {
 						this.$message({
 							message: response.data.data,
 							type: 'error'
@@ -225,7 +225,7 @@
 				  withCredentials: true, // 设置为 true，携带凭证
 				}).then(
 				(response) => {
-					if (response.data.code !== 200) {
+					if (response.data.code !== 0) {
 						console.log(response.data);
 						this.$message({
 						  message: response.data.message,
@@ -274,7 +274,7 @@
 				  withCredentials: true, // 设置为 true，携带凭证
 				}).then(
 				(response) => {
-					if (response.data.code !== 200) {
+					if (response.data.code !== 0) {
 						console.log(response.data);
 						this.$message({
 						  message: response.data.message,
@@ -342,7 +342,7 @@
 							// 获取回复的回复总数
 							axios.get(backendUrl + "/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
 							(response) => {
-								if (response.data.code !== 200) {
+								if (response.data.code !== 0) {
 									this.$message({
 										message: response.data.data,
 										type: 'error'
@@ -389,7 +389,7 @@
 						// 获取回复的回复总数
 						axios.get(backendUrl + "/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
 						(response) => {
-							if (response.data.code !== 200) {
+							if (response.data.code !== 0) {
 								this.$message({
 									message: response.data.data,
 									type: 'error'

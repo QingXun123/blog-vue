@@ -157,7 +157,7 @@ import backendUrl from '@/config/globalConfig';
 				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
-					// if (response.data.code !== 200) {
+					// if (response.data.code !== 0) {
 					// 	this.$message({
 					// 		message: response.data.err,
 					// 		type: 'error'
@@ -176,7 +176,7 @@ import backendUrl from '@/config/globalConfig';
 				axios.get(backendUrl + "/user/logout", {
 					withCredentials: true
 				}).then((response) => {
-					if (response.data.code === 200) {
+					if (response.data.code === 0) {
 						this.$message({
 							type: 'success',
 							message: '注销登录'
