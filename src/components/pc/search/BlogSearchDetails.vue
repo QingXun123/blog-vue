@@ -37,6 +37,7 @@
 
 <script>
 	import axios from "axios";
+	import backendUrl from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -50,7 +51,7 @@
 		},
 		methods: {
 			getEssayListLikeSubject: function(val) {
-				axios.post("https://api.blog.qxbase.com/essayInfo/getEssayListLikeSubject", {
+				axios.post(backendUrl + "/essayInfo/getEssayListLikeSubject", {
 					  "current": 1,
 					  "records": [
 					    val

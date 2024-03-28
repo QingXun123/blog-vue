@@ -36,6 +36,7 @@
 
 <script>
 import axios from 'axios';
+import backendUrl from '@/config/globalConfig';
 
 	export default {
 		data() {
@@ -49,7 +50,7 @@ import axios from 'axios';
 		},
 		methods: {
 			page: function(val) {
-				axios.post("https://api.blog.qxbase.com/essayInfo/page", {
+				axios.post(backendUrl + "/essayInfo/page", {
 					"orders": [
 					    {
 					      "asc": false,

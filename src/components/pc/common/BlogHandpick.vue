@@ -25,6 +25,7 @@
 
 <script>
 import axios from "axios";
+import backendUrl from '@/config/globalConfig';
 
 	export default {
 		data() {
@@ -37,7 +38,7 @@ import axios from "axios";
 		},
 		methods: {
 			getNewEssayList: function() {
-				axios.get("https://api.blog.qxbase.com/essayInfo/getNewEssayList").then(
+				axios.get(backendUrl + "/essayInfo/getNewEssayList").then(
 				(response) => {
 					const data = response.data.data;
 					// 遍历数据，将 releaseTime 格式化为 MM-DD 格式

@@ -38,6 +38,7 @@
 
 <script>
 import axios from 'axios';
+import backendUrl from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -50,7 +51,7 @@ import axios from 'axios';
 		},
 		methods: {
 			getFeaturedEssayList: function() {
-				axios.get("https://api.blog.qxbase.com/essayInfo/getTopEssayList").then(
+				axios.get(backendUrl + "/essayInfo/getTopEssayList").then(
 				(response) => {
 					this.essayTopList = response.data.data;
 				}).catch((err) => {

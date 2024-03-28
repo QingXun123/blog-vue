@@ -73,6 +73,7 @@
 
 <script>
 	import axios from 'axios'
+	import backendUrl from '@/config/globalConfig';
 	
 	export default {
 	    data() {
@@ -104,7 +105,7 @@
 				  return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
 			  },
 			  async getUser() {
-			  	axios.get("https://api.blog.qxbase.com/user/info", {
+			  	axios.get(backendUrl + "/user/info", {
 			  	  withCredentials: true ,// 开启跨域携带 Cookie
 			  	}).then(
 			  	(response) => {
@@ -127,7 +128,7 @@
 			  	window.location.href = '#/login';
 			  },
 			  exit: function() {
-			  	axios.get("https://api.blog.qxbase.com/user/logout", {
+			  	axios.get(backendUrl + "/user/logout", {
 			  		withCredentials: true
 			  	}).then((response) => {
 			  		if (response.data.code === 200) {

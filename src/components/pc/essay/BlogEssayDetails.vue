@@ -23,6 +23,7 @@
 import axios from "axios";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样式
+import backendUrl from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -39,7 +40,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 		},
 		methods: {
 			info: function() {
-				axios.get("https://api.blog.qxbase.com/essayInfo/info?essayId=" + this.$route.params.essayId)
+				axios.get(backendUrl + "/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
 					this.loading = false;
@@ -48,7 +49,7 @@ import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样�
 				})
 			},
 			readEssay: function(val) {
-				axios.get("https://api.blog.qxbase.com/essayInfo/readEssay?essayId=" + val)
+				axios.get(backendUrl + "/essayInfo/readEssay?essayId=" + val)
 				.then((response) => {
 					console.log("阅读成功");
 				}).catch((err) => {

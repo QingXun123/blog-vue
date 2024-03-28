@@ -38,6 +38,7 @@
 
 <script>
 	import axios from 'axios'; // 导入axios库
+	import backendUrl from '@/config/globalConfig';
 	
 	export default {
 		data() {
@@ -64,7 +65,7 @@
 				}, 500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
 			},
 			login: function() {
-				axios.post("https://api.blog.qxbase.com/user/doLogin", {
+				axios.post(backendUrl + "/user/doLogin", {
 					"email": this.email,
 					"password": this.password,
 				}, {
@@ -107,7 +108,7 @@
 				})
 			},
 			register: function() {
-				axios.post("https://api.blog.qxbase.com/user/register", {
+				axios.post(backendUrl + "/user/register", {
 					"userName": this.username,
 					"email": this.email,
 					"password": this.password,

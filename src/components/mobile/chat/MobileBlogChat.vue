@@ -121,6 +121,7 @@
 	// 引入 WebSocket 模块
 	import WebSocketClient from 'websocket'
 	import axios from 'axios'
+	import backendUrl from '@/config/globalConfig';
 	
 	export default {
 		props: ['user'],
@@ -355,13 +356,13 @@
 			});
 		  },
 		  getChatList() {
-			  axios.get("https://api.blog.qxbase.com/chat/getChatList")
+			  axios.get(backendUrl + "/chat/getChatList")
 			  .then((response) => {
 				  const data = response.data;
-				  if (data.code != 200) {
+				  if (data.code != 0) {
 					  this.$message({
 						  'type': 'error',
-						  'message': data.data,
+						  'message': data.msg,
 					  })
 				  }
 				  this.chatData = data.data;
@@ -372,13 +373,13 @@
 			  })
 		  },
 		  getUserList() {
-			  axios.get("https://api.blog.qxbase.com/room/getOnlineUserByRoomId?roomId=" + 1)
+			  axios.get(backendUrl + "/room/getOnlineUserByRoomId?roomId=" + 1)
 			  .then((response) => {
 				  const data = response.data;
-				  if (data.code != 200) {
+				  if (data.code != 0) {
 					  this.$message({
 						  'type': 'error',
-						  'message': data.data,
+						  'message': data.msg,
 					  })
 				  }
 				  this.userData = data.data;
@@ -459,13 +460,13 @@
 			  }, 1000);
 		  },
 		  getOnlineUserCount() {
-			  axios.get("https://api.blog.qxbase.com/room/getOnlineCountByRoomId?roomId=1")
+			  axios.get(backendUrl + "/room/getOnlineCountByRoomId?roomId=1")
 			  .then((response) => {
 				  const data = response.data;
-				  if (data.code !== 200) {
+				  if (data.code !== 0) {
 					  this.$message({
 						  'type': 'error',
-						  'message': data.data,
+						  'message': data.msg,
 					  });
 				  }
 				  this.userCount = data.data;
