@@ -43,6 +43,8 @@ import backendUrls from '@/config/globalConfig';
 				axios.get(backendUrls.url + "/essayInfo/info?essayId=" + this.$route.params.essayId)
 				.then((response) => {
 					this.essay = response.data.data;
+					document.title = this.essay.subject + backendUrls.urlName;
+					// console.log("title: " + this.essay.subject);
 					this.loading = false;
 				}).catch((err) => {
 					console.error(err);

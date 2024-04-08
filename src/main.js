@@ -14,6 +14,11 @@ import BlogHandpick from './components/pc/common/BlogHandpick.vue'
 import MobileMenu from './components/mobile/common/MobileMenu.vue'
 import MobileNavigation from './components/mobile/common/MobileNavigation.vue'
 
+import VideoPlayer from 'vue-video-player/src'
+import 'vue-video-player/src/custom-theme.css'
+import 'video.js/dist/video-js.css'
+Vue.use(VideoPlayer)
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.component("BlogMenu", BlogMenu);
