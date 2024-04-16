@@ -5,6 +5,10 @@ import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import VueDPlayer from 'vue-dplayer';
+import "vue-dplayer/dist/vue-dplayer.css";
+Vue.component('vue-dplayer', VueDPlayer);
+
 import BlogMenu from './components/pc/common/BlogMenu.vue'
 import BlogNavigation from './components/pc/common/BlogNavigation.vue'
 import BlogDate from './components/pc/common/BlogDate.vue'
@@ -13,11 +17,6 @@ import BlogHandpick from './components/pc/common/BlogHandpick.vue'
 
 import MobileMenu from './components/mobile/common/MobileMenu.vue'
 import MobileNavigation from './components/mobile/common/MobileNavigation.vue'
-
-import VideoPlayer from 'vue-video-player/src'
-import 'vue-video-player/src/custom-theme.css'
-import 'video.js/dist/video-js.css'
-Vue.use(VideoPlayer)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
