@@ -209,8 +209,8 @@ export default {
 }
 
 .dplayer {
-  width: 1200px;
-  height: 675px;
+  width: 960px;
+  height: 520px;
 }
 
 .episodeList {
