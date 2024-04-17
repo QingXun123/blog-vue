@@ -200,7 +200,7 @@ import backendUrls from '@/config/globalConfig';
 	#BlogMenu {
 		position: relative;
 		max-width: none;
-		min-width: 1200px; /* 最小宽度 */
+		min-width: 1522px; /* 最小宽度 */
 	}
 	
 	/deep/ .el-menu-demo {
