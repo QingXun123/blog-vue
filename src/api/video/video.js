@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 import backendUrls from '@/config/globalConfig';
 
-export function getVideoBarrage(id) {
+export function videoPage(data) {
 	return request({
-	  url: backendUrls.url + '/dplayer/v2?id=' + id,
-	  method: 'get'
+	  url: backendUrls.url + '/video/page',
+	  method: 'post',
+	  data: data
 	})
 }

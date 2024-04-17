@@ -27,6 +27,7 @@
 						</el-header>
 						<div style="margin: auto; min-width: 1200px;">
 							<VideoForm></VideoForm>
+							<!-- <VideoEpisodeForm></VideoEpisodeForm> -->
 						</div>
 						<el-footer id="footer">
 						  <BlogNavigation></BlogNavigation>
@@ -40,11 +41,13 @@
 
 <script>
 	import VideoForm from '../components/pc/video/VideoForm.vue'
+	import VideoEpisodeForm from '../components/pc/video/VideoEpisodeForm.vue'
 	
 	export default {
 	  name: 'home',
 	  components: {
 		  VideoForm,
+		  VideoEpisodeForm,
 	  },
 	  data() {
 	  	return {
@@ -70,6 +73,10 @@
 </script>
 
 <style scoped>
+	
+	#video {
+		
+	}
 	
 	/* 默认样式 */
 	.element {

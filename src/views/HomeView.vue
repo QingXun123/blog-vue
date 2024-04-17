@@ -34,6 +34,7 @@
 						  	  		  <el-main>
 						  	  			  <div style="float: right;">
 						  	  				<BlogBanner></BlogBanner>
+											<VideoListForm></VideoListForm>
 						  	  				<BlogDetails></BlogDetails>
 						  	  				<BlogEssayList></BlogEssayList>
 						  	  			  </div>
@@ -62,6 +63,7 @@
 import BlogBanner from '../components/pc/home/BlogBanner.vue'
 import BlogDetails from '../components/pc/home/BlogDetails.vue'
 import BlogEssayList from '../components/pc/home/BlogEssayList.vue'
+import VideoListForm from '../components/pc/video/VideoListForm.vue'
 import MobileBanner from '../components/mobile/home/MobileBanner.vue'
 import MobileDetails from '../components/mobile/home/MobileDetails.vue'
 import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
@@ -72,6 +74,7 @@ export default {
 	BlogBanner,
 	BlogDetails,
 	BlogEssayList,
+	VideoListForm,
 	MobileBanner,
 	MobileDetails,
 	MobileEssayList,

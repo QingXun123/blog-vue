@@ -1,69 +1,93 @@
 <template>
 	<div id="VideoForm">
 		<div class="video-container">
-			<vue-dplayer ref="dplayerRef" class="dplayer" :options="options"></vue-dplayer>
+			<vue-dplayer id="dplayer" ref="dplayerRef" class="dplayer" :options="options"></vue-dplayer>
+			<el-card class="episodeList" v-loading="episodeListLoading">
+				<div slot="header">
+				  <span>{{ videoInfo.video.title }}</span>
+				  <span style="float: right; padding: 3px 0; opacity: 0.5;">{{ videoInfo.video.status === 0 ? '待上映' : videoInfo.video.status === 1 ? '连载中' : '已完结' }}</span>
+				</div>
+				<div class="episodeMiddleWare"></div>
+				<div class="episodeButton">
+					<el-button :autofocus="item.id === videoEpisode.id" @click="eposodeOnClick(item.id)" v-for="(item, i) in videoInfo.videoEpisodes" :key="i" class="row-button"><span style="top: -5px; position: relative;">{{ item.episode }}</span></el-button>
+				</div>
+			</el-card>
 		</div>
-		<el-button @click="onclick">123</el-button>
 	</div>
 </template>
 
 <script>
-import { getVideoBarrage } from '@/api/video/dplayer'
+import { getDanmuList, addDanmu } from '@/api/video/videoDanmu'
+import { getVideoEpisodeById, getVideoById } from '@/api/video/videoEpisode'
 import WebSocketClient from 'websocket'
 import axios from 'axios'
-import backendUrls from '@/config/globalConfig';
-import VueDPlayer from 'vue-dplayer';
+import backendUrls from '@/config/globalConfig'
+import VueDPlayer from 'vue-dplayer'
 
 export default {
-  send: (endpoint, danmakuData) => {
-	  //send 一样处理这里就不写了
-	  console.log('假装通过 WebSocket 发送数据', danmakuData, endpoint.data);
-  },
-  read: (options) => {
-	  console.log('read is running');
-	  getVideoBarrage(1).then((response) => {
-		  if (!response || response.code !== 200) {
-			  options.error && options.error(response && response.msg);
-			  return;
-		  }
-		  options.success(response.data);
-	  }).catch((e) => {
-		  console.error(e);
-		  options.error && options.error();
-	  });
-  },
   components: {
     VueDPlayer
   },
   data() {
     return {
+	  episodeListLoading: true,
+	  container: document.getElementById('dplayer'),
       user: {userId: 1},
+	  videoInfo: {
+		  video: {}
+	  },
+	  videoEpisode: {},
       options: {
         lang: "zh-cn",
         preload: 'auto',
         video: {
           type: 'auto',
-          url: 'http://minio.qxbase.com/qxbase-bucket/2024-04/07/7f5c1e77-eb1e-4323-8043-ed18ea7a113b.mp4',
-		  pic: '123',
+          url: '',
+          // url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
+          // url: 'http://minio.qxbase.com/qxbase-bucket/2024-04/07/7f5c1e77-eb1e-4323-8043-ed18ea7a113b.mp4',
+		  pic: '',
           // pic: 'http://minio.qxbase.com/qxbase-bucket/image.jpg'
         },
-		danmaku: {
-			id: 1,
-			api: ['http://localhost:19000/dplayer/'],
-		},
+		danmaku: true,
 		apiBackend: {
-			read: (options) => {
-				  console.log('read is running');
-				  getVideoBarrage(1).then((response) => {
+			send: (url, data, cb) => {
+				console.log('url: ' + url);
+				// data: {"player":1,"author":1,"time":0,"text":"123123","color":"#fff","type":"right"}
+				console.log('data: ' +  JSON.stringify(data));
+				console.log('cb: ' + cb);
+				const danmu = {
+					userId: data.author,
+					videoEpisodeId: this.videoEpisode.id,
+					color: data.color,
+					type: data.type === 'right' ? 0 : data.type === 'top' ? 1 : 2,
+					text: data.text,
+					time: data.time
+				}
+				addDanmu(danmu).then((response) => {
+					this.$notify({
+					  title: '弹幕发送成功',
+					  message: danmu.text,
+					  type: 'success'
+					});
+					cb();
+				}).catch((error) => {
+					this.$notify.error({
+					  title: '失败',
+					  message: '弹幕发送失败 ' + error,
+					});
+				})
+			},
+			read: (endpoint, callback) => {
+				  getDanmuList(this.videoEpisode.id).then((response) => {
 					  if (!response || response.code !== 0) {
-						  options.error && options.error(response && response.msg);
+						  endpoint.error && endpoint.error(response && response.msg);
 						  return;
 					  }
-					  console.log(options);
-					  options.success(response.data);
+					  callback('', response.data);
+					  // endpoint.success(response.data);
 				  }).catch((e) => {
 					  console.error(e);
-					  options.error && options.error();
+					  endpoint.error && endpoint.error();
 				  });
 			},
 		},
@@ -71,7 +95,16 @@ export default {
     }
   },
   created() {
-    this.setupWebSocket();
+	this.videoEpisode.id = this.$route.params && this.$route.params.videoEpisodeId;
+	if (this.videoEpisode.id) {
+		this.switchVideo(this.videoEpisode.id);
+	}
+    // this.setupWebSocket();
+  },
+  watch: {
+	  'videoEpisode.videoId'(newVal, oldVal) {
+		this.getEpisodeList(newVal);
+	  },
   },
   beforeDestroy() {
     // 关闭 WebSocket 连接
@@ -80,37 +113,6 @@ export default {
     }
   },
   methods: {
-    onclick() {
-      console.log('当前播放状态: ' + this.$refs['danmakuRef'].getPlayState());
-	  window.dp6 = new DPlayer({
-		  container: document.getElementById('dplayer6'),
-		  preload: 'none',
-		  live: true,
-		  danmaku: true,
-		  apiBackend: {
-			  read: function (endpoint, callback) {
-				  console.log('假装 WebSocket 连接成功');
-				  callback();
-			  },
-			  send: function (endpoint, danmakuData, callback) {
-				  console.log('假装通过 WebSocket 发送数据', danmakuData);
-				  callback();
-			  }
-		  },
-		  video: {
-			  url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
-			  type: 'hls'
-		  }
-	  });
-      // const message = {
-      //  "msg": '123',
-      //  "to":"2",
-      //  "userId": 1,
-      //  "type":"2002",
-      //  'status': "2",
-      // }
-      // this.sendMessage(message);
-    },
     setupWebSocket() {
       // 创建 WebSocket 实例
       const socket = new WebSocket(`${backendUrls.wsUrl}/websocket/2/${this.user.userId}`);
@@ -164,38 +166,74 @@ export default {
         console.error('WebSocket 连接未建立或已关闭');
       }
     },
-	onclick() {
-		// this.$refs['dplayerRef'].dp.play();
-		this.$refs['dplayerRef'].dp.danmaku.draw(
-		    {
-		        text: 'dplayer is amazing',
-		        color: '#b7daff',
-		        type: 'right', // should be `top` `bottom` or `right`
-				speedRate: 1
-		    }
-		);
-	}
+	switchVideo(videoEpisodeId) {
+		getVideoEpisodeById(videoEpisodeId).then((response) => {
+			const data = response.data;
+			this.videoEpisode = data;
+			this.$refs['dplayerRef'].dp.switchVideo(
+				{
+					type: 'auto',
+					url: data.videoUrl,
+					pic: data.videoCoverUrl,
+				},{}
+			);
+		})
+	},
+	getEpisodeList(videoId) {
+		this.episodeListLoading = true;
+		getVideoById(videoId).then((response) => {
+			this.episodeListLoading = false;
+			const data = response.data;
+			this.videoInfo = data;
+		})
+	},
+	eposodeOnClick(id) {
+		this.switchVideo(id);
+	},
   }
 }
-</script>
+</script>	
 
 <style scoped>
 #VideoForm {
-  min-height: 600px;
+  min-height: 200px;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  background-color: rgb(36 36 36 / 1);
 }
 
 .video-container {
   position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  display: flex;
+  align-items: center; /* 垂直居中 */
 }
 
 .dplayer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  width: 1200px;
+  height: 675px;
+}
+
+.episodeList {
+	margin-left: 10px;
+	height: 650px;
+	width: 300px;
+}
+
+.episodeMiddleWare {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.episodeButton {
+	height: 300px;
+	overflow-y: auto;
+}
+
+.row-button {
+	margin-left: 10px;
+	width: calc(100% / 4 - 10px); /* 每行卡片的宽度 */
+	height: 30px; 
+    margin-bottom: 10px; /* 卡片之间的间距 */
 }
 </style>
