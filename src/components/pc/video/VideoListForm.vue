@@ -78,7 +78,6 @@ export default {
 }
 
 .videoListCard {
-  margin-top: 10px;
   width: 800px;
   height: 260px;
 }

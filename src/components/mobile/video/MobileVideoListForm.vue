@@ -1,6 +1,6 @@
 <template>
   <div id="videoList">
-    <el-card class="videoListCard" :style="{ width: width }">
+    <el-card class="videoListCard" :style="{ width: width }, { marginTop: marginTop }">
       <div>
         <span style="margin-top: -12px; margin-left: 10px; position: absolute; font-size: 15px; color: #FC8BBB;"
               type="text">{{ title }}</span>
@@ -34,6 +34,9 @@ export default {
     width: {
       type: String,
     },
+    marginTop: {
+      type: String,
+    },
     title: {
       default: '热门动漫',
       type: String,
@@ -57,8 +60,6 @@ export default {
         const data = response.data;
         this.videoPage = data;
         console.log('data: ' + data);
-        this.videoPage.list[1] = this.videoPage.list[0];
-        this.videoPage.list[2] = this.videoPage.list[0];
       })
     },
     videoCardOnClick(videoEpisodeId) {
@@ -79,12 +80,12 @@ export default {
 
 <style scoped>
 #videoList {
-
+  display: flex;
+  justify-content: center; /* 水平居中 */
 }
 
 .videoListCard {
-  margin-top: 10px;
-  width: 800px;
+  width: 99vw !important;
   height: 250px;
   display: flex;
   justify-content: center; /* 水平居中 */

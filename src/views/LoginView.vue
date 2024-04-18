@@ -72,7 +72,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 	
 	/* 默认样式 */
 	.element {
