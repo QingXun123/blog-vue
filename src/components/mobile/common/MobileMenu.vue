@@ -64,7 +64,7 @@
 			  			  style=" width: 80%; flex-direction: row; align-items: center;"
 			  	@keyup.enter.native="redirectToSearchPhone()">
 			    </el-input>
-				<el-button v-if="thi" @click="redirectToSearchPhone()" icon="el-icon-search" class="intoSearch"></el-button>
+				<el-button @click="redirectToSearchPhone()" icon="el-icon-search" class="intoSearch"></el-button>
 		  </div>
 		  
 		</el-drawer>
