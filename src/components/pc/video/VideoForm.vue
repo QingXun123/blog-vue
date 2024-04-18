@@ -6,7 +6,7 @@
         <div slot="header">
           <span>{{ videoInfo.video.title }}</span>
           <span style="float: right; padding: 3px 0; opacity: 0.5;">{{
-              videoInfo.video.status === 0 ? '待上映' : videoInfo.video.status === 1 ? '连载中' : '已完结'
+              videoInfo.video.type === 0 ? '待上映' : videoInfo.video.type === 1 ? '连载中' : '已完结'
             }}</span>
         </div>
         <div class="episodeMiddleWare"></div>
