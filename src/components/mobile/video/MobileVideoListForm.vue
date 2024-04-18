@@ -10,13 +10,13 @@
       </div>
       <div class="video-card-wrapper">
         <el-card v-for="(item, i) in videoPage.list" :key="i" class="videoCard" :body-style="{ padding: '0px' }">
-          <img @click="videoCardOnClick(item.videoEpisodes[0].id)"
-               :src="item.video.titleCoverUrl ? item.video.titleCoverUrl : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'"
+          <img @click="videoCardOnClick(item.firstVideoEpisodeId)"
+               :src="item.titleCoverUrl ? item.titleCoverUrl : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'"
                class="image"/>
           <div style="padding: 2px;">
-            <span>{{ truncateContent(item.video.title, 10) }}</span>
+            <span>{{ truncateContent(item.title, 10) }}</span>
             <span style="font-size: 11px; opacity: 0.7; position: relative; float: right;">最新：第{{
-                item.videoEpisodes[item.videoEpisodes.length - 1].episode
+                item.maxVideoEpisode
               }}集</span>
           </div>
         </el-card>
@@ -27,7 +27,7 @@
 
 <script>
 import backendUrls from '@/config/globalConfig'
-import {videoPage} from '@/api/video/video'
+import {videoPage, newVideoList} from '@/api/video/video'
 
 export default {
   props: {
@@ -56,14 +56,14 @@ export default {
   },
   methods: {
     getPage(data) {
-      videoPage(data).then((response) => {
+      newVideoList(data).then((response) => {
         const data = response.data;
         this.videoPage = data;
         console.log('data: ' + data);
       })
     },
-    videoCardOnClick(videoEpisodeId) {
-      this.$router.push({path: `/video/${videoEpisodeId}`});
+    videoCardOnClick(videoId) {
+      this.$router.push({path: `/video/play/${videoId}`});
     },
     truncateContent(content, max) {
       // 如果内容长度大于 max，则截取前 max 个字符并加上省略号

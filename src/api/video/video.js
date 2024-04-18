@@ -8,3 +8,11 @@ export function videoPage(data) {
 	  data: data
 	})
 }
+
+export function newVideoList(data) {
+	return request({
+	  url: backendUrls.url + '/video/newVideoList',
+	  method: 'post',
+	  data: data
+	})
+}

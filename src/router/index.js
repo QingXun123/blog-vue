@@ -36,7 +36,12 @@ const routes = [
     component: () => import('../views/ChatView.vue')
   },
   {
-    path: '/video/:videoEpisodeId',
+    path: '/video/:videoId',
+    name: 'video',
+    component: () => import('../views/VideoView.vue')
+  },
+  {
+    path: '/video/play/:videoEpisodeId',
     name: 'video',
     component: () => import('../views/VideoView.vue')
   }
