@@ -80,6 +80,7 @@ export default {
 
 <style scoped>
 #videoList {
+  margin-top: 5px;
   display: flex;
   justify-content: center; /* 水平居中 */
 }

@@ -74,7 +74,7 @@ export default {
 
 <style scoped>
 #videoList {
-
+  margin-top: 5px;
 }
 
 .videoListCard {
