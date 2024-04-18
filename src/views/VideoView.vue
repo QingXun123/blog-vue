@@ -44,13 +44,14 @@
 	import VideoForm from '../components/pc/video/VideoForm.vue'
 	import VideoEpisodeForm from '../components/pc/video/VideoEpisodeForm.vue'
   import VideoListForm from "@/components/pc/video/VideoListForm.vue";
-	
+
 	export default {
 	  name: 'home',
 	  components: {
       VideoListForm,
 		  VideoForm,
 		  VideoEpisodeForm,
+      MobileVideoListForm,
 	  },
 	  data() {
 	  	return {

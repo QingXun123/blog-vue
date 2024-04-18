@@ -12,6 +12,7 @@
                 <el-container>
                   <el-main style="padding: 0px 0px !important;">
                     <MobileBanner></MobileBanner>
+                    <MobileVideoListForm width="100%"></MobileVideoListForm>
                     <MobileDetails></MobileDetails>
                     <MobileEssayList></MobileEssayList>
                   </el-main>
@@ -67,10 +68,12 @@ import VideoListForm from '../components/pc/video/VideoListForm.vue'
 import MobileBanner from '../components/mobile/home/MobileBanner.vue'
 import MobileDetails from '../components/mobile/home/MobileDetails.vue'
 import MobileEssayList from '../components/mobile/home/MobileEssayList.vue'
+import MobileVideoListForm from "../components/mobile/video/MobileVideoListForm.vue"
 
 export default {
   name: 'home',
   components: {
+    MobileVideoListForm,
     BlogBanner,
     BlogDetails,
     BlogEssayList,

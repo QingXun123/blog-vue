@@ -73,7 +73,7 @@ import backendUrls from '@/config/globalConfig';
 
 <style scoped>
 	#MobileDetails {
-		margin-top: 20px;
+		margin-top: 10px;
 		border-radius: 5px;
 		position: relative;
 		line-height: 25px;

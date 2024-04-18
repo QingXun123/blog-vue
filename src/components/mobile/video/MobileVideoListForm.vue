@@ -1,11 +1,13 @@
 <template>
   <div id="videoList">
     <el-card class="videoListCard" :style="{ width: width }">
-      <span style="margin-top: -12px; margin-left: -10px; position: absolute; font-size: 15px; color: #FC8BBB;"
-            type="text">{{ title }}</span>
-      <el-button style="float: right; top: -15px; left: 5px; position: relative; padding: 3px 0; font-size: 15px;"
-                 type="text" disabled>更多
-      </el-button>
+      <div>
+        <span style="margin-top: -12px; margin-left: 10px; position: absolute; font-size: 15px; color: #FC8BBB;"
+              type="text">{{ title }}</span>
+        <el-button style="float: right; top: -15px; left: -5px; position: relative; padding: 3px 0; font-size: 15px;"
+                   type="text" disabled>更多
+        </el-button>
+      </div>
       <div class="video-card-wrapper">
         <el-card v-for="(item, i) in videoPage.list" :key="i" class="videoCard" :body-style="{ padding: '0px' }">
           <img @click="videoCardOnClick(item.videoEpisodes[0].id)"
@@ -54,6 +56,9 @@ export default {
       videoPage(data).then((response) => {
         const data = response.data;
         this.videoPage = data;
+        console.log('data: ' + data);
+        this.videoPage.list[1] = this.videoPage.list[0];
+        this.videoPage.list[2] = this.videoPage.list[0];
       })
     },
     videoCardOnClick(videoEpisodeId) {
@@ -80,20 +85,23 @@ export default {
 .videoListCard {
   margin-top: 10px;
   width: 800px;
-  height: 260px;
+  height: 250px;
+  display: flex;
+  justify-content: center; /* 水平居中 */
 }
 
 .video-card-wrapper {
+  width: 100vw;
+  left: calc((100vw - 122px*3) / 4);
   position: relative;
-  top: 25px;
   display: flex; /* 使用 Flexbox 布局 */
   flex-wrap: nowrap; /* 防止换行 */
-  gap: 10px; /* 卡片之间的间距 */
+  gap: calc((100vw - 122px*3) / 4);
 }
 
 .image {
-  width: 136px;
-  height: 189px !important;
+  width: 122px;
+  height: 174px;
   display: block;
   cursor: pointer;
 }
@@ -104,9 +112,8 @@ export default {
   border: none;
   font-size: 12px;
   position: relative;
-  top: -15px;
-  left: -10px;
-  width: 136px;
-  height: 220px;
+  top: -10px;
+  width: 122px;
+  height: 210px;
 }
 </style>
