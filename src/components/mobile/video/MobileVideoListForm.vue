@@ -27,7 +27,7 @@
 
 <script>
 import backendUrls from '@/config/globalConfig'
-import {videoPage} from '@/api/video/video'
+import {videoPage, newVideoList} from '@/api/video/video'
 
 export default {
   props: {
