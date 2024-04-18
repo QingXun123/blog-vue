@@ -1,22 +1,20 @@
 <template>
   <div id="VideoForm">
-    <div class="video-container">
-      <vue-dplayer id="dplayer" ref="dplayerRef" class="dplayer" :options="options"></vue-dplayer>
-      <el-card class="episodeList" v-loading="episodeListLoading">
-        <div slot="header">
-          <span>{{ videoInfo.video.title }}</span>
-          <span style="float: right; padding: 3px 0; opacity: 0.5;">{{
-              videoInfo.video.status === 0 ? '待上映' : videoInfo.video.status === 1 ? '连载中' : '已完结'
-            }}</span>
-        </div>
-        <div class="episodeMiddleWare"></div>
-        <div class="episodeButton">
-          <el-button :autofocus="item.id === videoEpisode.id" @click="eposodeOnClick(item.id)"
-                     v-for="(item, i) in videoInfo.videoEpisodes" :key="i" class="row-button"><span
-              style="top: -5px; position: relative;">{{ item.episode }}</span></el-button>
-        </div>
-      </el-card>
-    </div>
+    <vue-dplayer id="dplayer" ref="dplayerRef" class="dplayer" :options="options"></vue-dplayer>
+    <el-card class="episodeList" v-loading="episodeListLoading">
+      <div slot="header">
+        <span>{{ videoInfo.video.title }}</span>
+        <span style="float: right; padding: 3px 0; opacity: 0.5;">{{
+            videoInfo.video.status === 0 ? '待上映' : videoInfo.video.status === 1 ? '连载中' : '已完结'
+          }}</span>
+      </div>
+      <div class="episodeMiddleWare"></div>
+      <div class="episodeButton">
+        <el-button :autofocus="item.id === videoEpisode.id" @click="eposodeOnClick(item.id)"
+                   v-for="(item, i) in videoInfo.videoEpisodes" :key="i" class="row-button"><span
+            style="top: -5px; position: relative;">{{ item.episode }}</span></el-button>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -201,23 +199,18 @@ export default {
 #VideoForm {
   min-height: 200px;
   display: flex;
-  justify-content: center; /* 水平居中 */
-}
-
-.video-container {
-  position: relative;
-  display: flex;
+  flex-direction: column; /* 垂直排列 */
   align-items: center; /* 垂直居中 */
 }
 
 .dplayer {
-  width: 960px;
-  height: 520px;
+  width: 100vw;
+  height: 300px;
 }
 
 .episodeList {
-  height: 100%;
-  width: 300px;
+  width: 99vw;
+  height: 200px;
 }
 
 .episodeMiddleWare {

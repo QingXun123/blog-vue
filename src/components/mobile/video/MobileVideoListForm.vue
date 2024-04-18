@@ -1,6 +1,6 @@
 <template>
   <div id="videoList">
-    <el-card class="videoListCard" :style="{ width: width }">
+    <el-card class="videoListCard" :style="{ width: width }, { marginTop: marginTop }">
       <div>
         <span style="margin-top: -12px; margin-left: 10px; position: absolute; font-size: 15px; color: #FC8BBB;"
               type="text">{{ title }}</span>
@@ -32,6 +32,9 @@ import {videoPage} from '@/api/video/video'
 export default {
   props: {
     width: {
+      type: String,
+    },
+    marginTop: {
       type: String,
     },
     title: {
@@ -79,12 +82,12 @@ export default {
 
 <style scoped>
 #videoList {
-
+  display: flex;
+  justify-content: center; /* 水平居中 */
 }
 
 .videoListCard {
-  margin-top: 10px;
-  width: 800px;
+  width: 99vw !important;
   height: 250px;
   display: flex;
   justify-content: center; /* 水平居中 */
