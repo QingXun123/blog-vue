@@ -27,6 +27,7 @@
 						</el-header>
 						<div style="margin: auto; min-width: 1200px;">
 							<VideoForm></VideoForm>
+              <VideoListForm width="100%"></VideoListForm>
 							<!-- <VideoEpisodeForm></VideoEpisodeForm> -->
 						</div>
 						<el-footer id="footer">
@@ -42,10 +43,12 @@
 <script>
 	import VideoForm from '../components/pc/video/VideoForm.vue'
 	import VideoEpisodeForm from '../components/pc/video/VideoEpisodeForm.vue'
+  import VideoListForm from "@/components/pc/video/VideoListForm.vue";
 	
 	export default {
 	  name: 'home',
 	  components: {
+      VideoListForm,
 		  VideoForm,
 		  VideoEpisodeForm,
 	  },
@@ -75,7 +78,7 @@
 <style scoped>
 	
 	#video {
-		
+    background-color: rgb(36 36 36 / 1);
 	}
 	
 	/* 默认样式 */
