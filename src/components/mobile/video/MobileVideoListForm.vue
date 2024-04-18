@@ -60,8 +60,6 @@ export default {
         const data = response.data;
         this.videoPage = data;
         console.log('data: ' + data);
-        this.videoPage.list[1] = this.videoPage.list[0];
-        this.videoPage.list[2] = this.videoPage.list[0];
       })
     },
     videoCardOnClick(videoEpisodeId) {
