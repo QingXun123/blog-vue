@@ -1,6 +1,6 @@
 <template>
   <div id="videoList">
-    <el-card class="videoListCard" :style="{ width: width }, { marginTop: marginTop }">
+    <el-card class="videoListCard" :style="{ width: width }, { marginTop: marginTop }" v-if="videoPage.list.length > 0">
       <div>
         <span style="margin-top: -12px; margin-left: 10px; position: absolute; font-size: 15px; color: #FC8BBB;"
               type="text">{{ title }}</span>
