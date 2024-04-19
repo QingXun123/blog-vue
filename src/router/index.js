@@ -37,8 +37,8 @@ const routes = [
   },
   {
     path: '/video/:videoId',
-    name: 'video',
-    component: () => import('../views/VideoView.vue')
+    name: 'videoInfo',
+    component: () => import('../views/VideoInfoView.vue')
   },
   {
     path: '/video/play/:videoEpisodeId',

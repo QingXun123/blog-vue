@@ -8,7 +8,7 @@
       </el-button>
       <div class="video-card-wrapper">
         <el-card v-for="(item, i) in videoPage.list" :key="i" class="videoCard" :body-style="{ padding: '0px' }">
-          <img @click="videoCardOnClick(item.firstVideoEpisodeId)"
+          <img @click="videoCardOnClick(item.id)"
                :src="item.titleCoverUrl ? item.titleCoverUrl : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'"
                class="image"/>
           <div style="padding: 2px;">
@@ -57,7 +57,7 @@ export default {
       })
     },
     videoCardOnClick(videoId) {
-      this.$router.push({path: `/video/play/${videoId}`});
+      this.$router.push({path: `/video/${videoId}`});
     },
     truncateContent(content, max) {
       // 如果内容长度大于 max，则截取前 max 个字符并加上省略号

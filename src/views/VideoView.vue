@@ -49,7 +49,7 @@
   import MobileVideoListForm from "@/components/mobile/video/MobileVideoListForm.vue";
 
 	export default {
-	  name: 'home',
+	  name: 'video',
 	  components: {
       VideoListForm,
 		  VideoForm,
