@@ -8,27 +8,37 @@
         <div class="videoTextInfo">
           <h1 class="titleClass">{{ video.video.title }}</h1>
           <div style="width: 100%; display: block;">
-            <span style="margin: 5px 10px 5px 10px; float: left; width: 50%">作者: {{
+            <span style="margin: 5px 0px 5px 10px; float: left; width: 30%">作者: {{
                 video.video.author ? video.video.author : '暂无'
               }}</span>
-            <span style="margin: 5px 10px 5px 10px; float: right; padding-right: 100px; width: auto;">地区: {{
+            <span style="margin: 5px 0px 5px 0px; float: right; padding-right: 60px; width: auto;">地区: {{
                 video.video.country ? video.video.country : '暂无'
               }}</span>
           </div>
           <div style="width: 100%; display: block;">
-            <span style="margin: 5px 10px 5px 10px; float: left; width: 30%">更新时间: {{
+            <span style="margin: 5px 0px 5px 10px; float: left; width: 40%">更新时间: {{
                 video.video.updateDay ? updateDays[video.video.updateDay] : '暂无'
               }}</span>
-            <span style="margin: 5px 10px 5px 10px; float: right; padding-right: 100px; width: auto;">发布状态: {{
+            <span style="margin: 5px 0px 5px 10px; float: right; padding-right: 20px; width: auto;">发布状态: {{
                 video.video.status !== null ? status[video.video.status] : '暂无'
               }}</span>
           </div>
           <div style="width: 100%; display: block;">
-            <span style="margin: 5px 10px 5px 10px; float: left; width: 20%">最新集: 第{{
+            <span style="margin: 5px 10px 5px 10px; float: left; width: 50%">最新集: 第{{
                 video.videoEpisodes[video.videoEpisodes.length - 1].episode
               }}集</span>
           </div>
         </div>
+      </div>
+      <div class="handleIntroduction">
+        <el-tabs v-model="introductionName" type="card">
+          <el-tab-pane label="简介" name="1" style="font-size: 12px">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ video.video.introduction }}
+          </el-tab-pane>
+          <!--            <el-tab-pane label="线路二" name="2">线路二</el-tab-pane>-->
+          <!--            <el-tab-pane label="线路三" name="3">线路三</el-tab-pane>-->
+          <!--            <el-tab-pane label="线路四" name="4">线路四</el-tab-pane>-->
+        </el-tabs>
       </div>
       <div class="videoEpisodeInfo">
         <div class="handleEpisode">
@@ -43,35 +53,21 @@
             <!--            <el-tab-pane label="线路四" name="4">线路四</el-tab-pane>-->
           </el-tabs>
         </div>
-        <div class="handleIntroduction">
-          <el-tabs v-model="introductionName" type="card">
-            <el-tab-pane label="简介" name="1">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ video.video.introduction }}
-            </el-tab-pane>
-            <!--            <el-tab-pane label="线路二" name="2">线路二</el-tab-pane>-->
-            <!--            <el-tab-pane label="线路三" name="3">线路三</el-tab-pane>-->
-            <!--            <el-tab-pane label="线路四" name="4">线路四</el-tab-pane>-->
-          </el-tabs>
-        </div>
       </div>
-    </div>
-    <div class="videoHotListCard">
-      <span style="color: #FC8BBB; margin-top: 10px; margin-left: 10px">热门动漫</span>
-      <div class="videoHot" v-for="(item, i) in videoHotPage.list" :key="i">
-        <img
-            :src="item.titleCoverUrl ? item.titleCoverUrl : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'"
-            class="imageHot"/>
-        <div>
-          <h2 class="titleHot">{{ truncateContent(item.title, 12) }}</h2>
-          <span style="font-size: 12px; display: block; margin: 0px 0px 2px 5px; font-weight: 300;">状态: {{
-              status[item.status]
-            }}</span>
-          <span style="font-size: 12px; display: block; width: 100%; margin: 0px 0px 2px 5px; font-weight: 300;">最新集: 第{{
-              item.maxVideoEpisode
-            }}集</span>
-          <span style="font-size: 12px; display: block; width: 100%; margin: 0px 0px 2px 5px; opacity: 0.7;">简介: {{
-              truncateContent(item.introduction, 28)
-            }}</span>
+      <div class="videoHotListCard">
+        <span style="color: #FC8BBB; margin-top: 10px; margin-left: 10px">热门动漫</span>
+        <div class="video-card-wrapper">
+          <el-card v-for="(item, i) in videoHotPage.list" :key="i" class="videoCard" :body-style="{ padding: '0px' }">
+            <img @click="videoCardOnClick(item.firstVideoEpisodeId)"
+                 :src="item.titleCoverUrl ? item.titleCoverUrl : 'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png'"
+                 class="image"/>
+            <div style="padding: 2px;">
+              <span>{{ truncateContent(item.title, 10) }}</span>
+              <span style="font-size: 11px; opacity: 0.7; position: relative; float: right;">最新：第{{
+                  item.maxVideoEpisode
+                }}集</span>
+            </div>
+          </el-card>
         </div>
       </div>
     </div>
@@ -113,7 +109,7 @@ export default {
       });
       this.getHotList({
         pageNum: 1,
-        pageSize: 5,
+        pageSize: 6,
         title: '',
       });
     }
@@ -155,13 +151,12 @@ export default {
 }
 
 .image {
-  width: 198px;
-  height: 275px;
+  width: 120px;
+  height: 172px;
 }
 
 .videoInfoCard {
-  width: 645px;
-  max-height: 1200px;
+  width: 100%;
   //background-color: red;
 }
 
@@ -177,7 +172,7 @@ export default {
 }
 
 .titleClass {
-  width: 100%;
+  width: auto;
   font-size: 20px;
   font-weight: bold;
   unicode-bidi: isolate;
@@ -207,54 +202,50 @@ export default {
 .handleIntroduction {
   width: 100%;
   max-height: 1000px;
-  padding-bottom: 50px;
+  padding-bottom: 10px;
   //background-color: chartreuse;
 }
 
 .row-button {
   margin: 5px 5px 5px 5px;
-  width: calc(100% / 6 - 10px); /* 每行卡片的宽度 */
+  width: calc(100% / 4 - 10px); /* 每行卡片的宽度 */
   height: 30px;
 }
 
 .videoHotListCard {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 800px;
-  margin-left: 20px;
+  width: 100vw;
+  max-height: 500px;
+  padding-bottom: 10px;
   //background-color: blue;
 }
 
-.videoHot {
-  display: flex;
-  width: 100%;
-  height: 102px;
-  margin-top: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 1px solid #ccc; /* 上边框 */
-  //background-color: darkorange;
+.video-card-wrapper {
+  width: 97vw;
+  left: calc((100vw - 122px * 3) / 4);
+  position: relative;
+  display: flex; /* 使用 Flexbox 布局 */
+  gap: calc((100vw - 122px * 3) / 4);
+  flex-wrap: wrap;
 }
 
-.videoHot:first-of-type {
-  border-top: none;
+.image {
+  width: 122px;
+  height: 174px;
+  display: block;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.imageHot {
-  height: 100%;
-  width: auto;
-}
-
-.titleHot {
-  font-size: 15px;
-  font-weight: 600;
-  height: 20px;
-  width: 100%;
-  unicode-bidi: isolate;
-  display: block; /* 设置该标签占有所在位置的一行，其它标签只能换行 */
-  margin: 2px 0px 2px 5px;
-  //background-color: bisque;
+.videoCard {
+  box-shadow: none !important;
+  border-radius: 5px;
+  border: none;
+  font-size: 12px;
+  position: relative;
+  width: 122px;
+  height: 210px;
 }
 
 </style>

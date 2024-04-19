@@ -11,7 +11,7 @@
               <el-container>
                 <el-container>
                   <el-main style="padding: 0px 0px !important;">
-
+                    <MobileVideoInfoForm></MobileVideoInfoForm>
                   </el-main>
                 </el-container>
               </el-container>
@@ -41,11 +41,13 @@
 
 <script>
 import VideoInfoForm from "@/components/pc/video/VideoInfoForm.vue";
+import MobileVideoInfoForm from "@/components/mobile/video/MobileVideoInfoForm.vue";
 
 export default {
   name: 'videoInfo',
   components: {
     VideoInfoForm,
+    MobileVideoInfoForm,
   },
   data() {
     return {
