@@ -38,8 +38,8 @@
 </template>
 
 <script>
-	import axios from "axios";
-	import backendUrls from '@/config/globalConfig';
+import {getEssayListLikeSubject} from "@/api/essay/essay";
+
 	
 	export default {
 		data() {
@@ -53,7 +53,7 @@
 		},
 		methods: {
 			getEssayListLikeSubject: function(val) {
-				axios.post(backendUrls.url + "/essayInfo/getEssayListLikeSubject", {
+        getEssayListLikeSubject({
 					  "current": 1,
 					  "records": [
 					    val
@@ -61,7 +61,7 @@
 					  "size": 5,
 				})
 				.then((response) => {
-					this.essayPage = response.data.data;
+					this.essayPage = response.data;
 					const records = this.essayPage.records;
 					records.forEach((item) => {
 						const date = new Date(item.releaseTime);
@@ -104,7 +104,7 @@
 	
 	.el-card {
 		max-width: 800px;
-		width: 100vw;
+		width: 99vw;
 		margin-top: 10px;
 	}
 	

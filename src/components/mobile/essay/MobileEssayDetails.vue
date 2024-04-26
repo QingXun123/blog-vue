@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css'; // 选择一个适合你项目的样式
 import backendUrls from '@/config/globalConfig';
-	
+import {info, readEssay} from "@/api/essay/essay";
+
 	export default {
 		data() {
 			return {
@@ -35,16 +35,16 @@ import backendUrls from '@/config/globalConfig';
 		},
 		methods: {
 			info: function() {
-				axios.get(backendUrls.url + "/essayInfo/info?essayId=" + this.$route.params.essayId)
+				info(this.$route.params.essayId)
 				.then((response) => {
-					this.essay = response.data.data;
+					this.essay = response.data;
 					document.title = this.essay.subject + backendUrls.urlName;
 				}).catch((err) => {
 					console.error(err);
 				})
 			},
 			readEssay: function(val) {
-				axios.get(backendUrls.url + "/essayInfo/readEssay?essayId=" + val)
+				readEssay(val)
 				.then((response) => {
 					console.log(response);
 				}).catch((err) => {

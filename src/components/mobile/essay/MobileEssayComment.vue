@@ -96,8 +96,7 @@
 		   title="提示"
 		   :visible.sync="dialogVisible"
 		   width="90%"
-		   top="25vh"
-		   :before-close="handleClose">
+		   top="25vh">
 		   <span>此操作将永久删除该评论, 是否继续?</span>
 		   <span slot="footer" class="dialog-footer">
 		     <el-button @click="dialogVisible = false">取 消</el-button>
@@ -108,8 +107,7 @@
 		  title="回复评论"
 		  :visible.sync="drawer"
 		  direction="btt"
-		  size="30%"
-		  :before-close="handleClose">
+		  size="30%">
 		  <div class="center-div">
 			  <el-card class="box-card reply-comment-window">
 			  	<el-input
@@ -137,8 +135,12 @@
 </template>
 
 <script>
-	import axios from 'axios'; // 导入axios库
-	import backendUrls from '@/config/globalConfig';
+import {
+  addComment, deleteComment,
+  getCommentPage, getNextCommentPage,
+  getCommentTotalByReplyCommentId,
+  getDoubleNextCommentDoubleTotal, like
+} from "@/api/essay/essay";
 	
 	export default {
 		props: ['user'],
@@ -177,7 +179,7 @@
 				return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
 			},
 			deleteComment: function() {
-				axios.post(backendUrls.url + "/essayComment/deleteComment", {
+				deleteComment({
 					"commentId": this.tempDeleteCommentId,
 					"userId": this.user.userId,
 				}, {
@@ -185,11 +187,11 @@
 				}).then((response) => {
 					if (response.data.code !== 0) {
 						this.$message({
-							message: response.data.data,
+							message: response.data,
 							type: 'error'
 						});
 					}
-					if (response.data.data) {
+					if (response.data) {
 						this.$message({
 							'type': 'success',
 							'message': '删除成功'
@@ -216,7 +218,7 @@
 				setTimeout(() => {
 					this.loading = false;
 				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
-				axios.post(backendUrls.url + "/essayComment/addComment", {
+				addComment({
 					"essayId": this.$route.params.essayId,
 					"content": this.content,
 					"userId": this.user.userId,
@@ -232,7 +234,7 @@
 						  type: 'error'
 						});
 					} else {
-						// const comment = response.data.data;
+						// const comment = response.data;
 						// localStorage.setItem('userData', JSON.stringify(comment));
 						this.content = '';
 						// this.commentList.unshift({
@@ -263,7 +265,7 @@
 				setTimeout(() => {
 					this.loading = false;
 				}, 1500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
-				axios.post(backendUrls.url + "/essayComment/addComment", {
+				addComment({
 					"essayId": this.$route.params.essayId,
 					"content": this.nextContent,
 					"userId": this.user.userId,
@@ -281,7 +283,7 @@
 						  type: 'error'
 						});
 					} else {
-						// const comment = response.data.data;
+						// const comment = response.data;
 						// localStorage.setItem('userData', JSON.stringify(comment));
 						this.nextContent = '';
 						this.page(1);
@@ -299,7 +301,7 @@
 			},
 			page: function(val) {
 				console.log("nnn");
-				axios.post(backendUrls.url + "/essayComment/getCommentPage", {
+        getCommentPage({
 					"orders": [
 						{
 						  "asc": false,
@@ -314,13 +316,13 @@
 					]
 				}).then(
 				(response) => {
-					this.commentPage = response.data.data;
+					this.commentPage = response.data;
 					console.log(this.commentPage);
 					const records = this.commentPage.records;
 					this.commentList = records;
 					for (let i = 0; i < this.commentList.length; i++) {
 					  let commentId = this.commentList[i].commentId;
-					  axios.post(backendUrls.url + "/essayComment/getNextCommentPage", {
+            getNextCommentPage({
 						"orders": [
 							{
 							  "asc": true,
@@ -335,21 +337,21 @@
 						]
 					  }).then(
 					  (response) => {
-						// this.nextCommentPage[commentId] = response.data.data;
-						this.$set(this.nextCommentPage, commentId, response.data.data);
+						// this.nextCommentPage[commentId] = response.data;
+						this.$set(this.nextCommentPage, commentId, response.data);
 						const records = this.nextCommentPage[commentId].records;
 						records.forEach((item) => {
 							// 获取回复的回复总数
-							axios.get(backendUrls.url + "/essayComment/getCommentTotalByReplyCommentId?commentId=" + item.commentId).then(
+              getCommentTotalByReplyCommentId(item.commentId).then(
 							(response) => {
 								if (response.data.code !== 0) {
 									this.$message({
-										message: response.data.data,
+										message: response.data,
 										type: 'error'
 									});
 								}
-								// item.total = response.data.data;
-								this.$set(item, 'total', response.data.data);
+								// item.total = response.data;
+								this.$set(item, 'total', response.data);
 							}).catch((err) => {
 								console.error(err);
 							})
@@ -365,7 +367,7 @@
 				})
 			},
 			nextPage: function(val, commentId) {
-				axios.post(backendUrls.url + "/essayComment/getNextCommentPage", {
+        getNextCommentPage({
 					"orders": [
 					    {
 					      "asc": true,
@@ -380,22 +382,22 @@
 					]
 				}).then(
 				(response) => {
-					const temp = response.data.data;
+					const temp = response.data;
 					// this.nextCommentPage[temp.replySuperCommentId] = temp;
 					this.$set(this.nextCommentPage, temp.replySuperCommentId, temp);
 					console.log("test"+ temp[0]);
 					const records = this.nextCommentPage[temp.replySuperCommentId].records;
 					records.forEach((item) => {
 						// 获取回复的回复总数
-						axios.get(backendUrls.url + "/essayComment/getDoubleNextCommentDoubleTotal?commentId=" + item.commentId).then(
+            getDoubleNextCommentDoubleTotal(item.commentId).then(
 						(response) => {
 							if (response.data.code !== 0) {
 								this.$message({
-									message: response.data.data,
+									message: response.data,
 									type: 'error'
 								});
 							}
-							// item.total = response.data.data;
+							// item.total = response.data;
 							this.$set(item, 'total', 0);
 						}).catch((err) => {
 							console.error(err);
@@ -412,7 +414,7 @@
 					return;
 				}
 				if (!comment.likeId) {
-					axios.post(backendUrls.url + "/essayLike/like", {
+          like({
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}, {
@@ -429,11 +431,11 @@
 						console.log(error);
 						this.$message({
 							'type': 'error',
-							'message': response.data.data
+							'message': response.data
 						})
 					})
 				} else {
-					axios.post(backendUrls.url + "/essayLike/dislike", {
+          dislike({
 						'userId': this.user.userId,
 						'commentId': comment.commentId
 					}).then((response) => {
@@ -448,7 +450,7 @@
 						console.log(error);
 						this.$message({
 							'type': 'error',
-							'message': response.data.data
+							'message': response.data
 						})
 					})
 				}

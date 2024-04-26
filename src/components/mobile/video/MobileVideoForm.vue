@@ -22,7 +22,6 @@
 import {getDanmuList, addDanmu} from '@/api/video/videoDanmu'
 import {getVideoEpisodeById, getVideoById} from '@/api/video/videoEpisode'
 import WebSocketClient from 'websocket'
-import axios from 'axios'
 import backendUrls from '@/config/globalConfig'
 import VueDPlayer from 'vue-dplayer'
 

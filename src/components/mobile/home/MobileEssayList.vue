@@ -35,8 +35,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-import backendUrls from '@/config/globalConfig';
+import { getPage } from '@/api/essay/essay'
 
 	export default {
 		data() {
@@ -50,7 +49,7 @@ import backendUrls from '@/config/globalConfig';
 		},
 		methods: {
 			page: function(val) {
-				axios.post(backendUrls.url + "/essayInfo/page", {
+        getPage({
 					"orders": [
 					    {
 					      "asc": false,
@@ -61,7 +60,7 @@ import backendUrls from '@/config/globalConfig';
 					"size": 5
 				}).then(
 				(response) => {
-					this.essayPage = response.data.data;
+					this.essayPage = response.data;
 					const records = this.essayPage.records;
 					records.forEach((item) => {
 						const date = new Date(item.releaseTime);

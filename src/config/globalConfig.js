@@ -11,6 +11,12 @@ const backendUrls = {
   baseUrl: 'api.blog.qxbase.com',
   urlName: '-qxBase博客'
 };
+// const backendUrls = {
+//   url: 'http://localhost:8080',
+//   wsUrl: 'ws://localhost:8080',
+//   baseUrl: 'localhost:8080',
+//   urlName: '-qxBase博客'
+// };
 
 // 导出后端访问地址
 export default backendUrls;

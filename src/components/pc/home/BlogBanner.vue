@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import axios from 'axios'; // 导入axios库
-import backendUrls from '@/config/globalConfig';
+import { getBanner } from '@/api/essay/essay'
 
 export default {
   data() {
@@ -25,10 +24,9 @@ export default {
   },
   methods: {
     getBanner: function () {
-      axios.get(backendUrls.url + "/essayBanner/getBanner").then
-      ((response) => {
+      getBanner().then((response) => {
         // console.log(this.imgArr);
-        const records = response.data.data.records;
+        const records = response.data.records;
         this.imgArr = records.map((record) => record.img);
       }).catch((err) => {
         console.error(err);

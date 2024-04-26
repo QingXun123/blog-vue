@@ -37,9 +37,9 @@
 </template>
 
 <script>
-	import axios from 'axios'; // 导入axios库
 	import backendUrls from '@/config/globalConfig';
-	
+  import { login, register } from "@/api/user/user";
+
 	export default {
 		data() {
 			return {
@@ -50,7 +50,7 @@
 				loading: false,
 				user: '',
 				authCode: '',
-				identifyCodeImgUrl: 'https://api.blog.qxbase.com/user/identifyImage',
+				identifyCodeImgUrl: backendUrls.url + '/user/identifyImage',
 				codeLoading: false,
 			}
 		},
@@ -65,7 +65,7 @@
 				}, 500); // 2000 毫秒即 2 秒，你可以根据需要调整时间
 			},
 			login: function() {
-				axios.post(backendUrls.url + "/user/doLogin", {
+				login({
 					"email": this.email,
 					"password": this.password,
 				}, {
@@ -84,7 +84,7 @@
 						
 						// 这里你可以对 setCookieHeader 进行处理，提取你需要的信息
 						console.log(setCookieHeader);
-						this.user = response.data.data;
+						this.user = response.data;
 						this.$message({
 						  message: '登录成功',
 						  type: 'success'
@@ -107,7 +107,7 @@
 				})
 			},
 			register: function() {
-				axios.post(backendUrls.url + "/user/register", {
+				register({
 					"userName": this.username,
 					"email": this.email,
 					"password": this.password,
@@ -116,7 +116,7 @@
 				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
-					if (response.data.data) {
+					if (response.data) {
 						this.changeContent('login');
 						this.$message({
 						  message: '注册成功',
