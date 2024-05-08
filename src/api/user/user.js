@@ -3,7 +3,7 @@ import backendUrls from '@/config/globalConfig';
 
 export function login(data) {
     return request({
-        url: backendUrls.url + '/user/doLogin',
+        url: backendUrls.url + '/user/user/doLogin',
         method: 'post',
         data: data
     })
@@ -11,7 +11,7 @@ export function login(data) {
 
 export function register(data) {
     return request({
-        url: backendUrls.url + '/user/register',
+        url: backendUrls.url + '/user/user/register',
         method: 'post',
         data: data
     })
@@ -19,14 +19,14 @@ export function register(data) {
 
 export function userInfo() {
     return request({
-        url: backendUrls.url + '/user/info',
+        url: backendUrls.url + '/user/user/info',
         method: 'get'
     })
 }
 
 export function userLogout() {
     return request({
-        url: backendUrls.url + '/user/logout',
+        url: backendUrls.url + '/user/user/logout',
         method: 'get'
     })
 }

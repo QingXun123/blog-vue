@@ -3,21 +3,21 @@ import backendUrls from '@/config/globalConfig';
 
 export function getBanner() {
     return request({
-        url: backendUrls.url + '/essayBanner/getBanner',
+        url: backendUrls.url + '/essay/essayBanner/getBanner',
         method: 'get'
     })
 }
 
 export function getFeaturedEssayList() {
     return request({
-        url: backendUrls.url + '/essayInfo/getTopEssayList',
+        url: backendUrls.url + '/essay/essayInfo/getTopEssayList',
         method: 'get'
     })
 }
 
 export function getPage(data) {
     return request({
-        url: backendUrls.url + '/essayInfo/page',
+        url: backendUrls.url + '/essay/essayInfo/page',
         method: 'post',
         data: data
     })
@@ -25,7 +25,7 @@ export function getPage(data) {
 
 export function getEssayListLikeSubject(data) {
     return request({
-        url: backendUrls.url + '/essayInfo/getEssayListLikeSubject',
+        url: backendUrls.url + '/essay/essayInfo/getEssayListLikeSubject',
         method: 'post',
         data: data
     })
@@ -33,7 +33,7 @@ export function getEssayListLikeSubject(data) {
 
 export function addComment(data) {
     return request({
-        url: backendUrls.url + '/essayComment/addComment',
+        url: backendUrls.url + '/essay/essayComment/addComment',
         method: 'post',
         data: data
     })
@@ -41,7 +41,7 @@ export function addComment(data) {
 
 export function getCommentPage(data) {
     return request({
-        url: backendUrls.url + '/essayComment/getCommentPage',
+        url: backendUrls.url + '/essay/essayComment/getCommentPage',
         method: 'post',
         data: data
     })
@@ -49,7 +49,7 @@ export function getCommentPage(data) {
 
 export function getNextCommentPage(data) {
     return request({
-        url: backendUrls.url + '/essayComment/getNextCommentPage',
+        url: backendUrls.url + '/essay/essayComment/getNextCommentPage',
         method: 'post',
         data: data
     })
@@ -57,21 +57,21 @@ export function getNextCommentPage(data) {
 
 export function getCommentTotalByReplyCommentId(commentId) {
     return request({
-        url: backendUrls.url + '/essayComment/getNextCommentPage?commentId=' + commentId,
+        url: backendUrls.url + '/essay/essayComment/getNextCommentPage?commentId=' + commentId,
         method: 'get',
     })
 }
 
 export function getDoubleNextCommentDoubleTotal(commentId) {
     return request({
-        url: backendUrls.url + '/essayComment/getDoubleNextCommentDoubleTotal?commentId=' + commentId,
+        url: backendUrls.url + '/essay/essayComment/getDoubleNextCommentDoubleTotal?commentId=' + commentId,
         method: 'get',
     })
 }
 
 export function like(data) {
     return request({
-        url: backendUrls.url + '/essayLike/like',
+        url: backendUrls.url + '/essay/essayLike/like',
         method: 'post',
         data: data
     })
@@ -79,7 +79,7 @@ export function like(data) {
 
 export function dislike(data) {
     return request({
-        url: backendUrls.url + '/essayLike/dislike',
+        url: backendUrls.url + '/essay/essayLike/dislike',
         method: 'post',
         data: data
     })
@@ -87,7 +87,7 @@ export function dislike(data) {
 
 export function deleteComment(data) {
     return request({
-        url: backendUrls.url + '/essayComment/deleteComment',
+        url: backendUrls.url + '/essay/essayComment/deleteComment',
         method: 'post',
         data: data
     })
@@ -95,21 +95,21 @@ export function deleteComment(data) {
 
 export function info(essayId) {
     return request({
-        url: backendUrls.url + '/essayInfo/info?essayId=' + essayId,
+        url: backendUrls.url + '/essay/essayInfo/info?essayId=' + essayId,
         method: 'get'
     })
 }
 
 export function readEssay(essayId) {
     return request({
-        url: backendUrls.url + '/essayInfo/readEssay?essayId=' + essayId,
+        url: backendUrls.url + '/essay/essayInfo/readEssay?essayId=' + essayId,
         method: 'get'
     })
 }
 
 export function getNewEssayList(essayId) {
     return request({
-        url: backendUrls.url + '/essayInfo/getNewEssayList',
+        url: backendUrls.url + '/essay/essayInfo/getNewEssayList',
         method: 'get'
     })
 }
