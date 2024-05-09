@@ -57,7 +57,8 @@ export default {
   methods: {
     getPage(data) {
       newVideoList(data).then((response) => {
-        const data = response.data;
+        const res = response.data;
+        const data = res.data;
         this.videoPage = data;
         console.log('data: ' + data);
       })

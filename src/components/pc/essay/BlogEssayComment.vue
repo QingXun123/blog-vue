@@ -137,7 +137,7 @@ import {
   addComment, deleteComment,
   getCommentPage, getNextCommentPage,
   getCommentTotalByReplyCommentId,
-  getDoubleNextCommentDoubleTotal, like
+  getDoubleNextCommentDoubleTotal, like, dislike
 } from "@/api/essay/essay";
 
 export default {
@@ -187,16 +187,15 @@ export default {
         "content": this.content,
         "userId": this.user.userId,
         "type": this.checked ? 1 : 0,
-      }, {
-        withCredentials: true, // 设置为 true，携带凭证
       }).then(
           (response) => {
-            if (response.data.code !== 0) {
-              console.log(response.data);
-              this.$message({
-                message: response.data.message,
-                type: 'error'
-              });
+            const res = response.data;
+            if (res.code !== 0) {
+              console.log(res.data);
+              // this.$message({
+              //   message: res.msg,
+              //   type: 'error'
+              // });
             } else {
               // const comment = response.data;
               // localStorage.setItem('userData', JSON.stringify(comment));
@@ -236,14 +235,13 @@ export default {
         "type": this.nextChecked ? 1 : 0,
         'replySuperCommentId': this.tempCommentId,
         'replyCommentId': this.tempNextCommentId,
-      }, {
-        withCredentials: true, // 设置为 true，携带凭证
       }).then(
           (response) => {
-            if (response.data.code !== 0) {
-              console.log(response.data);
+            const res = response.data;
+            if (res.code !== 0) {
+              // console.log(response.data);
               this.$message({
-                message: response.data.message,
+                message: res.msg,
                 type: 'error'
               });
             } else {
@@ -280,7 +278,8 @@ export default {
         ]
       }).then(
           (response) => {
-            this.commentPage = response.data;
+            const res = response.data;
+            this.commentPage = res.data;
             console.log(this.commentPage);
             const records = this.commentPage.records;
             this.commentList = records;
@@ -381,8 +380,6 @@ export default {
         like({
           'userId': this.user.userId,
           'commentId': comment.commentId
-        }, {
-          withCredentials: true, // 设置为 true，携带凭证
         }).then((response) => {
           // console.log(response.data);
           this.$message({
@@ -428,8 +425,6 @@ export default {
         deleteComment({
           "commentId": commentId,
           "userId": this.user.userId,
-        }, {
-          withCredentials: true, // 设置为 true，携带凭证
         }).then((response) => {
           if (response.data.code !== 0) {
             this.$message({

@@ -80,11 +80,12 @@ export default {
           },
           read: (endpoint, callback) => {
             getDanmuList(this.videoEpisode.id).then((response) => {
-              if (!response || response.code !== 0) {
-                endpoint.error && endpoint.error(response && response.msg);
+              const res = response.data;
+              if (!res || res.code !== 0) {
+                endpoint.error && endpoint.error(res && res.msg);
                 return;
               }
-              callback('', response.data);
+              callback('', res.data);
               // endpoint.success(response.data);
             }).catch((e) => {
               console.error(e);
@@ -169,13 +170,13 @@ export default {
     },
     switchVideo(videoEpisodeId) {
       getVideoEpisodeById(videoEpisodeId).then((response) => {
-        const data = response.data;
-        this.videoEpisode = data;
+        const res = response.data;
+        this.videoEpisode = res.data;
         this.$refs['dplayerRef'].dp.switchVideo(
             {
               type: 'auto',
-              url: data.videoUrl,
-              pic: data.videoCoverUrl,
+              url: res.data.videoUrl,
+              pic: res.data.videoCoverUrl,
             }, {}
         );
       })
@@ -183,9 +184,9 @@ export default {
     getEpisodeList(videoId) {
       this.episodeListLoading = true;
       getVideoById(videoId).then((response) => {
+        const res = response.data;
         this.episodeListLoading = false;
-        const data = response.data;
-        this.videoInfo = data;
+        this.videoInfo = res.data;
       })
     },
     eposodeOnClick(id) {

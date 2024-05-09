@@ -52,8 +52,8 @@ export default {
   methods: {
     getPage(data) {
       newVideoList(data).then((response) => {
-        const data = response.data;
-        this.videoPage = data;
+        const res = response.data;
+        this.videoPage = res.data;
       })
     },
     videoCardOnClick(videoId) {

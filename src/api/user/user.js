@@ -5,7 +5,10 @@ export function login(data) {
     return request({
         url: backendUrls.url + '/user/doLogin',
         method: 'post',
-        data: data
+        data: data,
+        headers: {
+            isSaToken: true
+        }
     })
 }
 
@@ -13,20 +16,29 @@ export function register(data) {
     return request({
         url: backendUrls.url + '/user/register',
         method: 'post',
-        data: data
+        data: data,
+        headers: {
+            isSaToken: true
+        }
     })
 }
 
 export function userInfo() {
     return request({
         url: backendUrls.url + '/user/info',
-        method: 'get'
+        method: 'get',
+        headers: {
+            isSaToken: true
+        }
     })
 }
 
 export function userLogout() {
     return request({
         url: backendUrls.url + '/user/logout',
-        method: 'get'
+        method: 'get',
+        headers: {
+            isSaToken: true
+        }
     })
 }
