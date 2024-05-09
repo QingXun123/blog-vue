@@ -95,6 +95,9 @@ service.interceptors.response.use(res => {
     }
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
     } else if (code === 500) {
+      if (msg === '未能读取到有效 token') {
+        return res.data;
+      }
       Message({ message: msg, type: 'error' })
       return Promise.reject(new Error(msg))
     } else if (code === 601) {
