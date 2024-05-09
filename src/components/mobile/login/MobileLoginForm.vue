@@ -68,23 +68,22 @@
 				login({
 					"email": this.email,
 					"password": this.password,
-				}, {
-				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
-					if (response.data.code !== 200) {
+          const res = response.data;
+					if (res.code !== 200) {
 						this.$message({
-						  message: response.data.message,
+						  message: res.msg,
 						  type: 'error'
 						});
 					} else {
-						console.log(response);
+						// console.log(response);
 						// 获取响应中的 Set-Cookie 头部信息
 						const setCookieHeader = response.headers['satoken'];
 						
 						// 这里你可以对 setCookieHeader 进行处理，提取你需要的信息
 						console.log(setCookieHeader);
-						this.user = response.data;
+						this.user = res.data;
 						this.$message({
 						  message: '登录成功',
 						  type: 'success'
@@ -112,11 +111,10 @@
 					"email": this.email,
 					"password": this.password,
 					"identifyCode": this.authCode,
-				}, {
-				  withCredentials: true ,// 开启跨域携带 Cookie
 				}).then(
 				(response) => {
-					if (response.data) {
+          const res = response.data;
+					if (res.data) {
 						this.changeContent('login');
 						this.$message({
 						  message: '注册成功',
@@ -124,13 +122,13 @@
 						});
 					} else {
 						this.$message({
-						  message: response.data.message,
+						  message: res.msg,
 						  type: 'error'
 						});
 						this.identifyCodeClick();
 						this.authCode = '';
 					}
-					this.user = response.data;
+					this.user = res.data;
 					console.log(this.user);
 				}).catch((err) => {
 					console.error(err);

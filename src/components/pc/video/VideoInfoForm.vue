@@ -121,14 +121,15 @@ export default {
   methods: {
     getPage(data) {
       videoPage(data).then((response) => {
-        const data = response.data;
+        const res = response.data;
+        const data = res.data;
         this.video = data.list[0];
       })
     },
     getHotList(data) {
       newVideoList(data).then((response) => {
-        const data = response.data;
-        this.videoHotPage = data;
+        const res = response.data;
+        this.videoHotPage = res.data;
       })
     },
     eposodeOnClick(videoEpisodeId) {

@@ -42,7 +42,8 @@ export default {
     info: function () {
       info(this.$route.params.essayId)
           .then((response) => {
-            this.essay = response.data;
+            const res = response.data;
+            this.essay = res.data;
             document.title = this.essay.subject + backendUrls.urlName;
             // console.log("title: " + this.essay.subject);
             this.loading = false;

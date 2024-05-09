@@ -26,8 +26,9 @@ export default {
     getBanner: function () {
       getBanner().then
       ((response) => {
+        const res = response.data;
         // console.log(this.imgArr);
-        const records = response.data.records;
+        const records = res.data.records;
         this.imgArr = records.map((record) => record.img);
       }).catch((err) => {
         console.error(err);

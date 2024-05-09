@@ -21,7 +21,10 @@ const service = axios.create({
 })
 
 // request拦截器
-service.interceptors.request.use(config => {
+service.interceptors.request.use((config) => {
+  if ((config.headers || {}).isSaToken) {
+    config.withCredentials = true;
+  }
   // 是否需要设置 token
   const isToken = (config.headers || {}).isToken === false
   // 是否需要防止数据重复提交
@@ -79,7 +82,7 @@ service.interceptors.response.use(res => {
     const msg = errorCode[code] || res.data.msg || errorCode['default']
     // 二进制数据则直接返回
     if (res.request.responseType ===  'blob' || res.request.responseType ===  'arraybuffer') {
-      return res.data
+      return res
     }
     if (code === 401) {
       if (!isRelogin.show) {
@@ -95,6 +98,11 @@ service.interceptors.response.use(res => {
     }
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
     } else if (code === 500) {
+      // console.log("123321: "+JSON.stringify(res));
+      // console.log("11111111: "+JSON.stringify(res.config.headers));
+      if (res.config.headers.isSaToken === 'true') {
+        return res;
+      }
       Message({ message: msg, type: 'error' })
       return Promise.reject(new Error(msg))
     } else if (code === 601) {
@@ -104,7 +112,7 @@ service.interceptors.response.use(res => {
       Notification.error({ title: msg })
       return Promise.reject('error')
     } else {
-      return res.data
+      return res
     }
   },
   error => {

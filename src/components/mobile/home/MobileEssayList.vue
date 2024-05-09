@@ -60,7 +60,8 @@ import { getPage } from '@/api/essay/essay'
 					"size": 5
 				}).then(
 				(response) => {
-					this.essayPage = response.data;
+          const res = response.data;
+					this.essayPage = res.data;
 					const records = this.essayPage.records;
 					records.forEach((item) => {
 						const date = new Date(item.releaseTime);

@@ -52,7 +52,8 @@ import { getFeaturedEssayList } from '@/api/essay/essay'
 			getFeaturedEssayList: function() {
         getFeaturedEssayList().then(
 				(response) => {
-					this.essayTopList = response.data;
+          const res = response.data;
+					this.essayTopList = res.data;
 				}).catch((err) => {
 					console.error(err);
 				})

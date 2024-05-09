@@ -108,17 +108,16 @@ export default {
       return !(this.user === undefined || this.user === null || Object.keys(this.user).length === 0);
     },
     async getUser() {
-      userInfo({
-        withCredentials: true,// 开启跨域携带 Cookie
-      }).then(
+      userInfo().then(
           (response) => {
+            const res = response.data;
             // if (response.data.code !== 0) {
             // 	this.$message({
             // 		message: response.data.err,
             // 		type: 'error'
             // 	});
             // }
-            this.user = response.data;
+            this.user = res.data;
             if (this.user) {
               this.$emit("userEvent", this.user);
             }
@@ -131,10 +130,9 @@ export default {
       window.location.href = '#/login';
     },
     exit: function () {
-      userLogout({
-        withCredentials: true
-      }).then((response) => {
-        if (response.data.code === 0) {
+      userLogout().then((response) => {
+        const res = response.data;
+        if (res.code === 0) {
           this.$message({
             type: 'success',
             message: '注销登录'

@@ -37,7 +37,8 @@ import {info, readEssay} from "@/api/essay/essay";
 			info: function() {
 				info(this.$route.params.essayId)
 				.then((response) => {
-					this.essay = response.data;
+          const res = response.data;
+					this.essay = res.data;
 					document.title = this.essay.subject + backendUrls.urlName;
 				}).catch((err) => {
 					console.error(err);

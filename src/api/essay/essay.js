@@ -35,7 +35,10 @@ export function addComment(data) {
     return request({
         url: backendUrls.url + '/essay/essayComment/addComment',
         method: 'post',
-        data: data
+        data: data,
+        headers: {
+            isSaToken: true
+        }
     })
 }
 
@@ -73,7 +76,10 @@ export function like(data) {
     return request({
         url: backendUrls.url + '/essay/essayLike/like',
         method: 'post',
-        data: data
+        data: data,
+        headers: {
+            isSaToken: true
+        }
     })
 }
 
@@ -89,7 +95,10 @@ export function deleteComment(data) {
     return request({
         url: backendUrls.url + '/essay/essayComment/deleteComment',
         method: 'post',
-        data: data
+        data: data,
+        headers: {
+            isSaToken: true
+        }
     })
 }
 

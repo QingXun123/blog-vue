@@ -312,16 +312,16 @@ export default {
     },
     getChatList() {
       getChatList().then((response) => {
-        const data = response.data;
-        if (data.code != 0) {
+        const res = response.data;
+        if (res.code != 0) {
           this.$message({
             'type': 'error',
-            'message': data.msg,
+            'message': res.msg,
           })
         }
-        this.chatData = data;
+        this.chatData = res.data;
         this.scrollToChatBottom();
-        console.log(this.chatData);
+        // console.log(this.chatData);
       }).catch((error) => {
         console.log(error);
       })
@@ -329,15 +329,15 @@ export default {
     getUserList() {
       getOnlineUserByRoomId(1)
           .then((response) => {
-            const data = response.data;
-            if (data.code != 0) {
+            const res = response.data;
+            if (res.code != 0) {
               this.$message({
                 'type': 'error',
-                'message': data.msg,
+                'message': res.msg,
               })
             }
-            this.userData = data;
-            console.log("userList: " + this.userData);
+            this.userData = res.data;
+            // console.log("userList: " + this.userData);
           }).catch((error) => {
         console.log(error);
       })
@@ -416,15 +416,15 @@ export default {
     getOnlineUserCount() {
       getOnlineCountByRoomId(1)
           .then((response) => {
-            const data = response.data;
-            if (data.code !== 0) {
+            const res = response.data;
+            // console.log("res: " + JSON.stringify(res));
+            if (res.code !== 0) {
               this.$message({
                 'type': 'error',
-                'message': data.msg,
+                'message': res.msg,
               });
             }
-            this.userCount = data;
-            console.log("data: " + data);
+            this.userCount = res.data;
           }).catch((error) => {
         console.log(error);
       })

@@ -39,7 +39,7 @@ export default {
     getNewEssayList: function () {
       getNewEssayList().then(
           (response) => {
-            const data = response.data;
+            const data = response.data.data;
             // 遍历数据，将 releaseTime 格式化为 MM-DD 格式
             data.forEach((item) => {
               const date = new Date(item.releaseTime);
